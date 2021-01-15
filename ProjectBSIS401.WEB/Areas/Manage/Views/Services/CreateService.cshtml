@@ -1,0 +1,102 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.services.CreateViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Helper
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+
+<div class="section-title">
+    <h2>Create Services</h2>
+    <p></p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <form method="post" action="/manage/service/create">
+
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <input class="form-control" name="Name" placeholder="Enter a name" />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="servicetype" class="control-label mb-1">Services</label>
+                    <select class="js-example-basic-multiple-limit form-control" id="servicetype" name="ServiceType">
+                        @{
+                            var options2 = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType>();
+
+                            foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType option in options2)
+                            {
+                                <option value="@option">@option.ToString()</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <select class="js-example-basic-multiple-limit form-control" name="state">
+                    <option value="AL">Alabama</option>
+                    ...
+                    <option value="WY">Wyoming</option>
+                </select>
+
+                @Html.DropDownList("ServiceType", new SelectList(Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType))), new { id = "dropdownlist", multiple = "multiple" })
+                <input type="button" class="form-control" value="choose" onclick="Tests()" />
+
+
+
+                @foreach (ServiceType serviceType in Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType)))
+                {
+                    <label>
+                        <i class="fas fa-street-view"></i>
+                        <input asp-for="serviceArea" type="radio" value="@serviceType" />
+                        @serviceType
+                    </label>
+                }
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*<script src="~/jquery/src/jquery.tagsinput-revisited.js"></script>*@
+<script type="text/javascript">
+    function Tests() {
+        var select = $("#dropdownlist").val();
+        console.log(select);
+        var data = {
+            test: {
+                ServiceType: select
+            }
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/manage/service-create",
+            data: data,
+            success: function () {
+                alert("ok");
+            }
+        });
+    }
+
+
+
+    // In your Javascript (external .js resource or <script> tag)
+
+        $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+
+    $(".js-example-basic-multiple-limit").select2({
+        maximumSelectionLength: 2
+    });
+</script>

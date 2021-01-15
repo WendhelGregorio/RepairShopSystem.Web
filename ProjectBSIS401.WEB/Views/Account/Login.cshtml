@@ -1,0 +1,36 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.account.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<br /><br /><br /><br />
+<form method="post" action="/account/login">
+    <div class="createaccount">
+
+        <img src="~/myimages/logotransparent.png" />
+        <h3>Login</h3>
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+        </div>
+        <div class="form-group">
+            <input type="email" name="EmailAddress" id="EmailAddress" placeholder="Email Address" />
+        </div>
+        <div class="form-group">
+            <input type="password" name="Password" id="Password" placeholder="Password" />
+        </div>
+        <span>
+            <a class="centerlink" href="~/account/forgot-password">Forgettern Password?</a>
+        </span>
+
+        <div>
+            <a href="~/account/sign-up"><button class="btn btn-primary offset-5 mt-4" type="button" value="Login">Sign Up</button></a>
+        </div>
+
+
+        <div>
+            <button class="btn btn-primary offset-5 mt-3" type="submit" value="Login">Submit</button>
+        </div>
+    </div>
+
+</form>

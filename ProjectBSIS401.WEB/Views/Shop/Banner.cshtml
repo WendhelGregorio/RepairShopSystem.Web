@@ -1,0 +1,29 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.BannerImageViewModel
+@{
+    ViewData["Title"] = "Banner";
+}
+
+
+
+<h2>Update Banner</h2>
+<a href="~/shop/shop-profile/@Model.ShopId" class="btn btn-primary">Go to Profile</a>
+<div class="row">
+    <div class="col-md-6">
+        <form action="~/shop/update-banner" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" name="ShopId" value="@Model.ShopId" />
+                <label for="Banner">Banner:</label><br />
+                <img src="~/image/shops/banner/@Model.ShopId/banner.png" style="max-width:750px;max-height:300px;" /></br></br>
+                <input type="file" class="form-control" name="banner" />
+                @Html.ValidationSummary()
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

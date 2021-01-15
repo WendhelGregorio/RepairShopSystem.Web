@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt-Core" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Owin" Version="1.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Manage\Data\" />
+    <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="SignalR\Models\" />
+    <Folder Include="wwwroot\businesslogo\clients\" />
+    <Folder Include="wwwroot\image\client\banner\" />
+    <Folder Include="wwwroot\image\client\banner\5410ef9b-4d53-40ba-bbcc-8eceaf6f026b\" />
+    <Folder Include="wwwroot\image\shops\banner\" />
+    <Folder Include="wwwroot\image\shops\logo\" />
+    <Folder Include="wwwroot\image\shops\thumbnail\" />
+    <Folder Include="wwwroot\signalr\" />
+    <Folder Include="wwwroot\userprofile\users\" />
+    <Folder Include="wwwroot\userprofile\users\f341fbee-5c25-44c0-ba19-979c7d136d09\" />
+  </ItemGroup>
+
+</Project>

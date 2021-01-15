@@ -1,0 +1,46 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.services.EditViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<div class="section-title">
+    <h2>Edit</h2>
+    <p></p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="post" action="~/manage/service/edit">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="form-group">
+                    <label for="servicetype" class="control-label mb-1">Services</label>
+                    <select class="form-control" id="servicetype" name="ServiceType">
+                        @{
+                            var options2 = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType>();
+
+                            foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.ServiceType option in options2)
+                            {
+                                <option value="@option">@option.ToString()</option>
+                            }
+                        }
+                    </select>
+                </div>
+               
+                <div class="form-group">
+                    <label for="name" class="control-label mb-2">Vehicle</label>
+                    <input type="text" class="form-control" id="name" name="Name" value="@Model.Name" aria-describedby="nameHelp" placeholder="Enter Name">
+                </div>
+              
+
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="~/manage/service/details/@Model.Id" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

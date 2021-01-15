@@ -1,0 +1,64 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.account.RegisterViewModel
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+
+<br /><br /><br /><br />
+<form method="post" action="/account/sign-up">
+    <div class="signup">
+        <img src="~/myimages//logotransparent.png" />
+        <h3>Register</h3>
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+        </div>
+        <div>
+            <div class="">
+                <input type="text" name="FirstName" placeholder="First name" />
+
+                <input type="text" name="LastName" placeholder="Last name" />
+                <input type="password" name="Password" placeholder="Password" />
+                <input type="password" name="ConfirmPassword" placeholder="ConfirmPassword" />
+
+                <input type="email" name="EmailAddress" placeholder="Email Address" />
+
+
+                <input type="datetime-local" name="BirthOfDay" placeholder="Birth day" />
+                <input type="text" name="PhoneNumber" placeholder="Phone Number " />
+
+                <div class="offset-5 mt-4">
+                    <button class="btn btn-primary" type="submit" value="SignUp">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+<script>
+    function UserCheck() {
+        $("Status").html("Checking...");
+        $.post("@Url.Action("CheckUserNameAvailability","Account")", {
+            userData: $("#EmailAddress").val()
+        },
+        function (data) {
+                if (data == 0) {
+                    $("#Status").html('<font color =""Green"> Available!. you can take it.</font>');
+                    $("EmailAddress").css("border-color", "Green");
+                }
+                else {
+                    $("#Status").html('<font color =""Red"> The name is taken!. try Another.</font>');
+                    $("EmailAddress").css("border-color", "Red");
+
+                }
+            })
+
+
+    }
+</script>

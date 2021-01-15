@@ -1,0 +1,114 @@
+﻿@using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+@using ProjectBSIS401.WEB.ViewModels;
+@model ProjectBSIS401.WEB.ViewModels.home.HomeIndexViewModel
+@{
+    ViewData["Title"] = "OurServices";
+}
+
+<!-- Section Style 1 Start -->
+<section class="style-1 section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>Our Services </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @{
+                foreach (Service service in Model.PublicServices.Take(6))
+                {
+                    <div class="col-md-4">
+                        <div class="single-service">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <hr />
+                                <i class="icofont-image"></i>
+                                <i class="icofont-computer"></i>
+                                <i class="icofont-chart-bar-graph"></i>
+                                <i class="icofont-settings"></i>
+                                <i class="icofont-earth"></i>
+                                <i class="icofont-tasks-alt"></i>
+                                <hr />
+                                <h3>@service.Name</h3>
+                                @*<p>@service.Description</p>*@
+
+                            </div>
+
+                            <a href="~/manage/service/public-details/@service.Id" class="btn btn-danger">Read More</a>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</section>
+<!-- Page Heading/Breadcrumbs -->
+@*<div class="section-title">
+        <h2>Pricing</h2>
+        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.</p>
+    </div>
+    <hr />
+    <br /><br />*@
+
+
+
+<!-- Content Row -->
+@*<div class="row m-5">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h3 class="card-header">Basic</h3>
+                <div class="card-body">
+                    <div class="display-4">P1,999.99</div>
+                    <div class="font-italic">per month</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">We advertise your shop for 3 weeks</li>
+                    <li class="list-group-item">We offer a limit service of 5 slots per day</li>
+                    <li class="list-group-item">We offer another theme shop</li>
+                    <li class="list-group-item">
+                        <a href="~/home/contact" class="btn btn-primary">Contact Us!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline-primary h-100">
+                <h3 class="card-header bg-primary text-white">Plus</h3>
+                <div class="card-body">
+                    <div class="display-4">P2,999.99</div>
+                    <div class="font-italic">per 3 month</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">We advertise your shop for 6 weeks </li>
+                    <li class="list-group-item">We offer a limit service of 15 slots per day</li>
+                    <li class="list-group-item">We offer another theme shop</li>
+                    <li class="list-group-item">
+                        <a href="~/home/contact" class="btn btn-primary">Contact Us!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h3 class="card-header">Ultra</h3>
+                <div class="card-body">
+                    <div class="display-4">P4,999.99</div>
+                    <div class="font-italic">half a year</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">We advertise your shop for half a year</li>
+                    <li class="list-group-item">We offer a unlimited service slots per day</li>
+                    <li class="list-group-item">We offer another theme shop</li>
+                    <li class="list-group-item">
+                        <a href="~/home/contact" class="btn btn-primary">Contact Us!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+<!-- /.row -->
+<!-- Page Content -->

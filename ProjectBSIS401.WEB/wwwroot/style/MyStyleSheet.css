@@ -1,0 +1,677 @@
+﻿.createaccount {
+    margin: 20px 325px 20px 325px;
+    border-radius: 20px;
+    min-width: 500px;
+    min-height: 600px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 15px 30px 5px rgba(0,0,0,0.30);
+}
+
+.createaccount img {
+    margin-left: 180px;
+    border-radius: 50%;
+ 
+    width: 100px;
+    height: 100px;
+    margin-bottom:20px
+}
+
+
+.createaccount h3 {
+    text-align: center;
+    font-weight:bold;
+    color: gray;
+    font-size: 25px;
+    border-radius:20px;
+}
+
+    .createaccount input {
+        margin: 10px 0 0 32px;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid lightblue;
+        width: 85%;
+    }
+
+.createaccount .centerlink{
+    font-style: italic;
+    text-align: center;
+    margin-left: 150px;
+    
+}
+
+
+.createaccount button:hover {
+    background-color: #ffffff;
+    border: #2248a3;
+    color: #2248a3;
+    opacity: 0.8;
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 575.98px) {
+    body {
+        background-color: #ffffff;
+    }
+    .createaccount{
+        background-color:white;
+        margin-left:auto;
+        margin-right:auto;
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+    .createaccount img{
+       display:block;
+       margin-left:auto;
+       margin-right: auto;
+      
+       
+    }
+
+    .createaccount h3{
+        font-size:20px;
+    }
+
+    .createaccount input {
+        margin-left:18%;
+        margin-top: 10px;
+        width: 300px;
+       
+    }
+
+    .createaccount button {
+        margin-left:40%;
+        min-height: 30px;
+        min-width: 100px;
+    }
+
+}
+/*Small devices (landscape phones, 576px and up)*/
+@media(min-width: 576px) and (max-width:767px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .createaccount{
+        margin-left: 0;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .createaccount {
+        margin-left: 100px;
+    }
+    
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .createaccount {
+        margin-left: 220px;
+    }
+
+}
+                 
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    body {
+        background-color: #ffffff;
+    }
+
+}
+
+
+
+.signup {
+    margin: 20px 325px 20px 325px;
+    border-radius: 20px;
+    min-width: 500px;
+    min-height: 700px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 15px 30px 5px rgba(0,0,0,0.30);
+}
+.signup img {
+    margin-left: 180px;
+    border-radius: 50%;
+  
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px
+}
+
+.signup h3 {
+    text-align: center;
+    font-weight: bold;
+    color: gray;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+ .select{
+    border-radius: 20px;
+    margin: 15px 0 0 0;
+    border: solid lightblue 2px;
+
+}
+
+.signup input {
+   margin: 10px 0 0 32px;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid lightblue;
+    width: 400px;
+}
+
+.button1 {
+    outline: none;
+    cursor: pointer;
+    border: none;
+ 
+    min-height: 40px;
+    min-width: 150px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px 0 0 155px;
+}
+
+#back {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    min-height: 40px;
+    min-width: 150px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px 0 0 155px;
+}
+
+.signup button:hover {
+    background-color: #ffffff;
+    border: 2px lightblue solid;
+    color: lightblue;
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 575.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .signup {
+        background-color: #ffffff;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+.signup img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup h3 {
+    font-size: 20px;
+}
+
+.signup input {
+    margin-left: 18%;
+    margin-top: 10px;
+    width: 300px;
+}
+
+.signup button {
+    margin-left: 40%;
+    min-height: 30px;
+    min-width: 100px;
+}
+}
+/*Small devices (landscape phones, 576px and up)*/
+@media(min-width: 576px) and (max-width:767px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .signup {
+        margin-left: 0;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .signup {
+        margin-left: 100px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .signup {
+        margin-left: 220px;
+    }
+}
+
+
+
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    body {
+        background-color: #ffffff;
+    }
+}
+
+
+.verifyaccount {
+    margin: 20px 325px 20px 325px;
+    border-radius: 20px;
+    min-width: 500px;
+    min-height: 600px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 15px 30px 5px rgba(0,0,0,0.30);
+}
+
+.verifyaccount img {
+    margin-left: 180px;
+    border-radius: 50%;
+
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px
+}
+
+.verifyaccount h3 {
+    text-align: center;
+    font-weight: bold;
+    color: gray;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.verifyaccount p{
+    font-size:15px;
+    text-align:center;
+    color: gray;
+    margin-top:70px;
+}
+.verifyaccount input {   
+    margin: 10px 0 0 32px;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid lightblue;
+    width: 400px;
+}
+
+.verifyaccount button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+ 
+    min-height: 40px;
+    min-width: 150px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px 0 0 155px;
+}
+
+.verifyaccount button:hover {
+    background-color: #ffffff;
+    border: 2px lightblue solid;
+    color: lightblue;
+}
+
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 575.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .verifyaccount {
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+        .verifyaccount img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .verifyaccount h3 {
+            font-size: 20px;
+        }
+
+        .verifyaccount input {
+            margin-left: 18%;
+            margin-top: 10px;
+            width: 300px;
+        }
+
+        .verifyaccount button {
+            margin-left: 40%;
+            min-height: 30px;
+            min-width: 100px;
+        }
+}
+/*Small devices (landscape phones, 576px and up)*/
+@media(min-width: 576px) and (max-width:767px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .verifyaccount {
+        margin-left: 0;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .verifyaccount {
+        margin-left: 100px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .verifyaccount {
+        margin-left: 220px;
+    }
+}
+
+
+.forgotpasswordcontent {
+    margin: 20px 325px 20px 325px;
+    border-radius: 20px;
+    min-width: 500px;
+    min-height: 600px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 15px 30px 5px rgba(0,0,0,0.30);
+}
+
+    .forgotpasswordcontent img {
+        margin-left: 180px;
+     
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 20px
+    }
+
+.forgotpasswordcontent h3 {
+    text-align: center;
+    font-weight: bold;
+    color: gray;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.forgotpasswordcontent input {
+    margin: 10px 0 0 32px;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid lightblue;
+    width: 400px;
+}
+
+.forgotpasswordcontent button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+  
+    min-height: 40px;
+    min-width: 150px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 50px 0 0 155px;
+}
+
+.forgotpasswordcontent button:hover {
+    background-color: #ffffff;
+    border: 2px lightblue solid;
+    color: lightblue;
+}
+
+
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 575.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .forgotpasswordcontent {
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+    .forgotpasswordcontent img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .forgotpasswordcontent h3 {
+        font-size: 20px;
+    }
+
+    .forgotpasswordcontent input {
+        margin-left: 18%;
+        margin-top: 10px;
+        width: 300px;
+    }
+
+    .forgotpasswordcontent button {
+        margin-left: 40%;
+        min-height: 30px;
+        min-width: 100px;
+    }
+}
+/*Small devices (landscape phones, 576px and up)*/
+@media(min-width: 576px) and (max-width:767px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .forgotpasswordcontent {
+        margin-left: 0;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .forgotpasswordcontent {
+        margin-left: 100px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    body {
+        background-color: #ffffff;
+    }
+
+    .forgotpasswordcontent {
+        margin-left: 220px;
+    }
+
+   
+}
+
+
+
+
+/*Home Style*/
+.businesstag{
+   background-color:gray;
+}
+
+#showcase {
+    min-height: 400px;
+    box-shadow: 0 10px 25px 1px rgba(0,0,0,0.30);
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: solid lightblue 5px;
+    border-right: solid lightblue 5px;
+}
+
+.businessimage {
+    float: left;
+    width: 60%;
+    min-height:383px;
+    background-position: center;
+    background-size: 800px;
+}
+
+.businessimage img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-shadow: 0 10px 25px 1px rgba(0,0,0,0.30);
+}
+
+
+.businessdetail {
+    float: left;
+    width: 40%;
+    min-height: 400px;
+}
+
+
+.businessdetail h3 {
+    margin-bottom: 10px;
+    text-decoration: none;
+    text-align: center;
+    color: gray;
+}
+
+    .businessdetail p {
+        margin-top: 10px;
+        line-height: 20px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        color: black;
+        text-align: justify;
+        min-height: 250px;
+        min-width: 50px;
+        text-indent: 50px;
+    
+    }
+
+
+.businessdetail button {
+    min-height: 40px;
+    min-width: 100px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: maroon;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.logocenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+   
+}
+
+.logocenter img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  
+}
+
+.borderimage {
+    border-radius: 5px;
+    border: 5px lightblue solid;
+    border-top: 5px lightblue solid;
+}
+
+.shopdetails {
+    border: 2px lightblue solid;
+  
+}
+.shopdetails h3{
+    text-align:center;
+    font-family:'Bookman Old Style';
+    color:#1b4397;
+  
+}
+
+.shopdetails ul{
+   list-style-type: square;
+}
+
+.shopdetails li {
+
+    
+    margin-top: 10px;
+    text-align: justify
+}

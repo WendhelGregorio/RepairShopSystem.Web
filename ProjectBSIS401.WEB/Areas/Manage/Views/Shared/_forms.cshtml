@@ -1,0 +1,118 @@
+﻿@using ProjectBSIS401.WEB.Infrastructures.Domain.Helper
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewData["Title"] - ProjectBSIS401.WEB</title>
+
+
+
+    <!-- Default  Fontawesome -->
+    <link href="~/fontawesome/css/all.css" />
+    <link href="~/fontawesome/css/fontawesome.css" />
+    <link href="~/fontawesome/css/regular.css" />
+
+
+    <!-- Google Fonts -->
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">*@
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
+
+    <!--Select2.org-->
+    <link href="~/selectselect/dist/css/select2.css" rel="stylesheet" />
+   
+
+
+    <!-- Template Main CSS File -->
+    <link href="~/style/style.css" rel="stylesheet">
+
+    <!-- My own Style-->
+    <link href="~/style/MyStyleSheet.css" rel="stylesheet">
+</head>
+<body>
+
+    <br /><br /><br /><br />
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto"><a href="~/manage/users"><span style="color:#195bd0">Fi</span><span style="color:#b20e0e">x</span><span style="color:#195bd0">it</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    @*@if (WebUser.IsInRole(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.Role.Admin))
+                        {*@
+                    <li class="active"><a href="~/manage/users">Users</a></li>
+                    <li><a href="~/manage/shops/index">Shop</a></li>
+                    <li><a href="~/manage/service/index">Services</a></li>
+
+                    <li class="drop-down">
+                        <a href="">Account</a>
+                        <ul>
+
+                            <li><a href="~/account/sign-up">Sign Up</a></li>
+                            <li class="drop-down">
+                                <a href="#">Settings</a>
+                                <ul>
+
+                                    <li><a class="dropdown-item" href="~/account/profile/@WebUser.UserId">Profile</a></li>
+                                    <li><a class="dropdown-item" href="~/account/change-password/@WebUser.UserId">Change Password</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li><a class="dropdown-item" href="~/account/logout">Logout</a></li>
+
+
+
+
+                        </ul>
+                        @*</li>
+                            }*@
+
+
+                </ul>
+            </nav><!-- .nav-menu -->
+        </div>
+    </header><!-- End Header -->
+
+
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @Html.Partial("~/views/shared/_footer.cshtml")
+
+    <!--Fontawesome js files-->
+    <script src="~/fontawesome/js/all.js"></script>
+    <script src="~/fontawesome/js/fontawesome.js"></script>
+
+
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
+
+    <!--Selectseletc js files-->
+    <script src="~/selectselect/dist/js/select2.full.js"></script>
+
+
+    <!-- Template Main JS File -->
+    <script src="~/js2/main.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

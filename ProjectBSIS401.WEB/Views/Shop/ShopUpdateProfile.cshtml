@@ -1,0 +1,80 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopUpdateProfileViewModel
+@{
+    ViewData["Title"] = "ShopUpdateProfile";
+}
+
+
+<h3>Update Shop</h3>
+<div class="container">
+    <form method="post" action="~/shop/shop-update-profile">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="form-group">
+            <input type="hidden" id="ShopId" name="ShopId" value="@Model.ShopId" />
+            
+            <label for="ownershop" class="control-label ml-5 mr-3  mb-1">Owner Shop : @Model.OwnerShop</label>
+        </div>
+        <hr />
+        <div class="form-check-inline">
+            <label for="businessName" class="control-label ml-5 mr-3  mb-1" id="">Shop Name</label>
+            <input type="text" class="form-control" id="businessName" name="BusinessName" aria-describedby="businessNameHelp" value="@Model.BusinessName" placeholder="Enter shop name">
+
+            <label for="phonenumber" class="control-label ml-5 mr-3 mb-1">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" name="BusinessContact" aria-describedby="phoneNumberHelp"  value="@Model.BusinessContact" placeholder="Enter shop phone Number">
+
+        </div>
+        <hr />
+        <div class="form-check-inline">
+            <label for="businessEmailAddress" class="control-label ml-5 mr-3  mb-1">Email Address</label>
+            <input type="email" class="form-control" id="businessEmailAddress" name="BusinessEmailAddress" aria-describedby="businessEmailAddressHelp"  value="@Model.BusinessEmailAddress" placeholder="Enter shop email address">
+
+            <label for="businessLocation" class="control-label ml-5 mr-3 mb-1">Shop Location</label>
+            <input type="text" class="form-control" id="businessLocation" name="BusinessLocation" aria-describedby="businessLocationHelp" value="@Model.BusinessLocation" placeholder="Enter shop location">
+
+        </div>
+        <hr />
+        <div class="form-check-inline">
+            <label for="openAt" class="control-label ml-5 mr-3  mb-1">Open Time</label>
+            <input type="text" class="form-control" id="openAt" name="OpenAt" aria-describedby="emailAddressHelp"  value="@Model.OpenAt" placeholder="Enter open time">
+
+            <label for="closeAt" class="control-label ml-5 mr-3 mb-1">Close Time</label>
+            <input type="text" class="form-control" id="closeAt" name="CloseAt" aria-describedby="phoneNumberHelp"  value="@Model.CloseAt" placeholder="Enter close time">
+
+        </div>
+        <hr />
+
+        <div class="form-check-inline col-lg-11">
+            <label for="businessDescription" class="control-label ml-5 mr-3  mb-1">Description</label>
+            <textarea type="text" class="form-control" id="businessDescription" name="BusinessDescription" aria-describedby="businessDescriptionHelp" placeholder="Enter shop desciption">@Model.BusinessDescription</textarea>
+
+
+
+        </div>
+        <hr />
+        <div class="form-check-inline  col-lg-11">
+            <label for="businessType" class="control-label ml-5 mr-4 mb-1">Type</label>
+            <select class="form-control" id="role" name="BusinessType">
+                @{
+                    var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType>();
+
+                    foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType option in options)
+                    {
+                        <option value="@option">@option.ToString()</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <hr />
+        <div class="ml-5 mr-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="~/shop/shop-index" class="btn btn-danger">Cancel</a>
+        </div>
+
+
+    </form>
+
+</div>
+

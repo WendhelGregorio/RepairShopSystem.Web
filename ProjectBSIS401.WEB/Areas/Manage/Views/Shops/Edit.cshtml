@@ -1,0 +1,88 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.shops.EditViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<div class="section-title">
+    <h2>Edit</h2>
+    <p></p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="post" action="~/manage/shop/edit">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="form-group">
+                    <label for="businesstype" class="control-label mb-1">Business Category</label>
+                    <select class="form-control" id="businesstype" name="BusinessType">
+                        @{
+                            var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType>();
+
+                            foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType option in options)
+                            {
+                                <option value="@option">@option.ToString()</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownershop" class="control-label mb-2">Owner</label>
+                    <input type="text" class="form-control" id="ownershop" name="OwnerShop" value="@Model.OwnerShop" aria-describedby="ownershopHelp" placeholder="Enter Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="businessname" class="control-label mb-2">Shop Name</label>
+                    <input type="text" class="form-control" id="businessname" name="BusinessName" aria-describedby="businessnameHelp" value="@Model.BusinessName" placeholder="Enter Shop-Name">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="businesslocation" class="control-label mb-2">Shop Location</label>
+                    <input type="text" class="form-control" id="businesslocation" name="BusinessLocation" aria-describedby="businesslocationHelp" value="@Model.BusinessLocation" placeholder="Enter Shop Location">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="businessemailaddress" class="control-label mb-2">Shop Email</label>
+                    <input type="text" class="form-control" id="businessemailaddress" name="BusinessEmailAddress" aria-describedby="businessemailaddressHelp" value="@Model.BusinessEmailAddress" placeholder="Enter Shop Email">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="businesscontact" class="control-label mb-2">Shop contact-number</label>
+                    <input type="text" class="form-control" id="businesscontact" name="BusinessContact" aria-describedby="businesscontactHelp" value="@Model.BusinessContact" placeholder="Enter Shop Contact-Number">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="businessdescription" class="control-label mb-2">Shop Description</label>
+                    <input type="text" class="form-control" id="businessdescription" name="BusinessDescription" aria-describedby="businessdescriptionHelp" value="@Model.BusinessDescription" placeholder="Enter Shop Description">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="openat" class="control-label mb-2">Open Time</label>
+                    <input type="text" class="form-control" id="openat" name="OpenAt" aria-describedby="openatHelp" value="@Model.OpenAt" placeholder="Enter Open Time">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="closeat" class="control-label mb-2">Close Time</label>
+                    <input type="text" class="form-control" id="closeat" name="CloseAt" aria-describedby="closeatHelp" value="@Model.CloseAt" placeholder="Enter Close Time">
+                </div>
+
+
+
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="~/manage/shop/details/@Model.Id" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

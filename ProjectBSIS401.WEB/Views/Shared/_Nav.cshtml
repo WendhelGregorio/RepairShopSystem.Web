@@ -1,0 +1,147 @@
+﻿@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="~/home"><span style="color:#195bd0">Fi</span><span style="color:#b20e0e">x</span><span style="color:#195bd0">it</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class="active"><a href="~/home">Home</a></li>
+
+                <li><a href="~/home/ourservices">Services</a></li>
+                <li><a href="~/shop/index">Shops</a></li>
+                <li><a href="~/home/team">Team</a></li>
+                <li><a href="~/home/pricing">Pricing</a></li>
+                @*<li><a href="blog.html">Blog</a></li>*@
+                <li><a href="~/home/faqs">FAQS</a></li>
+                <li><a href="~/home/about">About</a></li>
+                <li><a href="~/home/contact">Contact</a></li>
+
+                <li class="drop-down">
+                    <a href="">Account</a>
+                    <ul>
+
+                        <li><a href="~/account/sign-up">Sign Up</a></li>
+                        <li class="drop-down">
+                            <a href="#">Settings</a>
+                            <ul>
+                                @{
+                                    @if (!WebUser.IsAuthenticated)
+                                    {
+
+                                        <li><a class="dropdown-item" href="~/account/profile/@WebUser.UserId">Profile</a></li>
+                                        <li><a class="dropdown-item" href="~/account/change-password/@WebUser.UserId">Change Password</a></li>
+                                    }
+
+
+                                }
+
+                                </ul>
+                        </li>
+
+                        <li><a class="dropdown-item" href="~/account/logout">Logout</a></li>
+
+
+
+
+                    </ul>
+                </li>
+                <li><a href="~/account/login">Sign In</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+   
+    </div>
+</header><!-- End Header -->
+
+
+@*Navigation
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="~/home/index">Fixit.PH</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/home/index">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/shop/shop-index">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/home/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/home/contact">Contact</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="~/home/ourservices" class="btn btn-primary">Pricing</a>
+                    </li>
+
+
+
+                    <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                    <a class="dropdown-item" href="portfolio-1-col.html">1. Cellphone</a>
+                    <a class="dropdown-item" href="portfolio-2-col.html">2. Laptop</a>
+                    <a class="dropdown-item" href="portfolio-3-col.html">3. Desktop</a>
+                    <a class="dropdown-item" href="portfolio-4-col.html">4. Tablet</a>
+
+                </div>
+
+
+            </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Setting
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+
+
+                            <a class="dropdown-item" href="~/account/sign-up">Sign Up</a>
+                            <a class="dropdown-item" href="~/account/login">Login</a>
+                            <a class="dropdown-item" href="~/account/profile/@WebUser.UserId">Profile</a>
+                            <a class="dropdown-item" href="~/account/change-password/@WebUser.UserId">Change Password</a>
+                            <a class="dropdown-item" href="~/account/logout">Logout</a>
+                            <a class="dropdown-item" href="~/home/faqs">FAQS</a>
+
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shop
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+
+
+
+
+
+
+
+
+    </div>
+
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>*@

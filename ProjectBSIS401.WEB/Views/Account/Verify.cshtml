@@ -1,0 +1,29 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.account.VerifyViewModel
+@{
+    ViewData["Title"] = "Verify";
+}
+<br /><br /><br /><br />
+
+
+
+<form method="post" action="/account/verify">
+    <div class="verifyaccount">
+        <img src="~/myimages/logotransparent.png" />
+        <h3>Verify Account</h3>
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+        </div>
+        <p>Please verify your account first.Check your email address to get the code.</p>
+        <input type="email" name="EmailAddress" placeholder="Email address" />
+        <input type="text" name="RegistrationCode" placeholder="Code" />
+
+        <button type="submit" value="Verify">Submit</button>
+    </div>
+
+
+</form>
+
+@*
+
+    <button type="submit" value="Verify">Verify</button>*@

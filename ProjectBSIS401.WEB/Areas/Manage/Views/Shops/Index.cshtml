@@ -1,0 +1,264 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.shops.IndexViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="section-title">
+    <h2>Shop List</h2>
+    <p></p>
+</div>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="input-group mt-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Status</span>
+            </div>
+            <select class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="searchStatus" onchange="searchTrigger()" placeholder="Status">
+                @{
+                    foreach (Status statuss in Model.Statuses)
+                    {
+                        if (Model.status == statuss)
+                        {
+                            <option value="@statuss" selected>@statuss.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@statuss">@statuss.ToString()</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-3 ">
+        <div class="input-group mt-5">
+            <input type="text" id="searchKeyword" placeholder="search services" class="form-control" aria-label="search shop" aria-describedby="basic-addon2" value="@Model.Shops.Keyword">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="table-responsive table--no-card m-b-30 mt-md-5">
+            <a href="~/manage/shop/create" class="btn btn-lg-3 btn-success btn-block">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Register Shop</span>
+            </a>
+        </div>
+    </div>
+</div>
+<hr />
+
+
+@if (Model.Shops.Items.Count > 0)
+{
+    <table class="table table-borderless table-striped table-hover">
+        <thead>
+            <tr class="table-info">
+                <th>Name</th>
+                <th>Location</th>
+                <th>Business Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Shop shop in Model.Shops.Items)
+                {
+                    <tr>
+                        <td>@shop.BusinessName</td>
+                        <td>@shop.BusinessLocation</td>
+                        <td>@shop.BusinessType</td>
+                        <td>
+                            <a href="~/manage/shop/details/@shop.Id" title="Shop Details"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
+                            <a href="#" onclick="confirmDeleteService('@shop.Id', '@shop.BusinessName')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
+                            @{
+                                if (shop.IsPublished)
+                                {
+                                    <li class="list-inline-item"><a href="#" title="Unpublish" onclick="confirmUnpublish('@shop.Id','@shop.BusinessName')"><button class="btn-danger form-control-sm"><i class="fas fa-window-close"></i></button></a></li>
+                                }
+                                else
+                                {
+                                    <li class="list-inline-item"><a href="#" title="Publish" onclick="confirmPublish('@shop.Id','@shop.BusinessName')"><button class="btn-success form-control-sm"><i class="fas fa-check-square"></i></button></a></li>
+                                }
+                            }
+
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
+                            <li class="page-item"><input type="number" value="@Model.Shops.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/manage/shop/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val())) + '&keyword=@(Model.Shops.Keyword)&status=@(Model.status)" /></li>
+                            <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.Shops.PageCount&nbsp;&nbsp;&nbsp;</span></li>
+                            @{
+                                var prev = Model.Shops.PageIndex - 1;
+                                if (prev > 0)
+                                {
+                                    <li class="page-item"><a class="page-link" href="~/manage/shop?keyword=@Model.Shops.Keyword&status=@Model.status&pageSize=@Model.Shops.PageSize&pageIndex=@prev"><span aria-hidden="true">&laquo;</span></a></li>
+                                }
+                            }
+                            <li class="page-item"><a class="page-link" href="#">@(Model.Shops.PageIndex)</a></li>
+                            @{
+                                var next = Model.Shops.PageIndex + 1;
+                                if (next <= Model.Shops.PageCount)
+                                {
+                                    <li class="page-item"><a class="page-link" href="~/manage/shop?keyword=@Model.Shops.Keyword&status=@Model.status&pageSize=@Model.Shops.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>0 search results.</p>
+}
+
+
+<!--Model Delete-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-shop">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Shop</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="modal-delete-shop-shops"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-delete-shop-confirm"><button type="button" class="btn btn-primary">Delete Shop</button></a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--MODAL Unpublish-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-unpublish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unpublish Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to unpublish <span id="modal-unpublish-businessname"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="modal-unpublish-button">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL Publish-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-publish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Publish Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to publish <span id="modal-publish-businessname"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="modal-publish-button">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    ////////////////////UNPUBLISH/////////////////////////////////////////////////////////////////
+    function confirmUnpublish(id, businessname) {
+        $("#modal-unpublish-businessname").html(businessname);
+        $("#modal-unpublish-button").attr("onclick", "UnpublishShop('" + id + "')");
+        $("#modal-unpublish").modal("show");
+    }
+    function UnpublishShop(id) {
+        $.ajax({
+            type: "POST",
+            url: "/manage/shop/unpublish",
+            data: { id: id },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (xhr) {
+                var response = JSON.parse(xhr.responseText);
+                alert("Error Occured : " + response.errors[0]);
+                location.reload();
+            }
+        });
+    }
+
+
+    //////////////////PUBLISH///////////////////////////////////////////////////////////////////////
+    function confirmPublish(id, businessname) {
+        $("#modal-publish-businessname").html(businessname);
+        $("#modal-publish-button").attr("onclick", "PublishShop('" + id + "')");
+        $("#modal-publish").modal("show");
+    }
+    function PublishShop(id) {
+        $.ajax({
+            type: "POST",
+            url: "/manage/shop/publish",
+            data: { id: id },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (xhr) {
+                var response = JSON.parse(xhr.responseText);
+                alert("Error Occured : " + response.errors[0]);
+                location.reload();
+            }
+        });
+    }
+
+    function confirmDeleteService(shopId, BusinessName) {
+        $("#modal-delete-shop-shops").html(BusinessName);
+        $("#modal-delete-shop-confirm").attr("href", "/manage/shop/delete/" + shopId);
+        $("#modal-delete-shop").modal("show");
+    }
+
+    $("#searchKeyword").keyup(function (event) {
+        if (event.keyCode === 13) {
+            searchTrigger();
+        }
+    });
+
+    function searchTrigger() {
+        window.location = "/manage/shop?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&status=" + $("#searchStatus").val();
+    }
+
+
+</script>
