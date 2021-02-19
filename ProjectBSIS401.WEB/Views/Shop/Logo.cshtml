@@ -1,0 +1,29 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.LogoImageViewModel
+@{
+    ViewData["Title"] = "Logo";
+}
+
+
+<br /><br /><br />
+<div class="section-title">
+    <h2>Update Logo</h2>
+</div>
+<a href="~/shop/shop-home/@Model.ShopId" class="btn btn-primary">Shop-Home</a>
+<div class="row">
+    <div class="col-md-6">
+        <form action="~/shop/update-logo" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" name="ShopId" value="@Model.ShopId" />
+                <label for="Logo">Logo:</label><br />
+                <img src="~/image/shops/logo/@Model.ShopId/logo.png" style="max-width:200px;max-height:200px;" alt="Logo" /></br></br>
+                <input type="file" class="form-control" name="logo" />
+                @Html.ValidationSummary()
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -24,19 +24,18 @@
                         <div class="single-service">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                                 <hr />
-                                <i class="icofont-image"></i>
+                                <i class="fas fa-image"></i>
                                 <i class="icofont-computer"></i>
                                 <i class="icofont-chart-bar-graph"></i>
                                 <i class="icofont-settings"></i>
                                 <i class="icofont-earth"></i>
                                 <i class="icofont-tasks-alt"></i>
                                 <hr />
-                                <h3>@service.Name</h3>
-                                @*<p>@service.Description</p>*@
+                                <a href="~/manage/service/details/@service.Id"><h3>@service.Name</h3></a>
+                                <p>@service.Description</p>
 
                             </div>
 
-                            <a href="~/manage/service/public-details/@service.Id" class="btn btn-danger">Read More</a>
                         </div>
                     </div>
                 }

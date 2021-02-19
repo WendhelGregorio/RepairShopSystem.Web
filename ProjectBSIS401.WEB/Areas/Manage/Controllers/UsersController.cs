@@ -39,7 +39,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 
             [HttpGet, Route("manage/users")]
             [HttpGet, Route("manage/users/index")]
-            public IActionResult Index(int pageSize = 5, int pageIndex = 1, string keyword = "", string status = "Active")
+            public IActionResult Index(int pageSize = 10, int pageIndex = 1, string keyword = "", string status = "Active")
             {
                 Enum.TryParse(status, out LoginStatus loginStatus); ;
 

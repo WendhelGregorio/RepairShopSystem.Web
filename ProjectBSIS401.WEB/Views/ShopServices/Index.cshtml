@@ -1,0 +1,80 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shopServices.IndexViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+
+@{
+
+    ViewData["Title"] = "Index";
+}
+
+<br /><br /><br />
+<div class="section-title">
+    <h2>Services</h2>
+    <p></p>
+</div>
+<a href="~/shop/shop-home/@Model.ShopId" class="form-control btn btn-primary">Shop</a>
+<hr />
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>Description</th>
+                <th>
+                    IsPublished
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Service service in Model.Services)
+            {
+                <tr>
+                    <td id="name">
+                        @service.Name
+                    </td>
+                    <td>
+                        @if (service.Description.Length <= 50)
+                        {
+                            @service.Description
+                        }
+                        else
+                        {
+                            @service.Description.Substring(0, 50)<span>...</span>
+                        }
+                    </td>
+                    @if (service.IsPublished == true)
+                    {
+                        <td>Available</td>
+                    }
+                    else
+                    {
+                        <td>Not available yet</td>
+                    }
+
+                    @if (service.IsPublished != true)
+                    {
+                        <td>
+                            ...
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a href="~/shop-services/add/@Model.ShopId/@service.Id">Add</a> |
+                            <a href="~/shop-services/details/@service.Id">Details</a>
+                        </td>
+
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+<div id="listItems">
+</div>
+

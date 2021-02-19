@@ -17,6 +17,6 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
         {
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-        }
+            }
     }
 }

@@ -12728,11 +12728,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\myproject\\ProjectBSIS401.WEB\\ProjectBSIS401.WEB.csproj",
+      "projectUniqueName": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\GitHubRepairSystem\\ProjectBSIS401.WEB\\ProjectBSIS401.WEB.csproj",
       "projectName": "ProjectBSIS401.WEB",
-      "projectPath": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\myproject\\ProjectBSIS401.WEB\\ProjectBSIS401.WEB.csproj",
+      "projectPath": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\GitHubRepairSystem\\ProjectBSIS401.WEB\\ProjectBSIS401.WEB.csproj",
       "packagesPath": "C:\\Users\\VGD 14\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\myproject\\ProjectBSIS401.WEB\\obj\\",
+      "outputPath": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\GitHubRepairSystem\\ProjectBSIS401.WEB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

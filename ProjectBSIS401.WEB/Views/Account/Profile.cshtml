@@ -1,4 +1,4 @@
-﻿@model ProjectBSIS401.WEB.ViewModels.account.ProfileViewModel
+﻿@model ProjectBSIS401.WEB.Infrastructures.Domain.Models.User
 @{
     ViewData["Title"] = "Profile";
 }
@@ -14,10 +14,10 @@
                         <div class="d-flex justify-content-start">
 
                             <div class="image-container">
-                                <img src="~/userprofile/users/@WebUser.UserId/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <img src="~/userprofile/users/@Model.Id/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                 <div class="middle">
 
-                                    <a href="~/account/update-profile/@WebUser.UserId" class="btn btn-primary">Update-profile</a>
+                                    <a href="~/account/update-profile/@Model.Id" class="btn btn-primary">Update-profile</a>
 
                                 </div>
 

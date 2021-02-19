@@ -12,6 +12,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [AllowAnonymous]
     public class UserGroupsController : Controller
     {
         private readonly DefaultDbContext _context;

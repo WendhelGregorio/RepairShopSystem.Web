@@ -28,7 +28,7 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public User User { get; set; }
 
-        public Shop Shop { get; set; }
+        public List<Shop> Shop { get; set; }
 
     }
 }

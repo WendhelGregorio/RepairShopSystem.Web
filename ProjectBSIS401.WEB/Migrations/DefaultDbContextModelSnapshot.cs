@@ -46,9 +46,6 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShopId")
-                        .IsUnique();
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Booking");
@@ -101,12 +98,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("BookingId");
-
                     b.Property<string>("Comment")
                         .HasMaxLength(500);
-
-                    b.Property<Guid?>("CostumerId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -116,11 +109,13 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<string>("FullName")
                         .HasMaxLength(100);
 
-                    b.Property<decimal>("Rating");
+                    b.Property<int>("Rating");
 
                     b.Property<Guid?>("ShopId");
 
                     b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
 
@@ -175,15 +170,21 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<string>("Description");
+
                     b.Property<bool>("IsPublished");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("ServiceType");
 
+                    b.Property<Guid?>("ShopServiceId");
+
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShopServiceId");
 
                     b.ToTable("Service");
                 });
@@ -192,6 +193,8 @@ namespace ProjectBSIS401.WEB.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BookingsId");
 
                     b.Property<string>("BusinessContact");
 
@@ -217,6 +220,8 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<string>("OwnerShop");
 
+                    b.Property<Guid?>("ShopServicesId");
+
                     b.Property<int>("Status");
 
                     b.Property<DateTime>("UpdatedAt");
@@ -225,7 +230,11 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookingsId");
+
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ShopServicesId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -240,7 +249,11 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<string>("Description");
+
                     b.Property<decimal>("Price");
+
+                    b.Property<string>("Service");
 
                     b.Property<Guid?>("ServiceId");
 
@@ -250,12 +263,7 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("ShopId")
-                        .IsUnique();
-
-                    b.ToTable("ShopService");
+                    b.ToTable("ShopServices");
                 });
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", b =>
@@ -338,35 +346,35 @@ namespace ProjectBSIS401.WEB.Migrations
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking", b =>
                 {
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "Shop")
-                        .WithOne("Bookings")
-                        .HasForeignKey("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking", "ShopId");
-
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Service", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService")
+                        .WithMany("Services")
+                        .HasForeignKey("ShopServiceId");
+                });
+
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", b =>
                 {
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Category", "category")
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking", "Bookings")
+                        .WithMany("Shop")
+                        .HasForeignKey("BookingsId");
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Category", "Categories")
                         .WithMany("Shops")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User")
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService", "ShopServices")
+                        .WithMany("Shops")
+                        .HasForeignKey("ShopServicesId");
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "Users")
                         .WithOne("Shops")
                         .HasForeignKey("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "UserId");
-                });
-
-            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService", b =>
-                {
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Service", "Services")
-                        .WithMany()
-                        .HasForeignKey("ServiceId");
-
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "Shops")
-                        .WithOne("ShopServices")
-                        .HasForeignKey("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService", "ShopId");
                 });
 #pragma warning restore 612, 618
         }

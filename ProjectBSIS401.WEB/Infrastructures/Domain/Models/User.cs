@@ -13,8 +13,6 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
             this.LoginStatus = LoginStatus.InActive;
             this.UserName = FirstName + LastName;
         }
-
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -42,12 +40,8 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
             }
            
         }
-
         public string PhoneNumber { get; set; }
-
-
         public string RegistrationCode { get; set; }
-
         public Shop Shops { get; set; }
 
       

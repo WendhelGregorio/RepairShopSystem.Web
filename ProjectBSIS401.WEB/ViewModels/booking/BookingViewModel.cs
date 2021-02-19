@@ -10,6 +10,8 @@ namespace ProjectBSIS401.WEB.ViewModels.booking
 {
     public class BookingViewModel
     {
+        public string Name { get; set; }
+
         public Guid? UserId { get; set; }
 
         public Guid? ShopId { get; set; }
@@ -25,10 +27,6 @@ namespace ProjectBSIS401.WEB.ViewModels.booking
 
         [Required]
         public string Address { get; set; }
-
-        public User User { get; set;}
-
-        public Shop shop { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

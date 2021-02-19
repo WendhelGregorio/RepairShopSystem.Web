@@ -9,6 +9,10 @@ namespace ProjectBSIS401.WEB.ViewModels.feedback
     public class IndexViewModel
     {
 
-        public List<FeedBack> FeedBacks { get; set; }
+
+        public List<FeedBack> ShopFeedBacks { get; set; }
+
+        public int Count { get; set; }
+
     }
 }

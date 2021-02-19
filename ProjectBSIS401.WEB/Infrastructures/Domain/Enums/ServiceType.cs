@@ -29,6 +29,13 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Enums
         [Description(" Laptop ")]
         Laptop,
 
+        [Description(" Laptop ")]
+        Desktop,
+
+        [Description(" Printer ")]
+        Printer,
+
+
 
 
         //[Description(" Computer Setup")]

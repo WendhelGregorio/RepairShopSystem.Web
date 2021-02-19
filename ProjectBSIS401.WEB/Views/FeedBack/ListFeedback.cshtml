@@ -1,0 +1,46 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.feedback.IndexViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "ListFeedback";
+}
+
+
+<br /><br /><br />
+<div class="section-title">
+    <h2>List-Feedbacks</h2>
+</div>
+@if (Model.ShopFeedBacks != null)
+{
+    if (Model.ShopFeedBacks.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                     
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (FeedBack feedBack in Model.ShopFeedBacks)
+                    {
+                        <tr>
+                            <td>@feedBack.FullName</td>
+                            <td>@feedBack.Email</td>
+                            <td>@feedBack.Comment</td>
+                            <td>@feedBack.Rating</td>
+                            <td>@feedBack.UpdatedAt.ToString("dddd, dd MMMM yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+      
+    }
+}

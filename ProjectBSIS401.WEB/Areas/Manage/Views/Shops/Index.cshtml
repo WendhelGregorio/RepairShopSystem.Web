@@ -2,7 +2,7 @@
 @using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
 @using ProjectBSIS401.WEB.Infrastructures.Domain.Models
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
 }
 
 <div class="section-title">
@@ -59,23 +59,36 @@
     <table class="table table-borderless table-striped table-hover">
         <thead>
             <tr class="table-info">
-                <th>Name</th>
+                <th>Owner</th>
                 <th>Location</th>
                 <th>Business Category</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @{
                 foreach (Shop shop in Model.Shops.Items)
                 {
                     <tr>
-                        <td>@shop.BusinessName</td>
-                        <td>@shop.BusinessLocation</td>
+                        <td>@shop.OwnerShop</td>
+                        
+                        <td>
+                            @if (shop.BusinessLocation.Length <= 25)
+                            {
+                                @shop.BusinessLocation
+                            }
+                            else
+                            {
+                                @shop.BusinessLocation.Substring(0, 25);<span>...</span>
+                            }
+                        </td>
                         <td>@shop.BusinessType</td>
                         <td>
+                            <a href="~/manage/shop/update-logo/@shop.Id" title="Shop Logo"><button type="button" class="btn"><i class="fas fa-file-image"   ></i></button></a>
+                            <a href="~/manage/shop/update-thumbnail/@shop.Id" title="Shop Thumbnail"><button type="button" class="btn"><i class="fas fa-images"></i></button></a>
+                            <a href="~/manage/shop/update-banner/@shop.Id" title="Shop Banner"><button type="button" class="btn"><i class="fas fa-image"></i></button></a>
                             <a href="~/manage/shop/details/@shop.Id" title="Shop Details"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
-                            <a href="#" onclick="confirmDeleteService('@shop.Id', '@shop.BusinessName')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
+                            <a href="#" onclick="confirmDeleteService('@shop.Id', '@shop.BusinessName')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-trash"></i></button></a>
                             @{
                                 if (shop.IsPublished)
                                 {
@@ -196,8 +209,8 @@ else
 </div>
 
 
-
 <script type="text/javascript">
+ 
 
     ////////////////////UNPUBLISH/////////////////////////////////////////////////////////////////
     function confirmUnpublish(id, businessname) {
@@ -257,7 +270,7 @@ else
     });
 
     function searchTrigger() {
-        window.location = "/manage/shop?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&status=" + $("#searchStatus").val();
+        window.location = "/manage/shop?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&sTaTus=" + $("#searchStatus").val();
     }
 
 

@@ -33,29 +33,78 @@ namespace ProjectBSIS401.WEB.Controllers
             _env = env;
         }
 
-        [HttpGet,Route("shop/index")]
-        public IActionResult Index(int pageIndex = 1,string keyword = null)
+
+        [HttpGet, Route("shop/index")]
+        [HttpGet,Route("shop/index/{userId}")]
+        public IActionResult Index(Guid? userId,int pageIndex = 1, string keyword = "", string btypes = "")
         {
-            var shop = this._context.Shops.Include(s => s.ShopServices).Include(s => s.Bookings)
-                                          .OrderBy(s => s.CreatedAt)
+            Shop result = new Shop();
+            Enum.TryParse(btypes, out BusinessType btypeses);
+            IQueryable<Shop> shopQuery = (IQueryable<Shop>)this._context.Shops.Where(s => s.BusinessType == btypeses);
+
+            var shop = this._context.Shops.Include(s => s.Bookings)
+                                          .OrderBy(s => s.BusinessName)
                                           .Take(30)
                                           .ToList();
 
             if (string.IsNullOrEmpty(keyword) == false)
             {
-                 var shopQuery = this._context.Shops.Where(s => s.BusinessName.ToLower().Contains(keyword.ToLower())
+                shopQuery = this._context.Shops.Where(s => s.BusinessName.ToLower().Contains(keyword.ToLower())
                                        || s.BusinessEmailAddress.ToLower().Contains(keyword.ToLower()));
-            }
 
+            }
             return View(new IndexViewModel
             {
+                UserId = userId,
                 Shops = shop,
-                Keyword = keyword
+                Keyword = keyword,
+                businessType = btypeses
+
             });
 
         }
+        [HttpGet, Route("shop/shop-items/{shopId}")]
+        [HttpGet,Route("shop/shop-items/{shopId}/{userId}")]
+        public IActionResult ShopItems(Guid? shopId,Guid? userId)
+        {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            //var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            var shopServices = this._context.ShopServices.Where(u => u.ShopId == shop.Id).ToList();
+            if (shop == null)
+            {
 
+                return View();
+            }
+            if(shopServices == null)
+            {
+                return Redirect("~/shop/index");
+            }
 
+            return View(new ShopIdViewModel {
+                Shop = shop,
+                ShopServices = shopServices,
+                ShopId = shopId,
+                UserId = userId
+                
+            });
+        }
+
+        [HttpGet, Route("shop/shop-items-info/{shopServiceId}/{shopId}")]
+        public IActionResult ShopItemInfo(Guid? shopServiceId,Guid? shopId)
+        {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            var info = this._context.ShopServices.FirstOrDefault(ss => ss.Id == shopServiceId);
+            if(info == null)
+            {
+                return NotFound();
+            }
+
+            return View(new ShopShopServicesDetails
+            {   ShopId  = shopId,
+                ShopServices = info
+            });
+        }
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("shop/shop-create/{userId}")]
         public IActionResult CreateShop(Guid? userId)
@@ -63,35 +112,25 @@ namespace ProjectBSIS401.WEB.Controllers
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
-
                 return BadRequest();
-
             }
-
-
-               
-            return View();
+            return View(new CreateShopViewModel {
+                UserId = userId,
+                OwnerShop = user.UserName,
+            });
 
         }
-
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("shop/shop-create")]
         public IActionResult CreateShop(CreateShopViewModel model)
         {
-
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
-         
-            var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
-      
-            if (user != null)
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId && u.UserName == model.OwnerShop);
+            if (user == null)
             {
-                var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
-                if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active && userRole.Role == Infrastructures.Domain.Enums.Role.User)
-                {
                     Shop shop = new Shop()
                     {
 
@@ -102,58 +141,73 @@ namespace ProjectBSIS401.WEB.Controllers
                         BusinessType = model.BusinessType,
                         OpenAt = model.OpenAt,
                         CloseAt = model.CloseAt,
-                        Id = user.Id.Value,
-                        UserId = user.Id.Value,
+                        Id = Guid.NewGuid(),
+                        UserId = model.UserId,
                         Status = Infrastructures.Domain.Enums.Status.Active,
                         BusinessDescription = model.BusinessDescription,
-                        OwnerShop = user.UserName,
+                        OwnerShop = model.OwnerShop,
 
                     };
                     this._context.Shops.Add(shop);
-                    this._context.SaveChanges();
-
-                 
-                }
-              
+                    this._context.SaveChanges();     
+            }
+            else
+            {
+                ViewBag.Error = "You already have shop";
+                return View("~/shop/shop-create/" + model.UserId);
             }
             return View(model);
         }
 
 
         [Authorize(Policy = "SignedIn")]
-        [HttpGet, Route("shop/shop-profile/{shopId}")]
-        public IActionResult ShopProfile(Guid? shopId)
+        [HttpGet, Route("shop/shop-home/{shopId}")]
+        public IActionResult ShopHome(Guid? shopId)
         {
             if (shopId == null)
             {
                 return NotFound();
             }
-            var shop = _context.Shops.Include(s => s.Bookings).FirstOrDefault(s => s.Id == shopId);
+            var shops = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
 
-            if (shop == null)
+            var booking = this._context.Bookings.Where(b => b.ShopId == shops.Id)
+                                                .OrderByDescending(b => b.UpdatedAt)
+                                                .ToList();
+
+            var shopServices = this._context.ShopServices.Where(ss => ss.ShopId == shops.Id)
+                                                         .OrderByDescending(ss => ss.UpdatedAt)
+                                                         .ToList();
+
+
+            var shopFeedbacks = this._context.FeedBacks.Where(s => s.ShopId == shopId)
+                                                       .OrderByDescending(s => s.UpdatedAt)
+                                                       .ToList();
+
+            int count = shopFeedbacks.Count();
+            int serviceCount = shopServices.Count();
+            int costumerCounts = booking.Count();
+            if (shops == null)
             {
                 return NotFound();
             }
-
-            //var shop = this._context.Shops.Include(s => s.Bookings);
-            return View(shop);
-        }
-
-      
-
-
-
-        [Authorize(Policy = "SignedIn")]
-        [HttpGet, Route("shop/shop-profile-feed")]
-        public List<Booking> FeedBookings(int pageIndex)
-        {
-            int skip = (int)(3 * (pageIndex - 1));
-            return this._context.Bookings
-                                .Where(c => c.Id != null)
-                                .OrderBy(c => c.TimeStamps)
-                                .Skip(skip)
-                                .Take(30)
-                                .ToList();
+            if(booking == null)
+            {
+                return NotFound();
+            }
+            if(shopServices == null)
+            {
+                return NotFound();
+            }
+            return View(new ShopHomeViewModel
+            {
+                ShopServices = shopServices,
+                Shops = shops,
+                Bookings = booking,
+                Count = count,
+                serviceCount = serviceCount,
+                costumerCount = costumerCounts
+            });
+            
         }
 
 
@@ -161,7 +215,6 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("shop/shop-update-profile/{shopId}")]
         public IActionResult ShopUpdateProfile(Guid? shopId)
         {
-
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
 
             if (shop != null)
@@ -254,23 +307,20 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-
-
-        [HttpGet, Route("shop/delete")]
-        public IActionResult Delete(Guid? costumerId)
+        [HttpGet, Route("shop/change-status-booking/{status}/{bookingId}/{shopId}")]
+        public IActionResult ChangeStatus(string status, Guid? bookingId,Guid? shopId)
         {
-            var costumer = this._context.Bookings.FirstOrDefault(c => c.Id == costumerId);
 
-            if (costumer != null)
+            var rStatus = (ReserveStatus)Enum.Parse(typeof(ReserveStatus), status, true);
+            var statusUserBooking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+
+            if (statusUserBooking != null)
             {
-                costumer.Description = null;
-                costumer.UserName = null;
-
-                this._context.Bookings.Remove(costumer);
+                statusUserBooking.ReserveStatus = rStatus;
+                this._context.Bookings.Update(statusUserBooking);
                 this._context.SaveChanges();
             }
-
-            return RedirectToAction("index");
+            return Redirect("~/shop/shop-profile/" + shopId);
         }
 
 
@@ -278,49 +328,35 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("/shop/shop-update-thumbnail/{shopId}")]
         public IActionResult Thumbnail(Guid? shopId)
         {
-            return View(new LogoImageViewModel() { ShopId = shopId });
+            return View(new ThumbnailViewModel() { ShopId = shopId });
         }
-
-
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/shop/shop-update-thumbnail")]
-        public async Task<IActionResult> Thumbnail(LogoImageViewModel model)
+        public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
         {
-            //Check file size of the uploaded thumbnail
-            //reject if the file is greater than 2mb
-            var fileSize = model.Logo.Length;
+            var fileSize = model.Thumbnail.Length;
             if ((fileSize / 1048576.0) > 2)
             {
                 ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
                 return View(model);
             }
-            //Check file type of the uploaded thumbnail
-            //reject if the file is not a jpeg or png
-            if (model.Logo.ContentType != "image/jpeg" && model.Logo.ContentType != "image/png")
+            if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
             {
                 ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
                 return View(model);
             }
-            //Formulate the directory where the file will be saved
-            //create the directory if it does not exist
             var dirPath = _env.WebRootPath + "/image/shops/thumbnail/" + model.ShopId.ToString();
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
             }
-            //always name the file thumbnail.png
             var filePath = dirPath + "/thumbnail.png";
-            if (model.Logo.Length > 0)
-
+            if (model.Thumbnail.Length > 0)
             {
-                //Open a file stream to read all the file data into a byte array
-                byte[] bytes = await FileBytes(model.Logo.OpenReadStream());
-                //load the file into the third party (ImageSharp) Nuget Plugin                
+                byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
                 using (Image<Rgba32> image = Image.Load(bytes))
                 {
-                    //use the Mutate method to resize the image 150px wide by 150px long
-                    image.Mutate(x => x.Resize(150, 150));
-                    //save the image into the path formulated earlier
+                    image.Mutate(x => x.Resize(750, 300));
                     image.Save(filePath);
                 }
             }
@@ -328,55 +364,44 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-        //[HttpGet, Route("/shop/shop-reservation/{userId}")]
-        //public IActionResult Reservation(Guid? userId)
-        //{
-        //    var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
-
-
-        //    if (user == null)
-        //    {
-        //        ModelState.AddModelError("", "Please login your account");
-        //        return RedirectToAction("~/home");
-        //    }
-
-
-
-        //    return View();
-        //}
-
-        //[HttpPost, Route("/shop/shop-reservation")]
-        //public IActionResult Reservation(ReserveViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ModelState.AddModelError("", "Information is required");
-        //        return View();
-        //    }
-
-        //    var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
-        //    if (user != null)
-        //    {
-
-        //    }
-
-
-
-        //    return View();
-        //}
-
-        [HttpGet,Route("/shop/shop-rating-star")]
-        public IActionResult ShopRatingStar()
+        [Authorize(Policy = "SignedIn")]
+        [HttpGet, Route("/shop/update-logo/{shopId}")]
+        public IActionResult Logo(Guid? shopId)
         {
-            return View();
+            return View(new LogoImageViewModel() { ShopId = shopId });
         }
-
-        //[HttpPost, Route("/shop/shop-rating-star")]
-        //public IActionResult ShopRatingStar()
-        //{
-        //    return View();
-        //}
-
+        [Authorize(Policy = "SignedIn")]
+        [HttpPost, Route("/shop/update-logo")]
+        public async Task<IActionResult> Logo(LogoImageViewModel model)
+        {
+            var fileSize = model.Logo.Length;
+            if ((fileSize / 1048576.0) > 3)
+            {
+                ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 3mb.");
+                return View(model);
+            }
+            if (model.Logo.ContentType != "image/jpeg" && model.Logo.ContentType != "image/png")
+            {
+                ModelState.AddModelError("", "Please upload a jpeg or png file for the logo.");
+                return View(model);
+            }
+            var dirPath = _env.WebRootPath + "/image/shops/logo/" + model.ShopId.ToString();
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            var filePath = dirPath + "/logo.png";
+            if (model.Logo.Length > 0)
+            {
+                byte[] bytes = await FileBytes(model.Logo.OpenReadStream());
+                using (Image<Rgba32> image = Image.Load(bytes))
+                {
+                    image.Mutate(x => x.Resize(750, 300));
+                    image.Save(filePath);
+                }
+            }
+            return RedirectToAction("Logo", new { ShopId = model.ShopId });
+        }
 
 
         #region Helpers

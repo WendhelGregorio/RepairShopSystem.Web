@@ -4,16 +4,19 @@
 }
 
 
+<br /><br /><br />
+<div class="section-title">
+    <h2>Update Banner</h2>
+</div>
 
-<h2>Update Banner</h2>
-<a href="~/shop/shop-profile/@Model.ShopId" class="btn btn-primary">Go to Profile</a>
+<a href="~/shop/shop-home/@Model.ShopId" class="btn btn-primary">Shop-Home</a>
 <div class="row">
     <div class="col-md-6">
         <form action="~/shop/update-banner" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
                 <label for="Banner">Banner:</label><br />
-                <img src="~/image/shops/banner/@Model.ShopId/banner.png" style="max-width:750px;max-height:300px;" /></br></br>
+                <img src="~/image/shops/banner/@Model.ShopId/banner.png" style="max-width:750px;max-height:300px;" alt="Banner" /></br></br>
                 <input type="file" class="form-control" name="banner" />
                 @Html.ValidationSummary()
             </div>
@@ -25,5 +28,4 @@
         </form>
     </div>
 </div>
-
 

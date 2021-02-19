@@ -14,15 +14,15 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
 
         public static bool IsAuthenticated
         {
-            get => Current.User.Identity.IsAuthenticated && UserId.HasValue && ShopId.HasValue;
+            get => Current.User.Identity.IsAuthenticated && UserId.HasValue;
         }
 
         public static void SetUser(User user,List<Role> roles, List<Group> groups)
         {
+            UserId = user.Id;
             EmailAddress = user.EmailAddress;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            UserId = user.Id;
             Gender = user.Gender;
             PhoneNumber = user.PhoneNumber;
             Roles = roles;
@@ -67,11 +67,6 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
             set => Current.Session.SetObjectAsJson("UserId", value);
         }
 
-        public static Guid? ShopId
-        {
-            get => Current.Session.GetObjectFromJson<Guid?>("ShopId");
-            set => Current.Session.SetObjectAsJson("ShopId", value);
-        }
 
         public static string ShopName
         {
@@ -143,6 +138,11 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
         public static bool IsUserLogggedIn()
         {
             return Current.User.Identities.Any(x => x.IsAuthenticated);
+        }
+
+        public static string currentUserId()
+        {
+            return Current.Session.Id;
         }
   
        

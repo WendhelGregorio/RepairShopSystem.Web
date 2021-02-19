@@ -32,7 +32,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 
         [HttpGet, Route("manage/service")]
         [HttpGet, Route("manage/service/index")]
-        public IActionResult Index(int pageSize = 5, int pageIndex = 1, string keyword = "", string service = "Android Phone")
+        public IActionResult Index(int pageSize = 10, int pageIndex = 1, string keyword = "", string service = "Android Phone")
         {
             Enum.TryParse(service, out ServiceType serviceType); ;
 
@@ -93,6 +93,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
 
+
         [HttpGet, Route("manage/service/details/{id}")]
         public IActionResult Details(Guid? id)
         {
@@ -110,46 +111,23 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             return View(service);
         }
 
-
-        [HttpGet, Route("manage/service/public-details/{id}")]
-        public IActionResult PublicDetails(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var service = this._context.Services.FirstOrDefault(m => m.Id == id);
-            if (service == null)
-            {
-                return NotFound();
-            }
-
-            return View(service);
-        }
-
-
-
-
         [HttpGet, Route("manage/service/create")]
-        public IActionResult CreateService()
+        public IActionResult Create()
         {
-
-           
             return View();
         }
-
         [HttpPost, Route("manage/service/create")]
-        public IActionResult CreateService(CreateViewModel model)
+        public IActionResult Create(CreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
             Service service = new Service()
             {
                 Id = Guid.NewGuid(),
+                Name = model.Name,
+                Description = model.Description,
                 ServiceType = model.ServiceType,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
@@ -157,41 +135,32 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             this._context.Services.Add(service);
             this._context.SaveChanges();
 
-
             return RedirectToAction("Index");
-
         }
-
-   
-
 
         [HttpGet, Route("manage/service/edit/{id}")]
         public IActionResult Edit(Guid? id)
         {
             var service = this._context.Services.FirstOrDefault(s => s.Id == id);
-
             if (service == null)
             {
                 return RedirectToAction("Index");
             }
-
-
             if (service != null)
             {
                 return View(
                     new EditViewModel()
                     {
-                        Id = service.Id.Value,
+                        Id = service.Id,
                         Name = service.Name,
+                        Description = service.Description,
                         ServiceType = service.ServiceType,
-                       
                     }
                 );
             }
 
             return View();
         }
-
         [HttpPost, Route("manage/service/edit")]
         public IActionResult Edit(EditViewModel model)
         {
@@ -230,9 +199,6 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             }
             return null;
         }
-
-
-    
         [HttpPost, Route("manage/service/publish")]
         public IActionResult Publish(ServiceIdViewModel model)
         {

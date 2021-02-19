@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Test";
+}
+
+<h2>Test</h2>
+
+
+
+<h2>This is a heading</h2>
+
+<p id="p1">This is a paragraph.</p>
+<p id="test">This is another paragraph.</p>
+<table id="test2" class="table-borderless table-responsive-lg table-primary">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Dog</td>
+            <td>1234567890</td>
+            <td>Dog Pallace</td>
+        </tr>
+        <tr>
+            <td>Dog</td>
+            <td>1234567890</td>
+            <td>Dog Pallace</td>
+        </tr>
+        <tr>
+            <td>Dog</td>
+            <td>1234567890</td>
+            <td>Dog Pallace</td>
+        </tr>
+    </tbody>
+</table>
+<button>Click me</button>
+
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("button").click(function () {
+          $("#test2").hide();
+         
+        
+        });
+        
+    });
+
+    $(document).ready(function () {
+        $("#p1").mouseenter(function () {
+            alert("You entered p1!");
+        });
+    });
+
+    $(document).ready(function () {
+        $("#p1").mouseleave(function () {
+            alert("Bye! You now leave p1!");
+        });
+    });
+
+
+</script>

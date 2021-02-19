@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [AllowAnonymous]
     public class UserRolesController : Controller
     {
         private readonly DefaultDbContext _context;

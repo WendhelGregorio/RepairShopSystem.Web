@@ -1,4 +1,4 @@
-﻿using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+﻿    using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,8 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
     { 
     
         public string Name { get; set; }
+
+        public string Description { get; set; }
 
         public ServiceType ServiceType { get; set; }
 

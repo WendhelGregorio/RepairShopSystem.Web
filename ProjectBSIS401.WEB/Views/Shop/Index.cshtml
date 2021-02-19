@@ -1,169 +1,97 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.shop.IndexViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Helper
 @{
     ViewData["Title"] = "Index";
 }
-
-div class="container">
-
-
-<ul style="list-style-type:none; margin:0; padding:0; overflow: hidden; background-color:transparent">
-
-    @*<li style="float:left;"><a style="text-decoration:none; padding:14px; text-align:center; color:#808080; display:block;" class="active" href="#home"></a></li>
-    <li style="float:left;"><a style="text-decoration:none; padding:14px; text-align:center; color:#808080; display:block;" href="#news"></a></li>
-    @*<li style="float:left;"><a style="text-decoration:none; padding:14px; text-align:center; color:#808080; display:block;" href="#contact"></a></li>*@
-  
-        @*<li style="float:left;"><a style="text-decoration:none; padding:14px; text-align:center; color:#808080; display:block;" href="~/shop/shop-profile/@Model.Id" class="">My Shop</a></li>*@
-    
-
-</ul>
 
 
 
 
 <div class="row">
-
-    <!-- Blog Entries Column -->
-    <div class="col-md-8">
-        @{ foreach (Shop shop in Model.Shops)
-            {
-
-                <!-- Blog Post -->
-        <div class="card mb-4">
-            @if (shop.Id == null)
-            {
-                <img class="card-img-top" src="~/myimages/user1.png" alt="Card image cap">
-
-            }
-            else
-            {
-                <img class="card-img-top" src="~/image/shops/banner/@shop.Id/banner.png" alt="Card image cap">
-            }
-           
-            <div class="card-body shopdetails">
-
-                <h3 class="card-title">@shop.BusinessName</h3>
-                <p class="card-text">
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <ul style="list-style-type:none">
-                                <li>Email-address: @shop.BusinessEmailAddress</li>
-                                <li>Contact-number: @shop.BusinessContact</li>
-                                <li>Location: @shop.BusinessLocation</li>
-                                <li>We fix/repair:  @shop.BusinessType</li> 
-                            </ul>
-                        </div>
-
-                        <div class="col-sm-6">
-                        
-                            <ul style="list-style-type:none">
-                                <li>Email-address: </li>
-                                <li>Contact-number: @shop.ShopServices.Services.Name</li>
-                                <li>Location: @shop.ShopServices.Services.Name</li>
-                                <li>We fix/repair:   @shop.ShopServices.Services.Name</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="~/booking/book-costumer/@shop.Id" class="btn btn-primary mt-2">Reserve now</a>
-
-                </p>
-
-
+    <div class="col-lg-5">
+        <div class="input-group mt-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Status</span>
             </div>
-            <div class="card-footer text-muted shopdetails">
-                <small>
-                    Open at: @shop.OpenAt
-                </small>
-
-                <small>
-                    Close at: @shop.CloseAt
-                </small>
-
-
-            </div>
-        </div>
-            }
-        }
-
-
-
-    </div>
-
-    <!-- Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-        <!-- Search Widget -->
-        <div class="card mb-4">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-                <div class="input-group">
-                    <input type="text" id="searchKeyword" placeholder="search users" class="form-control" aria-label="search business owner" aria-describedby="basic-addon2" value="@Model.Keyword">
-                    <span class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fas fa-search-minus" aria-hidden="true"></i></a></span>
-                    </span>
-                </div>
-            </div>
+            <select class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="searchBtype" onchange="searchTrigger()" placeholder="Status">
+                @{
+                    foreach (BusinessType businessType in Model.listbusinessTypes)
+                    {
+                        if (Model.businessType == businessType)
+                        {
+                            <option value="@businessType" selected>@businessType.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@businessType">@businessType.ToString()</option>
+                        }
+                    }
+                }
+            </select>
         </div>
 
-        @*@using (Html.BeginForm())
+        @if (!WebUser.IsUserLogggedIn() == true)
         {
-            <p>
-                Find by name: @Html.TextBox("keyword")
-                <input type="submit" value="Search" />
-            </p>
-        }*@
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="input-group mt-">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
-                            </div>
-                            <select class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="searchStatus" onchange="searchTrigger()" placeholder="Category">
-                                @{
-                                    foreach (BusinessType type in Model.btype)
-                                    {
-                                        if (Model.BType == type)
-                                        {
-                                            <option value="@type" selected>@type.ToString()</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@type">@type.ToString()</option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <p>if you login your account you can create your own shop if you want</p>
+        }
+        else
+        {
+            <div class="input-group-append">
+                <a href="~/shop/shop-create/@Model.UserId" class="btn btn-primary">Create Shop</a>
             </div>
-        </div>
-
+        }
 
 
     </div>
 
+    <div class="col-lg-3 ">
+        <div class="input-group mt-5">
+            <input type="text" id="searchKeyword" placeholder="search services" class="form-control" aria-label="search shop" aria-describedby="basic-addon2" @*value="@Model.Keyword"*@>
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.row -->
-</div>
-<!-- /.container -->
 
 
+       
+  
 
-<script>
-
-    $("#searchKeyword").keyup(function (event) {
-        if (event.keyCode === 13) {
-            searchTrigger();
+<br />
+<div >
+    <div class="row">
+        @foreach (Shop shop in Model.Shops)
+        {
+            <div class="col-lg-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="~/image/shops/banner/@shop.Id/banner.png" style="height:260px;" alt="banner"></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @*<label class="form-label">owner: @shop.OwnerShop</label>*@
+                            <a href="~/shop/shop-items/@shop.Id/@Model.UserId">@shop.BusinessName</a>
+                        </h4>
+                        <p id="description" class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+               
+                    </div>
+                </div>
+            </div>
         }
-    });
+    </div>
+</div>
 
-    function searchTrigger() {
-        window.location = "/shop/index?pageIndex=1&keyword=" + $("#searchKeyword").val(); /*+ "&status=" + $("#searchStatus").val()*/
-    }
-</script>
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script>
+      
+
+
+        $("#searchKeyword").keyup(function (event) {
+            if (event.keyCode === 13) {
+                searchTrigger();
+            }
+        });
+
+        function searchTrigger() {
+            window.location = "/shop/index?pageIndex=1&keyword=" + $("#searchKeyword").val(); + "&btypes=" + $("#searchBtype").val();
+        }
+    </script>

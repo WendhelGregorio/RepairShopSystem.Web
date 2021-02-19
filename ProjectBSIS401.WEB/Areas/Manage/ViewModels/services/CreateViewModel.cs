@@ -14,6 +14,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.ViewModels.services
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public ServiceType ServiceType { get; set; }
 
     }

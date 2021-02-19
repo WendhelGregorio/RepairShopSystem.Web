@@ -10,30 +10,32 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
 {
     public class CreateShopViewModel
     {
-       
-       
-
+        [Required]
+        public Guid? UserId { get; set; }
 
         [Required]
+        public string OwnerShop { get; set; }
+
+        [Required(ErrorMessage = "Business-Name is required to register shop")]
         public string BusinessName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Category is required to register shop")]
         public BusinessType BusinessType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Description is required to register shop")]
         public string BusinessDescription { get; set; }
 
 
 
-        [Required]
+        [Required(ErrorMessage = "Business-Contact-Number is required to register shop")]
         public string BusinessContact { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Business-Email number is required to register shop")]
         public string BusinessEmailAddress { get; set; }
 
-      
 
-        [Required]
+
+        [Required(ErrorMessage = "Business-Location is required to register shop")]
         public string BusinessLocation { get; set; }
 
         [Required]

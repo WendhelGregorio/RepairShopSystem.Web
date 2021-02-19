@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,12 +12,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
     {
         public Guid? ShopId { get; set; }
 
-        public Guid? BookingId { get; set; }
-        
+        public Guid? UserId { get; set; }
 
-        public Guid? CostumerId { get; set; }
-
-        public decimal Rating { get; set; }
+        public RatingNumber Rating { get; set; }
      
         [StringLength(500)]
         public string Comment { get; set; }
@@ -26,5 +24,6 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         [StringLength(255)]
         public string Email { get; set; }
+
     }
 }

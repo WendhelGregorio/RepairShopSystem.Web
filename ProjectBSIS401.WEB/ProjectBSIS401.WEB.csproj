@@ -22,16 +22,10 @@
   <ItemGroup>
     <Folder Include="Areas\Manage\Data\" />
     <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Areas\Manage\Views\ShopServices\" />
     <Folder Include="SignalR\Models\" />
-    <Folder Include="wwwroot\businesslogo\clients\" />
-    <Folder Include="wwwroot\image\client\banner\" />
-    <Folder Include="wwwroot\image\client\banner\5410ef9b-4d53-40ba-bbcc-8eceaf6f026b\" />
-    <Folder Include="wwwroot\image\shops\banner\" />
-    <Folder Include="wwwroot\image\shops\logo\" />
-    <Folder Include="wwwroot\image\shops\thumbnail\" />
-    <Folder Include="wwwroot\signalr\" />
     <Folder Include="wwwroot\userprofile\users\" />
-    <Folder Include="wwwroot\userprofile\users\f341fbee-5c25-44c0-ba19-979c7d136d09\" />
+    <Folder Include="wwwroot\vendor\jquery\jquery-ui-1.12\" />
   </ItemGroup>
 
 </Project>

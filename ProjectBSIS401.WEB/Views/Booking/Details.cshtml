@@ -1,0 +1,60 @@
+﻿@model ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br /><br /><br />
+<div class="section-title">
+    <h2>Details</h2>
+    <p></p>
+</div>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            Time
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+    </dl>
+</div>
+<div>
+        <a href="~/shop/shop-profile/@Model.ShopId" class="btn btn-danger">Back to List</a>
+
+        
+
+
+</div>

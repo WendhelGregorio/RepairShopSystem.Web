@@ -14,6 +14,6 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
        
         public BusinessType BusinessType { get; set; }
 
-        public IList<Shop> Shops { get; set; }
+        public List<Shop> Shops { get; set; }
     }
 }

@@ -1,4 +1,23 @@
-﻿.createaccount {
+﻿.active-list {
+    color: dimgray;
+}
+
+.active-list:hover {
+    background-color: lawngreen;
+    color: black;
+}
+
+.feedbackTab{
+    right:0;
+    position:fixed;
+    width:32px;
+    height:150px;
+    top: 150px;
+    z-index: 1;
+}
+
+
+.createaccount {
     margin: 20px 325px 20px 325px;
     border-radius: 20px;
     min-width: 500px;

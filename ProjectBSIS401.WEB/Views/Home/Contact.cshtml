@@ -54,6 +54,8 @@
         <div class="col-lg-8 mb-4">
             <h3>Send us a Message</h3>
             <form method="post" action="~/home/contact" name="sentMessage" id="contactForm" novalidate>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
                 <div class="control-group form-group">
                     <div class="controls">
                         <label>Full Name:</label>
@@ -79,7 +81,10 @@
                         <textarea rows="10" cols="100" name="Message" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
                     </div>
                 </div>
-                <div id="success"></div>
+                <div id="success" class="alert-success"><h5>@ViewBag.Success</h5></div>
+                <div id="error" class="alert-danger">
+                    <h5> @ViewBag.Error</h5>
+                </div>
                 <!-- For success/fail messages -->
                 <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
             </form>

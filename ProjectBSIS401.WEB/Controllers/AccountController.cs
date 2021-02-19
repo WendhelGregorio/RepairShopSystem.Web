@@ -17,6 +17,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+using ProjectBSIS401.WEB.ViewModels;
 using ProjectBSIS401.WEB.ViewModels.account;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -70,7 +71,7 @@ namespace ProjectBSIS401.WEB.Controllers
 
             var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower());
             var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
-
+           
             if (user != null)
             {
                 if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
@@ -115,7 +116,6 @@ namespace ProjectBSIS401.WEB.Controllers
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
 
                         WebUser.SetUser(user, roles, groups);
-
                         await this.SignIn();
 
 
@@ -125,6 +125,7 @@ namespace ProjectBSIS401.WEB.Controllers
                     {
                         user.LoginRetries = 0;
                         user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+             
                         this._context.Users.Update(user);
                         this._context.SaveChanges();
 
@@ -135,20 +136,18 @@ namespace ProjectBSIS401.WEB.Controllers
                         //var shops = this._context.Shops.Where(s => ).Select(s => s.Id).ToList;
 
                         WebUser.SetUser(user, roles, groups);
-
-                      
                         await this.SignIn();
-
+                
                         var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id && s.IsPublished == true);
                         if (shop != null)
                         {
 
-                            return RedirectPermanent("~/shop/shop-profile/" + shop.Id);
+                            return RedirectPermanent("~/shop/shop-home/" + shop.Id);
                         }
-                        
+
                        
 
-                        return RedirectPermanent("~/home");
+                        return RedirectPermanent("~/shop/index/" + user.Id);
                     }
                     else
                     {
@@ -255,21 +254,6 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-
-        public JsonResult CheckUserNameAvailability( string userEmail)
-        {
-            System.Threading.Thread.Sleep(200);
-            var searchData = this._context.Users.Where(u => u.EmailAddress == userEmail).FirstOrDefault();
-            if (searchData != null)
-            {
-                return Json(1);
-            }
-            else
-            {
-                return Json(0);
-            }
-        }
-
         [HttpGet,Route("account/welcome")]
         public IActionResult Welcome()
         {
@@ -364,16 +348,11 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("account/change-password/{userId}")]
         public IActionResult ChangePassword(Guid? userId)
         {
-            var user = WebUser.UserId;
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
             if(user == null)
             {
                 return RedirectToAction("~/account/login");
             
-            }
-
-            if(user != null)
-            {
-                userId = user;
             }
             return View();
         }
@@ -479,21 +458,17 @@ namespace ProjectBSIS401.WEB.Controllers
         public IActionResult Profile(Guid? userId)
         {
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
-           
 
-
-            return View(new ProfileViewModel
+            if (user == null)
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                EmailAddress = user.EmailAddress,
-                Gender = user.Gender,
-                PhoneNumber = user.PhoneNumber,
-                UserName = user.UserName,
-                Age = user.Age
-        });
+                return NotFound();
+            }
+
+
+            return View(user);
 
         }
+
 
 
         [Authorize(Policy = "SignedIn")]

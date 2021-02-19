@@ -10,10 +10,7 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
 {
     public class ShopProfileViewModel
     {
-        
-        public List<Booking> Bookings { get; set; }
-
-        public List<Shop> Shops { get; set; }
+        public Shop Shops { get; set; }
     }
 
 

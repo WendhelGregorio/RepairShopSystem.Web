@@ -1,0 +1,174 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopIdViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "ShopItems";
+}
+>
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="row">
+            @if (Model.Shop.BusinessName.Length <= 20)
+            {
+                <h6 class="logo me-auto float-lg-start"><img src="~/image/shops/logo/@Model.Shop.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8;" />@Model.Shop.BusinessName</h6>
+            }
+            else
+            {
+                <h6><strong>Shop name is less than equal to 20 characters</strong></h6>
+            }
+        </div>
+        <div class="col-lg-3">
+            @if (!WebUser.IsUserLogggedIn() == true)
+            {
+                <div class="list-group">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate booking" class="list-group-item">Booking</a>
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate feedback" class="list-group-item ">Feedback</a>
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate and message us" class="list-group-item ">Message-Us</a>
+                </div>
+
+            }
+            else
+            {
+                <div class="list-group">
+                    <a href="~/booking/book-costumer/@Model.ShopId/@Model.UserId" class="list-group-item active-list">Booking</a>
+                    <a href="#collapseExample" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item active-list">Feedback</a>
+                    <div class="collapse" id="collapseExample">
+                        <form method="post" action="~/feedback/shop-feedbacks">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <div class="form-group">
+                                <input type="hidden" name="UserId" value="@Model.UserId" />
+                                <input type="hidden" name="ShopId" value="@Model.ShopId" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="FullName">Fullname</label>
+                                <input class="form-control" type="text" name="FullName" size="28" placeholder="Your fullname" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="Email">Email-address</label>
+                                <input class="form-control" type="email" name="Email" size="28" placeholder="Your email-address" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="Comment">Comment</label>
+                                <textarea class="form-control" type="text" name="Comment" placeholder="Your comment" rows="10" cols="29"></textarea>
+                            </div>
+
+                            <div class="form-check-inline  col-lg-12">
+                                <label for="businessType" class="control-label ml-5 mr-4 mb-1">Rating-Star</label>
+                                <select class="form-control" id="rating" name="Rating">
+                                    @{
+                                        var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber>();
+
+                                        foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber option in options)
+                                        {
+                                            <option value="@option">@option.ToString()</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <button type="submit" class="btn btn-success">Send</button>
+
+                            </div>
+                            <hr />
+
+                        </form>
+                    </div>
+                    <a href="#" class="list-group-item active-list">Category 3</a>
+                </div>
+          
+            }
+
+
+        </div>
+        <!-- /.col-lg-3 -->
+     
+
+
+        <div class="col-lg-9">
+            <img class="d-block img-fluid" src="~/image/shops/banner/@Model.ShopId/banner.png" style="width:820px;height:260px;" alt="First slide">
+            <br />
+            <div class="row">
+                @foreach (ShopService shopService in Model.ShopServices)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            @*<a href="#"><img class="card-img-top" src="~/myimages/diplay4.png" alt=""></a>*@
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="~/shop/shop-items-info/@shopService.Id/@Model.ShopId">@shopService.Service</a>
+                                </h4>
+                                <h5>@shopService.Price.ToString("F")</h5>
+                                <p class="card-text">@shopService.Description</p>
+
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">★ ★ ★ ★ ☆</small><span> <a href="">Book-Services</a></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+
+
+@*<div id="feedbackLink">*@
+@*<input type="hidden" id="shopId" value="@Model.ShopId" />
+            <input type="hidden" id="userId" value="@Model.UserId" />
+        <div class="form-group">
+            <label class="form-label">Fullname</label>
+            <input type="text" class="form-control" id="fullname" placeholder="Username" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" />
+        </div>
+
+
+        <div class="form-group">
+            <label for="rating" class="control-label mb-1">Rating-Number</label>
+            <select class="form-control" id="rating" name="RatingNumber">
+                @{
+                    var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber>();
+
+                    foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.RatingNumber option in options)
+                    {
+                        <option value="@option">@option.ToString()</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Comment</label>
+            <input type="text" placeholder="Comment" class="form-control" id="comment" />
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" id="feedbackSubmit" class="btn btn-primary">Send</button>
+        </div>
+
+        <div id="results"></div>
+    </div>*@
+<script>
+    $("#booking").click(function () {
+        alert("Login your account to activate booking.");
+
+    });
+</script>
+<style>
+   
+</style>

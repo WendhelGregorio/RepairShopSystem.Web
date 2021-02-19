@@ -10,17 +10,15 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
 {
     public class IndexViewModel
     {
-        public Guid? Id { get; set; }
+        public Guid? UserId { get; set; }
 
         public List<Shop> Shops { get; set; }
 
         public string Keyword { get; set; }
 
-        public BusinessType BType { get; set; }
+        public BusinessType businessType { get; set; }
 
-        //public List<Client> Clients { get; set; }
-
-        public List<BusinessType> btype
+        public List<BusinessType> listbusinessTypes
         {
             get
             {

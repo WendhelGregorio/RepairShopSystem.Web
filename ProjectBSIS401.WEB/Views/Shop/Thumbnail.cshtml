@@ -1,19 +1,22 @@
-﻿@model ProjectBSIS401.WEB.ViewModels.shop.LogoImageViewModel
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.ThumbnailViewModel
 @{
     ViewData["Title"] = "Thumbnail";
 }
 
+<br /><br /><br />
+<div class="section-title">
+    <h2>Update Thumbnail</h2>
+</div>
 
-<h2>Update Banner</h2>
-<a href="~/shop/shop-profile/@Model.ShopId" class="btn btn-primary">Go to Profile</a>
+<a href="~/shop/shop-home/@Model.ShopId" class="btn btn-primary">Shop-Home</a>
 <div class="row">
     <div class="col-md-6">
         <form action="~/shop/shop-update-thumbnail" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
-                <label for="Banner">Banner:</label><br />
-                <img src="~/image/shops/logo/@Model.ShopId/thumbnail.png" style="max-width:150px;max-height:150px;" /></br></br>
-                <input type="file" class="form-control" name="banner" />
+                <label for="Thumbnail">Thumbnail:</label><br />
+                <img src="~/image/shops/thumbnail/@Model.ShopId/thumbnail.png" style="max-width:150px;max-height:150px;" alt="Thumbnail" /></br></br>
+                <input type="file" class="form-control" name="thumbnail" />
                 @Html.ValidationSummary()
             </div>
             <div class="form-group">

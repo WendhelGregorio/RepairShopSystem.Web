@@ -15,7 +15,14 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
                 <input type="hidden" name="Id" value="@Model.Id" />
-
+                <div class="form-group">
+                    <label for="name" class="control-label mb-2">Name</label>
+                    <input type="text" class="form-control" id="name" name="Name" value="@Model.Name" aria-describedby="nameHelp" placeholder="Enter a name">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="control-label mb-2">Description</label>
+                    <input type="text" class="form-control" id="description" name="Description" value="@Model.Description" aria-describedby="descriptionHelp" placeholder="Enter a description">
+                </div>
                 <div class="form-group">
                     <label for="servicetype" class="control-label mb-1">Services</label>
                     <select class="form-control" id="servicetype" name="ServiceType">
@@ -29,13 +36,6 @@
                         }
                     </select>
                 </div>
-               
-                <div class="form-group">
-                    <label for="name" class="control-label mb-2">Vehicle</label>
-                    <input type="text" class="form-control" id="name" name="Name" value="@Model.Name" aria-describedby="nameHelp" placeholder="Enter Name">
-                </div>
-              
-
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="~/manage/service/details/@Model.Id" class="btn btn-danger">Cancel</a>

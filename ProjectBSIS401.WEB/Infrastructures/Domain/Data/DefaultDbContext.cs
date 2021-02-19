@@ -27,11 +27,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Data
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<ShopService> ShopServices { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Category> Categories { get; set; }
-       
-
-
         public DbSet<Shop> Shops { get; set; }
 
 

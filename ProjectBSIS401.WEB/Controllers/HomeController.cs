@@ -22,35 +22,9 @@ namespace ProjectBSIS401.WEB.Controllers
 
         public IActionResult Index()
         {
-            var services = this._context.Services.ToList();
-
-            return View(new HomeIndexViewModel()
-            {
-                Shops = FeedShops(1),
-                PublicServices = services
-                
-            });
+            return View();
+            
         }
-
-        [HttpGet, Route("home/feed-shop")]
-        public List<Shop> FeedShops(int pageIndex)
-        {
-            int skip = (int)(3 * (pageIndex - 1));
-            return this._context.Shops
-                                .Where(p => p.IsPublished == true)
-                                .OrderBy(p => p.CreatedAt)
-                                .Skip(skip)
-                                .Take(30)
-                                .ToList();
-        }
-
-      
-
-        //public PartialViewResult RenderClient()
-        //{
-        //    return PartialView(GetTeachers());
-        //}
-
         [HttpGet,Route("~/home/pricing")]
         public IActionResult Pricing()
         {
@@ -105,17 +79,33 @@ namespace ProjectBSIS401.WEB.Controllers
                 return View(model);
             }
 
-
-            Contact contact = new Contact()
+            var userCheck = this._context.Contacts.FirstOrDefault(c => c.FullName == model.FullName  && c.EmailAddress == model.EmailAddress);
+            if(userCheck == null)
             {
-                FullName = model.FullName,
-                PhoneNumber = model.PhoneNumber,
-                EmailAddress = model.EmailAddress,
-                Message = model.Message
-            };
-            this._context.Contacts.Add(contact);
-            this._context.SaveChanges();
+         
+                Contact contact = new Contact()
+                {
+                    Id = Guid.NewGuid(),
+                    FullName = model.FullName,
+                    PhoneNumber = model.PhoneNumber,
+                    EmailAddress = model.EmailAddress,
+                    Message = model.Message,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                this._context.Contacts.Add(contact);
+                this._context.SaveChanges();
 
+                
+
+            }
+            else
+            {
+                 ViewBag.Error = ",You already contact us. The contact page have one message a day.";
+                 return View();
+            }
+
+            ViewBag.Success = "The message sent succesfully. Thank you for messaging us.";
             return View();
 
         }

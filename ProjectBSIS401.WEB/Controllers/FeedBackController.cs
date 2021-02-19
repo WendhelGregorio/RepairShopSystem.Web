@@ -16,44 +16,59 @@ namespace ProjectBSIS401.WEB.Controllers
         {
             _context = context;
         }
-        [HttpGet, Route("/feedback/index")]
-        public IActionResult Index()
+        [HttpGet, Route("~/feedback/list-feedbacks/{shopId}")]
+        public IActionResult ListFeedback(Guid? shopId)
         {
-            List <FeedBack> feedBacks = this._context.FeedBacks.ToList();
+            var shopFeedbacks = this._context.FeedBacks.Where(s => s.ShopId == shopId)
+                                                       .OrderByDescending(s => s.UpdatedAt)
+                                                       .ToList();
 
+            int count = shopFeedbacks.Count();
+          
+           
             return View(new IndexViewModel()
             {
-                FeedBacks = feedBacks
+                ShopFeedBacks = shopFeedbacks,
+                Count = count,
+               
             });
         }
 
-        [HttpGet,Route("/feedback/feedbacks-infos")]
-        public ActionResult FeedBackInfo()
-        {
-            return View();
-        }
 
-        [HttpPost, Route("/feedback/feedbacks-infos")]
-        public ActionResult FeedBackInfo(FeedBackViewModel model)
+        [HttpPost,Route("~/feedback/shop-feedbacks")]
+        public IActionResult ShopFeedBack(FeedBackViewModel model)
         {
             if(!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Invalid Input");
-                return View();
+                return Redirect("~/shop/shop-items/" + model.ShopId + "/" + model.UserId);
             }
 
-            var feedback = new FeedBack()
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == model.ShopId);
+
+
+            if(user != null && shop != null)
             {
-                Comment = model.Comment,
-                Email = model.Email,
-                FullName = model.FullName,
-                Id = Guid.NewGuid(),
-            };
+                FeedBack feedBack = new FeedBack()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = model.UserId,
+                    ShopId = model.ShopId,
+                    FullName = model.FullName,
+                    Comment = model.Comment,
+                    Email = model.Email,
+                    Rating = model.Rating,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                };
 
-            this._context.FeedBacks.Add(feedback);
-            this._context.SaveChanges();
+                this._context.FeedBacks.Add(feedBack);
+                this._context.SaveChanges();
 
-            return View();
+            }
+            ViewBag.Success = "Message send successfully";
+            return Redirect("~/shop/shop-items/" + model.ShopId + "/" + model.UserId);
         }
 
     }

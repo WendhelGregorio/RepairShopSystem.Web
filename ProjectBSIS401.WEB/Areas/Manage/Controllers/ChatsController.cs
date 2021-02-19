@@ -33,7 +33,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
         public IActionResult Chat()
         {
             var chathub = new ChatHub();
-
+      
             return View(chathub);
         }
 

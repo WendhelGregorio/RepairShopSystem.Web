@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "BookUser";
 }
-
+<br /><br />
 <div class="container">
     <div class="row">
         <div class="col">
@@ -13,9 +13,12 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="ShopId" name="ShopId" aria-describedby="shopidHelp" value="@Model.ShopId.Value">
+                    <input type="hidden" class="form-control" name="ShopId" aria-describedby="shopidHelp" value="@Model.ShopId">
+                    <input type="hidden" class="form-control" name="UserId" aria-describedby="useridHelp" value="@Model.UserId">
+                    <input type="hidden" class="form-control" name="Name" aria-describedby="nameHelp" value="@Model.Name" />
                 </div>
-
+                <h3 name="Name">@Model.Name</h3>
+                <hr />
                 <div class="form-group">
                     <label for="contactnumber" class="control-label mb-1">Phone Number</label>
                     <input type="text" class="form-control" id="contactNumber" name="ContactNumber" aria-describedby="contactNumberHelp" placeholder="Enter phone Number">
@@ -28,9 +31,13 @@
 
                 <div class="form-group">
                     <label for="description" class="control-label mb-1">Description</label>
-                    <input type="text" class="form-control" id="description" name="Description" aria-describedby="lastNameHelp" placeholder="Enter Description">
+                    <input type="text" class="form-control" id="description" name="Description" aria-describedby="description   Help" placeholder="Enter Description">
                 </div>
-               
+                <div class="form-group">
+                    <label for="contactnumber" class="control-label mb-1">Date</label>
+                    <input type="datetime-local" class="form-control" id="dateAndTime" name="DateAndTime" aria-describedby="contactNumberHelp" placeholder="Enter date and time">
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a href="#" class="btn btn-danger">Cancel</a>
 
@@ -39,3 +46,8 @@
         </div>
     </div>
 </div>
+
+<script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script>
+    $("#dateAndTime").datepicker();
+</script>
