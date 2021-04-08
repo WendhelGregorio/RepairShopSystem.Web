@@ -24,10 +24,25 @@
     <link href="~/style/MyStyleSheet.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="~/style/simple-sidebar.css" rel="stylesheet">
+
+    <link href="~/vendor/jquery/jquery-ui-1.12/" />
+    <script src="~/vendor/jquery/home.js"></script>
+
+    <!-- Noty -->
+    <link href="~/vendor/noty/noty.css" rel="stylesheet" type="text/css" />
+    <link href="~/vendor/noty/themes/metroui.css" rel="stylesheet" type="text/css" />
+    <script src="~/vendor/noty/noty.min.js"></script>
+    <style>
+        .noty_bar {
+            z-index: 1000;
+            background-color: beige;
+        }
+    </style>
+
 </head>
 <body>
-    @Html.Partial("~/views/shared/_nav.cshtml")
-    
+    @Html.Partial("~/views/shared/_nav.cshtml");
+
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
@@ -38,17 +53,23 @@
 
     @Html.Partial("~/views/shared/_footer.cshtml")
 
+    <script>
+        var currentUser = '@WebIDS.GetPublicUserId';
+    </script>
     <!-- Vendor JS Files -->
     <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
-    <script src="~/vendor/jquery/jquery-ui-theme-blitzer/jquery-ui.js"></script>
+    <script src="~/vendor/jquery/jquery-ui-1.12/jquery-ui.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/fontawesome/js/all.min.js"></script>
+    <script src="~/vendor/noty/noty.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/vendor/jquery/home.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="~/js/main.js"></script>
+    <script src="~/main/main.js"></script>
 
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", false)
 
 
 </body>

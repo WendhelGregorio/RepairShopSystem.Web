@@ -930,7 +930,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                             Address = "Lincoln ,Dinalupihan,Bataan",
                             ContactNumber = "1234566789",
                             DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                            Description = "sira ang laptop ko sir parefair po",
+                            AdditionalDescription = "sira ang laptop ko sir parefair po",
                             TimeStamps = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow,
                             CreatedAt = DateTime.UtcNow,
@@ -951,7 +951,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                            Address = "St Isabel,Dinalupihan,Bataan",
                            ContactNumber = "1234566789",
                            DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                           Description = "sira ang laptop ko sir parefair po",
+                            AdditionalDescription = "sira ang laptop ko sir parefair po",
                            TimeStamps = DateTime.UtcNow,
                            UpdatedAt = DateTime.UtcNow,
                            
@@ -972,7 +972,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                            Address = "St Isabel,Dinalupihan,Bataan",
                            ContactNumber = "1234566789",
                            DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                           Description = "sira ang laptop ko sir parefair po",
+                           AdditionalDescription = "sira ang laptop ko sir parefair po",
                            TimeStamps = DateTime.UtcNow,
                            UpdatedAt = DateTime.UtcNow,
                           
@@ -994,7 +994,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                             AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
                          
@@ -1015,7 +1015,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                               Address = "St Isabel,Dinalupihan,Bataan",
                               ContactNumber = "1234566789",
                               DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                              Description = "sira ang laptop ko sir parefair po",
+                            AdditionalDescription = "sira ang laptop ko sir parefair po",
                               TimeStamps = DateTime.UtcNow,
                               UpdatedAt = DateTime.UtcNow,
                             
@@ -1037,7 +1037,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1058,7 +1058,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1079,7 +1079,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1102,7 +1102,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1123,7 +1123,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1144,7 +1144,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1166,7 +1166,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1187,7 +1187,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1208,7 +1208,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1231,7 +1231,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1252,7 +1252,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1273,7 +1273,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1297,7 +1297,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1318,7 +1318,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1339,7 +1339,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1364,7 +1364,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1385,7 +1385,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1406,7 +1406,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1430,7 +1430,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1451,7 +1451,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1472,7 +1472,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1495,7 +1495,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1516,7 +1516,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1537,7 +1537,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1561,7 +1561,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1582,7 +1582,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1603,7 +1603,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -1626,7 +1626,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           Address = "St Isabel,Dinalupihan,Bataan",
                           ContactNumber = "1234566789",
                           DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                          Description = "sira ang laptop ko sir parefair po",
+                          AdditionalDescription = "sira ang laptop ko sir parefair po",
                           TimeStamps = DateTime.UtcNow,
                           UpdatedAt = DateTime.UtcNow,
 
@@ -1647,7 +1647,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        Address = "St Isabel,Dinalupihan,Bataan",
                        ContactNumber = "1234566789",
                        DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                       Description = "sira ang laptop ko sir parefair po",
+                       AdditionalDescription = "sira ang laptop ko sir parefair po",
                        TimeStamps = DateTime.UtcNow,
                        UpdatedAt = DateTime.UtcNow,
 
@@ -1668,7 +1668,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       Address = "St Isabel,Dinalupihan,Bataan",
                       ContactNumber = "1234566789",
                       DateAndTime = DateTime.Parse("12/7/2019 5:39 PM"),
-                      Description = "sira ang laptop ko sir parefair po",
+                      AdditionalDescription = "sira ang laptop ko sir parefair po",
                       TimeStamps = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
 
@@ -3860,7 +3860,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       new Infrastructures.Domain.Models.FeedBack()
                       {
 
-                          Id = Guid.Parse("31c5a3c9-de09-4646-99c1-7a1e5fa2bbf7"),
+                          Id = Guid.Parse("4949de35-0f09-4f8f-9464-3b40d6804374"),
                           ShopId = Guid.Parse("528aeca1-004b-4c28-a52a-bfc6ae23e5f6"),
                           UserId = Guid.Parse("06146021-502D-48EB-9BFD-0C10C855EE42"),
                           FullName = "Jerry Mouse",

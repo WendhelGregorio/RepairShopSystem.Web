@@ -1,0 +1,55 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shopServices.MyShopServiceViewModel
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_ShopPartialNav.cshtml";
+}
+
+
+
+<br /><br>
+<div>
+    <a href="#" class="img-hover"><img src="~/image/shops/banner/@WebIDS.GetShopId/banner.png" style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
+</div>
+<!-- Section Style 1 Start -->
+<section class="style-1 section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>My Services </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            @{
+                foreach (var shopService in Model.ShopServices)
+                {
+                    <div class="col-md-4">
+                        <div class="single-service">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <hr />
+
+                                <i class="icofont-computer"></i>
+                                <i class="icofont-chart-bar-graph"></i>
+                                <i class="icofont-settings"></i>
+                                <i class="icofont-earth"></i>
+                                <i class="icofont-tasks-alt"></i>
+                                <hr />
+                                @*<a href="#">*@<h3 class="text-black-50">@shopService.Service</h3>@*</a>*@
+                                <p>@shopService.Description</p>
+                                <small>@shopService.Price.ToString("F")</small>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</section>
+
+

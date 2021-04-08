@@ -1,4 +1,5 @@
-﻿@model ProjectBSIS401.WEB.Infrastructures.Domain.Models.User
+﻿@model ProjectBSIS401.WEB.ViewModels.account.ProfileViewModel
+
 @{
     ViewData["Title"] = "Profile";
 }
@@ -14,10 +15,10 @@
                         <div class="d-flex justify-content-start">
 
                             <div class="image-container">
-                                <img src="~/userprofile/users/@Model.Id/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <img src="~/userprofile/users/@Model.User.Id/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                 <div class="middle">
 
-                                    <a href="~/account/update-profile/@Model.Id" class="btn btn-primary">Update-profile</a>
+                                    <a href="~/account/update-profile/@Model.User.Id" class="btn btn-primary">Update-profile</a>
 
                                 </div>
 
@@ -27,90 +28,142 @@
                                 </div>
                             </div>
                         </div>
-                        @{
-
-                        }
-                        <div class="row">
-                            <div class="col-12">
-                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content ml-1" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">First Name</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.FirstName
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Last Name</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.LastName
-                                            </div>
-                                        </div>
-                                        <hr />
-
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">User Name</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.UserName
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Gender</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.Gender
-                                            </div>
-                                        </div>
-                                        <hr />
-
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Email-Address</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.EmailAddress
-                                            </div>
-                                        </div>
-                                        <hr />
-
-
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Age</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                @Model.Age
-                                            </div>
-                                        </div>
-
+                       
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">My Info</button>
+                                <button class="nav-link" id="nav-book-tab" data-bs-toggle="tab" data-bs-target="#nav-book" type="button" role="tab" aria-controls="nav-book" aria-selected="false">My Books</button>
+                                @*<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>*@
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">First Name</label>
                                     </div>
-                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                        @*@Html.Partial("~/views/shop/ShopProfile.cshtml")*@
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.FirstName
                                     </div>
                                 </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Last Name</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.LastName
+                                    </div>
+                                </div>
+                                <hr />
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">User Name</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.UserName
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Gender</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.Gender
+                                    </div>
+                                </div>
+                                <hr />
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Email-Address</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.EmailAddress
+                                    </div>
+                                </div>
+                                <hr />
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Age</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.Age
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
+                            <div class="tab-pane fade" id="nav-book" role="tabpanel" aria-labelledby="nav-book-tab">
+                                @{ 
+
+                                    if(Model.Bookings != null)
+                                    {
+                                        if(Model.Bookings.Count > 0)
+                                        {
+                                            <div>
+                                                <table id="MyBookList" class="table table-borderless table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Price</th>
+                                                            <th>status</th>
+                                                            <th>Date</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @{
+                                                            int count = 0;
+                                                            @foreach (var bookings in Model.Bookings)
+                                                            {
+                                                                count++;
+                                                        <tr>
+                                                            <td>@count</td>
+                                                            <td>@bookings.ShopServiceName</td>
+                                                            <td>@bookings.ShopServicePrice.ToString("F")</td>
+                                                            <td>@bookings.ReserveStatus</td>
+                                                            <td>@bookings.UpdatedAt.ToString("MM/dd/yyyy")</td>
+                                                            @if (bookings.ReserveStatus == ReserveStatus.Confirm || bookings.ReserveStatus == ReserveStatus.Completed)
+                                                            {
+                                                            <td>
+                                                                <a href="~/shop/@bookings.ShopId" ><i class="fas fa-comment-o"></i></a>
+
+                                                            </td>
+                                                            }
+
+                                                        </tr>
+                                                            }
+                                                        }
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            
+                            
+                            
+                            </div>
+                            @*<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3333</div>*@
                         </div>
+                      
+
+                           
+                        </div>
+
+
 
 
 

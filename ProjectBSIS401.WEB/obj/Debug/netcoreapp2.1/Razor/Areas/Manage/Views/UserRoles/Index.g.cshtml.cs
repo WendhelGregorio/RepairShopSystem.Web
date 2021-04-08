@@ -239,7 +239,7 @@ WriteAttributeValue("", 2816, Model.Roles.Keyword, 2816, 22, false);
             WriteLiteral("                                    <li class=\"page-item\">");
             EndContext();
             BeginContext(3254, 181, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a65c45d52c44432e9e6f09403017be8e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9ddef48c5d54c30b81740b0db84b72b", async() => {
                 BeginContext(3392, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&laquo;</span>");
                 EndContext();
@@ -316,7 +316,7 @@ AddHtmlAttributeValue("", 3385, prev, 3385, 5, false);
             WriteLiteral("                                    <li class=\"page-item\">");
             EndContext();
             BeginContext(3887, 181, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fccf29bba1a24df2a77fc0fbe6b863c2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "170979e39c684fcc9b683ef54a238f1f", async() => {
                 BeginContext(4025, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&raquo;</span>");
                 EndContext();
@@ -406,7 +406,7 @@ else
             WriteLiteral("</h5>\r\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                    </button>\r\n                </div>\r\n                ");
             EndContext();
             BeginContext(4840, 1279, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c5b7c6bc1fc9466296cf67da50d98225", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "19e7ecb05ac04b58b55ec084f89ed64a", async() => {
                 BeginContext(4906, 92, true);
                 WriteLiteral("\r\n                    <div class=\"modal-body\">\r\n                        <input type=\"hidden\"");
                 EndContext();
@@ -535,7 +535,7 @@ WriteAttributeValue("", 5625, role, 5625, 5, false);
             WriteLiteral("</h5>\r\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                    </button>\r\n                </div>\r\n                ");
             EndContext();
             BeginContext(6760, 874, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aaea2f2b68b1428898b21b2a700c25ff", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4a4b1a9cc13c45ab81b1fb801e7ed96a", async() => {
                 BeginContext(6831, 106, true);
                 WriteLiteral("\r\n                    <div class=\"modal-body\">\r\n                        <input type=\"hidden\" name=\"UserId\"");
                 EndContext();

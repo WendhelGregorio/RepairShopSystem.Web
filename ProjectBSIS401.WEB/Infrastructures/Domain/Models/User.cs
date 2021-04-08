@@ -44,6 +44,8 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
         public string RegistrationCode { get; set; }
         public Shop Shops { get; set; }
 
+        public List<ChatUser> ChatUsers { get; set; }
+
       
 
     }

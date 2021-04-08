@@ -22,6 +22,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdditionalDescription");
+
                     b.Property<string>("Address");
 
                     b.Property<string>("ContactNumber");
@@ -30,11 +32,17 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("DateAndTime");
 
-                    b.Property<string>("Description");
-
                     b.Property<int>("ReserveStatus");
 
                     b.Property<Guid?>("ShopId");
+
+                    b.Property<string>("ShopServiceDescription");
+
+                    b.Property<Guid?>("ShopServiceId");
+
+                    b.Property<string>("ShopServiceName");
+
+                    b.Property<decimal>("ShopServicePrice");
 
                     b.Property<DateTime>("TimeStamps");
 
@@ -51,24 +59,74 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.ToTable("Booking");
                 });
 
-            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Category", b =>
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Chat", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BusinessType");
 
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid?>("ShopId");
+                    b.Property<int>("Type");
 
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Chat");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ChatUser", b =>
+                {
+                    b.Property<Guid?>("ChatId");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("ChatId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatUser");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Comment", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<int>("Likes");
+
+                    b.Property<bool>("LikesEnabled");
+
+                    b.Property<bool>("MaskUser");
+
+                    b.Property<Guid?>("ShopId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Contact", b =>
@@ -83,6 +141,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<string>("FullName");
 
                     b.Property<string>("Message");
+
+                    b.Property<int>("MessageCount");
 
                     b.Property<string>("PhoneNumber");
 
@@ -142,25 +202,128 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ReservationService", b =>
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Like", b =>
                 {
-                    b.Property<Guid?>("ShopId");
-
-                    b.Property<Guid?>("UserId");
-
-                    b.Property<Guid?>("ReserveId");
-
-                    b.Property<Guid?>("ServiceId");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<Guid?>("Id");
+                    b.Property<Guid?>("ShopId")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.HasKey("ShopId", "UserId", "ReserveId", "ServiceId");
+                    b.Property<Guid?>("UserId");
 
-                    b.ToTable("ReservationService");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Like");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Message", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ChatId");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("MessageCount");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("ShopId");
+
+                    b.Property<string>("Text");
+
+                    b.Property<DateTime>("Timestamp");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("ShopId");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Pricing", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Month");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pricings");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.PricingContent", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<Guid?>("PricingId");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PricingId");
+
+                    b.ToTable("PricingContents");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Rating", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<bool>("IsCounted");
+
+                    b.Property<bool>("MaskUser");
+
+                    b.Property<decimal>("Score");
+
+                    b.Property<Guid?>("ShopId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Service", b =>
@@ -208,17 +371,30 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<int>("BusinessType");
 
-                    b.Property<Guid?>("CategoryId");
-
                     b.Property<string>("CloseAt");
+
+                    b.Property<int>("Comments");
+
+                    b.Property<bool>("CommentsEnabled");
 
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<bool>("IsPublished");
 
+                    b.Property<string>("Layout")
+                        .HasMaxLength(75);
+
+                    b.Property<int>("Likes");
+
+                    b.Property<bool>("LikesEnabled");
+
                     b.Property<string>("OpenAt");
 
                     b.Property<string>("OwnerShop");
+
+                    b.Property<decimal>("Rating");
+
+                    b.Property<bool>("RatingsEnabled");
 
                     b.Property<Guid?>("ShopServicesId");
 
@@ -228,11 +404,11 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<Guid?>("UserId");
 
+                    b.Property<int>("Views");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookingsId");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ShopServicesId");
 
@@ -271,6 +447,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid?>("ChatId");
+
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<DateTime>("DateOfBirth");
@@ -298,6 +476,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
 
                     b.ToTable("User");
                 });
@@ -351,6 +531,73 @@ namespace ProjectBSIS401.WEB.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ChatUser", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Chat", "Chat")
+                        .WithMany("Users")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
+                        .WithMany("ChatUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "Shop")
+                        .WithMany()
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Like", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "Shop")
+                        .WithMany()
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Message", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Chat", "Chat")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId");
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop")
+                        .WithMany("Messages")
+                        .HasForeignKey("ShopId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.PricingContent", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Pricing", "Pricing")
+                        .WithMany("PricingContents")
+                        .HasForeignKey("PricingId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Rating", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "Shop")
+                        .WithMany()
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Service", b =>
                 {
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService")
@@ -364,10 +611,6 @@ namespace ProjectBSIS401.WEB.Migrations
                         .WithMany("Shop")
                         .HasForeignKey("BookingsId");
 
-                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Category", "Categories")
-                        .WithMany("Shops")
-                        .HasForeignKey("CategoryId");
-
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.ShopService", "ShopServices")
                         .WithMany("Shops")
                         .HasForeignKey("ShopServicesId");
@@ -375,6 +618,13 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "Users")
                         .WithOne("Shops")
                         .HasForeignKey("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "UserId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Chat")
+                        .WithMany("User")
+                        .HasForeignKey("ChatId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopIdViewModel
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopItemsViewModel
 @using ProjectBSIS401.WEB.Infrastructures.Domain.Models
 @{
     ViewData["Title"] = "ShopItems";
@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="row">
-            @if (Model.Shop.BusinessName.Length <= 20)
+            @if (Model.Shop.BusinessName.Length <= 30)
             {
                 <h6 class="logo me-auto float-lg-start"><img src="~/image/shops/logo/@Model.Shop.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8;" />@Model.Shop.BusinessName</h6>
             }
@@ -22,23 +22,53 @@
             @if (!WebUser.IsUserLogggedIn() == true)
             {
                 <div class="list-group">
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate booking" class="list-group-item">Booking</a>
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate feedback" class="list-group-item ">Feedback</a>
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate and message us" class="list-group-item ">Message-Us</a>
+                    @*<a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate booking" class="list-group-item">Booking</a>*@
+                    @*<a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate feedback" class="list-group-item ">Feedback</a>
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Login to activate and message us" class="list-group-item ">Message-Us</a>*@
                 </div>
 
             }
             else
             {
                 <div class="list-group">
-                    <a href="~/booking/book-costumer/@Model.ShopId/@Model.UserId" class="list-group-item active-list">Booking</a>
+                    @*<a href="~/booking/book-costumer/@Model.ShopId/@Model.UserId" class="list-group-item active-list">Booking</a>*@
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Comments</div>
+
+                            </div>
+                            <span class="badge bg-primary rounded-pill">@Model.Shop.Comments</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Likes</div>
+
+                            </div>
+                            <span class="badge bg-primary rounded-pill">@Model.Shop.Likes</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Rating</div>
+
+                            </div>
+                            <span class="badge bg-primary rounded-pill">@Model.Shop.Rating.ToString("F")</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><a href="~/chats/create-private-room/@Model.Shop.UserId">Chat Us</a></div>
+
+                            </div>
+                        </li>
+                    </ol>
                     <a href="#collapseExample" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item active-list">Feedback</a>
                     <div class="collapse" id="collapseExample">
                         <form method="post" action="~/feedback/shop-feedbacks">
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary()
                             <div class="form-group">
-                                <input type="hidden" name="UserId" value="@Model.UserId" />
+                                <input type="hidden" name="UserId" value="@WebIDS.GetPublicUserId" />
                                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
                             </div>
                             <div class="form-group">
@@ -76,7 +106,7 @@
 
                         </form>
                     </div>
-                    <a href="#" class="list-group-item active-list">Category 3</a>
+                    @*<a href="#" class="list-group-item active-list">Category 3</a>*@
                 </div>
           
             }
@@ -97,15 +127,28 @@
                         <div class="card h-100">
                             @*<a href="#"><img class="card-img-top" src="~/myimages/diplay4.png" alt=""></a>*@
                             <div class="card-body">
+                                
                                 <h4 class="card-title">
-                                    <a href="~/shop/shop-items-info/@shopService.Id/@Model.ShopId">@shopService.Service</a>
+                                    <a href="~/shop/shop-public-items-info/@shopService.Id/@Model.ShopId">@shopService.Service</a>
+
                                 </h4>
                                 <h5>@shopService.Price.ToString("F")</h5>
                                 <p class="card-text">@shopService.Description</p>
+                                <div>
 
-                            </div>
+                                </div>
+
+                            </div>  
                             <div class="card-footer">
-                                <small class="text-muted">★ ★ ★ ★ ☆</small><span> <a href="">Book-Services</a></span>
+                                @if (!WebUser.IsUserLogggedIn() == true)
+                                {
+                                    <p>...</p>
+                                }
+                                else
+                                {
+                                    <span> <a href="~/booking/book-costumer/@Model.Shop.Id/@WebIDS.GetPublicUserId/@shopService.Id">Book-Services &nbsp;<i class="fas fa-plus"></i></a></span>
+                                }
+
                             </div>
                         </div>
                     </div>

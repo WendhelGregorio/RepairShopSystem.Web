@@ -4,6 +4,10 @@
 }
 
 
+
+<div class="section-title mt-5">
+    <h2>Create Shop</h2>
+</div>
 <div class="container">
     <form method="post" action="~/shop/shop-create">
         @Html.AntiForgeryToken()
@@ -18,65 +22,79 @@
             <span class="ml-5 text-success">Owner:</span>
             <input type="text" class="form-control" id="ownerShop" name="OwnerShop" value="@Model.OwnerShop" disabled="disabled"/>
         </div>
-        <hr />
-        <div class="form-check-inline">
-            <label for="businessName" class="control-label ml-5 mr-3  mb-1" id="">Shop Name</label>
-            <input type="text" class="form-control" id="businessName" name="BusinessName" aria-describedby="businessNameHelp" placeholder="Enter shop name">
+        <div class="row">
+            <div class="col-6">
+                <label for="businessName" class="control-label ml-5 mr-3  mb-1" id="">Shop Name</label>
+                <input type="text" class="form-control" id="businessName" name="BusinessName" aria-describedby="businessNameHelp" placeholder="Enter shop name">
+            </div>
+          
+            <div class="col-6">
+                <label for="phonenumber" class="control-label ml-5 mr-3 mb-1">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" name="BusinessContact" aria-describedby="phoneNumberHelp" placeholder="Enter shop phone Number">
 
-            <label for="phonenumber" class="control-label ml-5 mr-3 mb-1">Phone Number</label>
-            <input type="text" class="form-control" id="phoneNumber" name="BusinessContact" aria-describedby="phoneNumberHelp" placeholder="Enter shop phone Number">
-
+            </div>
+            
         </div>
-        <hr />
-        <div class="form-check-inline">
-            <label for="businessEmailAddress" class="control-label ml-5 mr-3  mb-1">Email Address</label>
-            <input type="email" class="form-control" id="businessEmailAddress" name="BusinessEmailAddress" aria-describedby="businessEmailAddressHelp" placeholder="Enter shop email address">
 
-            <label for="businessLocation" class="control-label ml-5 mr-3 mb-1">Shop Location</label>
-            <input type="text" class="form-control" id="businessLocation" name="BusinessLocation" aria-describedby="businessLocationHelp" placeholder="Enter shop location">
-
+        <div class="row">
+            <div class="col">
+                <label for="businessEmailAddress" class="control-label ml-5 mr-3  mb-1">Email Address</label>
+                <input type="email" class="form-control" id="businessEmailAddress" name="BusinessEmailAddress" aria-describedby="businessEmailAddressHelp" placeholder="Enter shop email address">
+            </div>
         </div>
-        <hr />
-        <div class="form-check-inline">
-            <label for="openAt" class="control-label ml-5 mr-3  mb-1">Open Time</label>
-            <input type="text" class="form-control" id="openAt" name="OpenAt" aria-describedby="emailAddressHelp" placeholder="Enter open time">
+        <div class="row">
+            <div class="col">
+                <label for="businessLocation" class="control-label ml-5 mr-3 mb-1">Shop Location</label>
+                <input type="text" class="form-control" id="businessLocation" name="BusinessLocation" aria-describedby="businessLocationHelp" placeholder="Enter shop location">
 
-            <label for="closeAt" class="control-label ml-5 mr-3 mb-1">Close Time</label>
-            <input type="text" class="form-control" id="closeAt" name="CloseAt" aria-describedby="phoneNumberHelp" placeholder="Enter close time">
-
+            </div>
         </div>
-        <hr />
+        
+        <div class="row">
+            <div class="col-4">
+                <label for="openAt" class="control-label ml-5 mr-3  mb-1">Open Time</label>
+                <input type="text" class="form-control" id="openAt" name="OpenAt" aria-describedby="emailAddressHelp" placeholder="Enter open time">
 
-        <div class="form-check-inline col-lg-11">
-            <label for="businessDescription" class="control-label ml-5 mr-3  mb-1">Description</label>
-            <textarea type="text" class="form-control" id="businessDescription" name="BusinessDescription" aria-describedby="businessDescriptionHelp" placeholder="Enter shop desciption"></textarea>
+            </div>
+            <div class="col-4">
+                <label for="closeAt" class="control-label ml-5 mr-3 mb-1">Close Time</label>
+                <input type="text" class="form-control" id="closeAt" name="CloseAt" aria-describedby="phoneNumberHelp" placeholder="Enter close time">
 
- 
+            </div>
+            <div class="col-4">
+                <label for="businessType" class="control-label ml-5 mr-4 mb-1">Type</label>
+                <select class="form-control" id="role" name="BusinessType">
+                    @{
+                        var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType>();
 
-        </div>
-        <hr />
-        <div class="form-check-inline  col-lg-11">
-            <label for="businessType" class="control-label ml-5 mr-4 mb-1">Type</label>
-            <select class="form-control" id="role" name="BusinessType">
-                @{
-                    var options = Enum.GetValues(typeof(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType)).Cast<ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType>();
-
-                    foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType option in options)
-                    {
-                        <option value="@option">@option.ToString()</option>
+                        foreach (ProjectBSIS401.WEB.Infrastructures.Domain.Enums.BusinessType option in options)
+                        {
+                            <option value="@option">@option.ToString()</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            </div>
         </div>
-
-
         <hr />
-        <div class="ml-5 mr-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="~/home/index" class="btn btn-danger">Cancel</a>
+        <div class="row">
+            <div class="col">
+                <label for="businessDescription" class="control-label ml-5 mr-3  mb-1">Description</label>
+                <textarea type="text" class="form-control" id="businessDescription" name="BusinessDescription" aria-describedby="businessDescriptionHelp" placeholder="Enter shop desciption"></textarea>
+
+            </div>
         </div>
+        <br />
+       <div class="row">
+           <div class="col-4"> </div>
+           <div class="col-4">
+               <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+               <a href="~/home/index" class="btn btn-lg  btn-danger">Cancel</a>
+           </div>
+           <div class="col-4">
 
-
+           </div>
+       </div>
+ 
     </form>
 
 </div>

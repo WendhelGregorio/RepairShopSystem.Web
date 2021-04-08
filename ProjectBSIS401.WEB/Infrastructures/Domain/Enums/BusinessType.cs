@@ -10,16 +10,16 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Enums
     {
 
         [Display(Name = "Tablet")]
-        Tablet,
+        Tablet = 1,
 
         [Display(Name = "CellPhone")]
-        CellPhone,
+        CellPhone = 2,
 
         [Display(Name = "Desktop")]
-        Desktop,
+        Desktop = 3,
 
         [Display(Name = "Laptop")]
-        Laptop ,
+        Laptop = 4 ,
 
     }
 }

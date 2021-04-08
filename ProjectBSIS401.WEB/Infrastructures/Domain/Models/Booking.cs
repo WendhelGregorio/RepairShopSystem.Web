@@ -12,9 +12,17 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public Guid? ShopId { get; set; }
 
+        public Guid? ShopServiceId { get; set; }
+
+        public string ShopServiceName { get; set; }
+
+        public decimal ShopServicePrice { get; set; }
+
+        public string ShopServiceDescription { get; set; }
+
         public string UserName { get; set; }
 
-        public string Description { get; set; }
+        public string AdditionalDescription { get; set; }
 
         public string ContactNumber { get; set; }
 

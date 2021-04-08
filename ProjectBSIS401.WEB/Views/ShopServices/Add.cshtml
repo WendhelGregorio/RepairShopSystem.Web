@@ -4,10 +4,9 @@
 }
 
 <h2>Add</h2>
-<div id="error" class="alert-danger"><h4>@ViewBag.Error</h4></div>
+<div asp-validation-summary="All" class="text-danger"></div>
 <form method="post" action="~/shop-services/add">
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
     <input type="hidden" name="ServiceId" value="@Model.ServiceId" />
     <input type="hidden" name="ShopId" value="@Model.ShopId" />
     <input type="hidden" name="Service" value="@Model.Service" />
@@ -26,6 +25,6 @@
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="~/shop-services/index/@Model.ShopId" class="btn btn-danger">Cancel</a>
+        <a href="~/shop/my-dashboard" class="btn btn-danger">Cancel</a>
     </div>
 </form>

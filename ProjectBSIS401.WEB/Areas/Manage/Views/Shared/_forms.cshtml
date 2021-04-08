@@ -16,7 +16,6 @@
     <link href="~/fontawesome/css/fontawesome.css" />
     <link href="~/fontawesome/css/regular.css" />
 
-
     <!-- Google Fonts -->
     @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">*@
 
@@ -24,16 +23,21 @@
     <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
 
-    <!--Select2.org-->
-    <link href="~/selectselect/dist/css/select2.css" rel="stylesheet" />
-   
-
-
     <!-- Template Main CSS File -->
     <link href="~/style/style.css" rel="stylesheet">
-
     <!-- My own Style-->
     <link href="~/style/MyStyleSheet.css" rel="stylesheet">
+
+    <!-- Noty -->
+    <link href="~/vendor/noty/noty.css" rel="stylesheet" type="text/css" />
+    <link href="~/vendor/noty/themes/metroui.css" rel="stylesheet" type="text/css" />
+    <script src="~/vendor/noty/noty.min.js"></script>
+    <style>
+        .noty_bar {
+            z-index: 1000;
+            background-color: beige;
+        }
+    </style>
 </head>
 <body>
 
@@ -48,10 +52,11 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     @*@if (WebUser.IsInRole(ProjectBSIS401.WEB.Infrastructures.Domain.Enums.Role.Admin))
-                        {*@
+        {*@
                     <li class="active"><a href="~/manage/users">Users</a></li>
                     <li><a href="~/manage/shops/index">Shop</a></li>
                     <li><a href="~/manage/service/index">Services</a></li>
+                    <li><a href="~/manage/pricings/index">Pricing</a></li>
                     <li><a href="~/manage/shop-services/index"></a></li>
                     <li class="drop-down">
                         <a href="">Account</a>
@@ -62,8 +67,9 @@
                                 <a href="#">Settings</a>
                                 <ul>
 
-                                    <li><a class="dropdown-item" href="~/account/profile/@WebUser.UserId">Profile</a></li>
-                                    <li><a class="dropdown-item" href="~/account/change-password/@WebUser.UserId">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="~/manage/users/update-profile/@WebIDS.GetAdminUserId">Profile</a></li>
+                                    <li><a class="dropdown-item" href="~/account/change-password/@WebIDS.GetAdminUserId">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="~/account/reset-password/@WebIDS.GetAdminUserId">Reset Password</a></li>
 
                                 </ul>
                             </li>
@@ -75,7 +81,7 @@
 
                         </ul>
                         @*</li>
-                            }*@
+            }*@
 
 
                 </ul>
@@ -101,16 +107,20 @@
 
 
     <!-- Vendor JS Files -->
-    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+    <script src="~/vendor/jquery/jquery-ui-1.12/jquery-ui.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
-
-    <!--Selectseletc js files-->
-    <script src="~/selectselect/dist/js/select2.full.js"></script>
+    <script src="~/fontawesome/js/all.min.js"></script>
+    <script src="~/vendor/jquery/home.js"></script>
+    <!-- Noty -->
+    <script src="~/vendor/noty/noty.js"></script>
+    <!-- SignalR -->
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    
 
 
     <!-- Template Main JS File -->
-    <script src="~/js2/main.js"></script>
+    <script src="~/main/main.js"></script>
 
 
     @RenderSection("Scripts", required: false)

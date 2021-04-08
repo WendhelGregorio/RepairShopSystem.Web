@@ -9,6 +9,7 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
     public class BannerImageViewModel
     {
         public Guid? ShopId { get; set; }
+
         public IFormFile Banner { get; set; }
     }
 }

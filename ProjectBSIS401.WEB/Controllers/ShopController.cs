@@ -13,6 +13,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+using ProjectBSIS401.WEB.ViewModels.category;
 using ProjectBSIS401.WEB.ViewModels.shop;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -23,6 +24,7 @@ namespace ProjectBSIS401.WEB.Controllers
     public class ShopController : Controller
     {
         private readonly DefaultDbContext _context;
+        public readonly static DefaultDbContext _db;
         protected readonly IConfiguration _config;
         private IHostingEnvironment _env;
 
@@ -34,42 +36,122 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-        [HttpGet, Route("shop/index")]
-        [HttpGet,Route("shop/index/{userId}")]
-        public IActionResult Index(Guid? userId,int pageIndex = 1, string keyword = "", string btypes = "")
+        [HttpGet,Route("shop/index")]
+        public IActionResult Index(int pageSize = 10, int pageIndex = 1, string keyword = "", string status = "Desktop")
         {
-            Shop result = new Shop();
-            Enum.TryParse(btypes, out BusinessType btypeses);
-            IQueryable<Shop> shopQuery = (IQueryable<Shop>)this._context.Shops.Where(s => s.BusinessType == btypeses);
+             Enum.TryParse(status, out BusinessType businessType); ;
 
-            var shop = this._context.Shops.Include(s => s.Bookings)
-                                          .OrderBy(s => s.BusinessName)
-                                          .Take(30)
-                                          .ToList();
+            Page<Shop> result = new Page<Shop>();
+
+            if (pageSize < 1)
+            {
+                pageSize = 1;
+            }
+
+            IQueryable<Shop> shopQuery = (IQueryable<Shop>)this._context.Shops.Where(s => s.BusinessType == businessType);
 
             if (string.IsNullOrEmpty(keyword) == false)
             {
-                shopQuery = this._context.Shops.Where(s => s.BusinessName.ToLower().Contains(keyword.ToLower())
-                                       || s.BusinessEmailAddress.ToLower().Contains(keyword.ToLower()));
+                shopQuery = shopQuery.Where(s => s.BusinessName.Contains(keyword));
 
             }
-            return View(new IndexViewModel
+
+            long queryCount = shopQuery.Count();
+
+            int pageCount = (int)Math.Ceiling((decimal)(queryCount / pageSize));
+            long mod = (queryCount % pageSize);
+
+            if (mod > 0)
             {
-                UserId = userId,
-                Shops = shop,
-                Keyword = keyword,
-                businessType = btypeses
+                pageCount = pageCount + 1;
+            }
 
+            int skip = (int)(pageSize * (pageIndex - 1));
+            List<Shop> shops = shopQuery.ToList();
+
+            result.Items = shops.Skip(skip).Take((int)pageSize).ToList();
+            result.PageCount = pageCount;
+            result.PageSize = pageSize;
+            result.QueryCount = queryCount;
+            result.PageIndex = pageIndex;
+            result.Keyword = keyword;
+
+            return View(new IndexViewModel()
+            {
+               Shops = result,
+               businessType = businessType
             });
-
         }
+        [HttpGet("shop/{shopId}")]
+        public IActionResult Shop(Guid? shopId)
+        {
+            Guid? userId = WebIDS.GetPublicUserId;
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            if(shop != null)
+            {
+                var comments = _context.Comments.Where(c => c.ShopId == shopId && c.IsPublished == true)
+                                                .OrderByDescending(c => c.UpdatedAt)
+                                                .Take(3)
+                                                .Select(c => new CommentViewModel()
+                                                {
+                                                    Id = c.Id,
+                                                    UserId = c.UserId,
+                                                    Content = c.Content,
+                                                    Likes = c.Likes,
+                                                    UserName = (c.MaskUser == true ? c.UserName : c.User.LastName),
+                                                    UserIcon = (c.MaskUser == true ? "user.svg" : c.User.Id.ToString() + ".jpeg"),
+                                                    UpdatedAt = c.UpdatedAt
+
+                                                }).ToList();
+                var commentCount = 0;
+                commentCount = comments.Count;
+
+                var ratings = _context.Ratings.Where(r => r.ShopId == shopId && r.IsCounted == true).ToList();
+                decimal ratingAve = 0;
+                
+                if (ratings != null)
+                {
+                    if (ratings.Count > 0)
+                    {
+                        ratingAve = ratings.Average(r => r.Score);
+                    }
+                }
+
+                var isLiked = false;
+                var liked = _context.Likes.FirstOrDefault(l => l.ShopId == shopId && l.UserId == userId);
+
+                if (liked != null)
+                {
+                    isLiked = true;
+                }
+
+                return View(new ShopViewModel()
+                {
+                    Id = shop.Id,
+                    OwnerShop = shop.OwnerShop,
+                    BusinessContact = shop.BusinessContact,
+                    BusinessEmailAddress = shop.BusinessEmailAddress,
+                    BusinessLocation = shop.BusinessLocation,
+                    BusinessDescription = shop.BusinessDescription,
+                    BusinessName = shop.BusinessName,
+                    CommentItems = comments,
+                    Comments = commentCount,
+                    RatingAve = ratingAve,
+                    IsLiked = isLiked,
+                    Likes = shop.Likes
+                });
+            }
+            return NotFound();
+        }
+
         [HttpGet, Route("shop/shop-items/{shopId}")]
-        [HttpGet,Route("shop/shop-items/{shopId}/{userId}")]
-        public IActionResult ShopItems(Guid? shopId,Guid? userId)
+        public IActionResult ShopItems(Guid? shopId)
         {
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
             //var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
-            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = this._context.Users.FirstOrDefault(u => u.Id == WebIDS.GetPublicUserId);
             var shopServices = this._context.ShopServices.Where(u => u.ShopId == shop.Id).ToList();
             if (shop == null)
             {
@@ -81,16 +163,16 @@ namespace ProjectBSIS401.WEB.Controllers
                 return Redirect("~/shop/index");
             }
 
-            return View(new ShopIdViewModel {
+            return View(new ShopItemsViewModel {
                 Shop = shop,
                 ShopServices = shopServices,
                 ShopId = shopId,
-                UserId = userId
+              
                 
             });
         }
 
-        [HttpGet, Route("shop/shop-items-info/{shopServiceId}/{shopId}")]
+        [HttpGet, Route("shop/shop-public-items-info/{shopServiceId}/{shopId}")]
         public IActionResult ShopItemInfo(Guid? shopServiceId,Guid? shopId)
         {
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
@@ -105,6 +187,9 @@ namespace ProjectBSIS401.WEB.Controllers
                 ShopServices = info
             });
         }
+
+   
+
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("shop/shop-create/{userId}")]
         public IActionResult CreateShop(Guid? userId)
@@ -161,32 +246,65 @@ namespace ProjectBSIS401.WEB.Controllers
 
 
         [Authorize(Policy = "SignedIn")]
-        [HttpGet, Route("shop/shop-home/{shopId}")]
-        public IActionResult ShopHome(Guid? shopId)
+        [HttpGet, Route("shop/my-dashboard")]
+        public IActionResult ShopHome(int pageSize = 3, int pageIndex = 1, string keyword = "", string status = "Confirm")
         {
-            if (shopId == null)
+            Enum.TryParse(status, out ReserveStatus reserveStatus); ;
+
+            Page<Booking> bookResult = new Page<Booking>();
+            Page<ShopService> shopServiceResult = new Page<ShopService>();
+
+            if (pageSize < 1)
             {
-                return NotFound();
+                pageSize = 1;
             }
-            var shops = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
 
-            var booking = this._context.Bookings.Where(b => b.ShopId == shops.Id)
-                                                .OrderByDescending(b => b.UpdatedAt)
-                                                .ToList();
+            IQueryable<Booking> bookQuery = (IQueryable<Booking>)this._context.Bookings.Where(u => u.ReserveStatus == reserveStatus && u.ShopId == WebIDS.GetShopId);
+            if (string.IsNullOrEmpty(keyword) == false)
+            {
+                bookQuery = bookQuery.Where(b => b.ShopServiceName.Contains(keyword)
+                                            || b.UserName.Contains(keyword)
+                                            || b.Address.Contains(keyword));
+            }
 
-            var shopServices = this._context.ShopServices.Where(ss => ss.ShopId == shops.Id)
+            long queryCount = bookQuery.Count();
+            int pageCount = (int)Math.Ceiling((decimal)(queryCount / pageSize));
+            long mod = (queryCount % pageSize);
+            if (mod > 0)
+            {
+                pageCount = pageCount + 1;
+            }
+
+            int skip = (int)(pageSize * (pageIndex - 1));
+            List<Booking> bookings = bookQuery.ToList();
+            bookResult.Items = bookings.Skip(skip).Take((int)pageSize).ToList();
+            bookResult.PageCount = pageCount;
+            bookResult.PageSize = pageSize;
+            bookResult.QueryCount = queryCount;
+            bookResult.PageIndex = pageIndex;
+            bookResult.Keyword = keyword;
+
+           
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == WebIDS.GetShopId);
+
+            var booking = this._context.Bookings.Where(b => b.ShopId == shop.Id)
+                                                .OrderByDescending(b => b.UpdatedAt);
+
+            var bookId = this._context.Bookings.FirstOrDefault(b => b.ShopId == shop.Id);
+
+            var shopServices = this._context.ShopServices.Where(ss => ss.ShopId == shop.Id)
                                                          .OrderByDescending(ss => ss.UpdatedAt)
                                                          .ToList();
 
 
-            var shopFeedbacks = this._context.FeedBacks.Where(s => s.ShopId == shopId)
+            var shopFeedbacks = this._context.FeedBacks.Where(s => s.ShopId == shop.Id)
                                                        .OrderByDescending(s => s.UpdatedAt)
                                                        .ToList();
 
             int count = shopFeedbacks.Count();
             int serviceCount = shopServices.Count();
             int costumerCounts = booking.Count();
-            if (shops == null)
+            if (shop == null)
             {
                 return NotFound();
             }
@@ -200,9 +318,13 @@ namespace ProjectBSIS401.WEB.Controllers
             }
             return View(new ShopHomeViewModel
             {
+                BookingsPage = bookResult,
+                ReserveStatus = reserveStatus,
+
+                BookingId = bookId.Id,
                 ShopServices = shopServices,
-                Shops = shops,
-                Bookings = booking,
+                Shop = shop,
+                Bookings = booking.ToList(),
                 Count = count,
                 serviceCount = serviceCount,
                 costumerCount = costumerCounts
@@ -210,11 +332,102 @@ namespace ProjectBSIS401.WEB.Controllers
             
         }
 
+        [HttpGet,Route("/shop/profile/{shopId}")]
+        public IActionResult Profile(Guid? shopId)
+        {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            var user = this._context.Users.FirstOrDefault(u => u.Id == WebIDS.GetShopAdminId);
+            if(shop == null)
+            {
+                return RedirectPermanent("/shop/my-dashboard");
+            }
+
+            return View(new ProfileViewModel {
+                Shop = shop,
+                User = user,
+                
+            });
+        }
+
+        [HttpGet,Route("/shop/business-insight")]
+        public IActionResult BusinessInsight()
+        {
+            return View();
+        }
+
+        [HttpGet,Route("/shop/my-chat")]
+        public IActionResult MyChat()
+        {
+            var chats = this._context.Chats
+                                      .Include(x => x.Users)
+                                             .ThenInclude(x => x.User)
+                                      .Where(x => x.Type == Infrastructures.Domain.Enums.ChatType.Private
+                                      && x.Users.Any(y => y.UserId == WebIDS.GetShopAdminId)
+                                      ).ToList();
+
+            return View(new MyChatViewModel
+            { 
+                Chats = chats
+            });
+        }
+
+        [HttpGet, Route("/shop/get-bookings/{Id}")]
+        public List<GetBookingsViewModel> GetBookings(Guid? Id)
+        {
+            System.Threading.Thread.Sleep(5000);
+            return _context.Bookings.Where(x => x.ShopId == Id)
+                                       .Select(x => new GetBookingsViewModel
+                                       {
+                                           Id = x.Id,
+                                           UpdatedAt = x.UpdatedAt,
+                                           Address = x.Address,
+                                           ReserveStatus = x.ReserveStatus,
+                                           ShopServiceName = x.ShopServiceName,
+                                           UserName = x.UserName
+
+                                       }).ToList();
+        
+   
+        }
+
+        [HttpGet,Route("/shop/get-comments")]
+        public List<Comment> GetComments()
+        {
+            System.Threading.Thread.Sleep(3000);
+            return this._context.Comments.ToList();
+        }
+
+        public static List<Rating> GetRatings()
+        {
+            System.Threading.Thread.Sleep(5000);
+            List<Rating> allRatings = new List<Rating>();
+            allRatings = _db.Ratings.ToList();
+            return allRatings;
+        }
+
+        //public static List<Comment> GetComments()
+        //{
+        //    System.Threading.Thread.Sleep(5000);
+        //    List<Comment> allComment = new List<Comment>();
+        //    allComment = _db.Comments.ToList();
+        //    return allComment;
+        //}
+
+
+        public static List<Like> GetLikes()
+        {
+            System.Threading.Thread.Sleep(5000);
+            List<Like> allLikes = new List<Like>();
+            allLikes = _db.Likes.ToList();
+            return allLikes;
+        }
+
 
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("shop/shop-update-profile/{shopId}")]
         public IActionResult ShopUpdateProfile(Guid? shopId)
         {
+        
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
 
             if (shop != null)
@@ -235,6 +448,7 @@ namespace ProjectBSIS401.WEB.Controllers
             }
             return View(shop);
         }
+
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("shop/shop-update-profile")]
         public IActionResult ShopUpdateProfile(ShopUpdateProfileViewModel model)
@@ -307,21 +521,21 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-        [HttpGet, Route("shop/change-status-booking/{status}/{bookingId}/{shopId}")]
-        public IActionResult ChangeStatus(string status, Guid? bookingId,Guid? shopId)
-        {
+        //[HttpGet, Route("shop/change-status-booking/{status}/{bookingId}/{shopId}")]
+        //public IActionResult ChangeStatus(string status, Guid? bookingId,Guid? shopId)
+        //{
 
-            var rStatus = (ReserveStatus)Enum.Parse(typeof(ReserveStatus), status, true);
-            var statusUserBooking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+        //    var rStatus = (ReserveStatus)Enum.Parse(typeof(ReserveStatus), status, true);
+        //    var statusUserBooking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
 
-            if (statusUserBooking != null)
-            {
-                statusUserBooking.ReserveStatus = rStatus;
-                this._context.Bookings.Update(statusUserBooking);
-                this._context.SaveChanges();
-            }
-            return Redirect("~/shop/shop-profile/" + shopId);
-        }
+        //    if (statusUserBooking != null)
+        //    {
+        //        statusUserBooking.ReserveStatus = rStatus;
+        //        this._context.Bookings.Update(statusUserBooking);
+        //        this._context.SaveChanges();
+        //    }
+        //    return Redirect("~/shop/shop-profile/" + shopId);
+        //}
 
 
         [Authorize(Policy = "SignedIn")]
@@ -402,6 +616,8 @@ namespace ProjectBSIS401.WEB.Controllers
             }
             return RedirectToAction("Logo", new { ShopId = model.ShopId });
         }
+
+
 
 
         #region Helpers

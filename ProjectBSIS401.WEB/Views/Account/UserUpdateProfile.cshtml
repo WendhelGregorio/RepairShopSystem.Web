@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <input type="hidden" name="UserId" value="@Model.UserId" />
                     <label for="Thumbnail">Thumbnail:</label><br />
-                    <img src="~/userprofile/users/@WebUser.UserId/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                    <img src="~/userprofile/users/@Model.UserId/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                     <input type="file" class="form-control" name="thumbnail" />
                     <h6>Upload a different photo...</h6>
                     @Html.ValidationSummary()
@@ -131,7 +131,7 @@
                             <div class="col-xs-12">
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <a href="~/account/profile/@WebUser.UserId" class="btn btn-lg btn-danger">Back</a>
+                                <a href="~/account/profile/@Model.UserId" class="btn btn-lg btn-danger">Back</a>
                             </div>
                         </div>
                     </form>

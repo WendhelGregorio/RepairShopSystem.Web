@@ -112,10 +112,13 @@ namespace ProjectBSIS401.WEB.Controllers
                         this._context.SaveChanges();
 
                         var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                     
                         var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
 
                         WebUser.SetUser(user, roles, groups);
+                        WebIDS.SetUserId(user.Id,user.UserName, roles, groups);
+                        WebIDS.SetAdminId(user.Id, roles, groups);
                         await this.SignIn();
 
 
@@ -136,18 +139,24 @@ namespace ProjectBSIS401.WEB.Controllers
                         //var shops = this._context.Shops.Where(s => ).Select(s => s.Id).ToList;
 
                         WebUser.SetUser(user, roles, groups);
+                        WebIDS.SetUserId(user.Id, user.UserName, roles, groups);
+                        WebIDS.SetPublicUserId(user.Id, roles,groups);
                         await this.SignIn();
                 
                         var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id && s.IsPublished == true);
                         if (shop != null)
                         {
-
-                            return RedirectPermanent("~/shop/shop-home/" + shop.Id);
+                            WebIDS.SetShopId(shop.Id);
+                            WebIDS.SetUserId(user.Id, user.UserName, roles, groups);
+                            WebIDS.SetShopAdminId(user.Id, roles, groups);
+                            await this.SignIn();
+                            return RedirectPermanent("~/shop/my-dashboard");
                         }
 
-                       
 
-                        return RedirectPermanent("~/shop/index/" + user.Id);
+                          //return RedirectPermanent("~/account/update-profile/" + user.Id);
+                
+                        return RedirectPermanent("~/shop/index");
                     }
                     else
                     {
@@ -393,33 +402,31 @@ namespace ProjectBSIS401.WEB.Controllers
             return View();
         }
 
-
-        [Authorize(Policy = "SignedIn")]
+        [AllowAnonymous]
+        //[Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/update-profile/{userId}")]
         public IActionResult UserUpdateProfile(Guid? userId)
         {
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
 
-            if(WebUser.UserId == null)
+            if(userId == null)
             {
                 return RedirectToAction("~/account/login");
             }
-
-            if (user != null)
+            else
             {
                 return View(
-                    new UpdateProfileViewModel()
-                    {
-                        UserId = user.Id.Value,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        PhoneNumber = user.PhoneNumber
-                    }
-                );
+                   new UpdateProfileViewModel()
+                   {
+                       UserId = user.Id.Value,
+                       FirstName = user.FirstName,
+                       LastName = user.LastName,
+                       PhoneNumber = user.PhoneNumber
+                   }
+               );
             }
-
-            return View();
+           
 
         }
 
@@ -459,13 +466,20 @@ namespace ProjectBSIS401.WEB.Controllers
         {
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
 
+            var bookings = this._context.Bookings.Where(b => b.UserId == user.Id)
+                                                 .OrderByDescending(b => b.UpdatedAt)
+                                                 .ToList();
             if (user == null)
             {
                 return NotFound();
             }
 
 
-            return View(user);
+            return View(new ProfileViewModel
+            {
+                User = user,
+                Bookings = bookings
+            });
 
         }
 

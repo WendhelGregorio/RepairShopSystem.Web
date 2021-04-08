@@ -10,17 +10,24 @@ namespace ProjectBSIS401.WEB.ViewModels.booking
 {
     public class BookingViewModel
     {
-        public string Name { get; set; }
-
         public Guid? UserId { get; set; }
 
         public Guid? ShopId { get; set; }
 
-        [Required]
-        public BusinessType Type { get; set; }
+        public Guid? ShopServiceId { get; set; }
+
+        public string UserName { get; set; }
+
+
+        public string TitleShopService { get; set; }
+
+        public string DescriptionShopService { get; set; }
+
+        public decimal PriceShopService { get; set; }
+
 
         [Required]
-        public string Description { get; set; }
+        public string AdditionalDescription { get; set; }
 
         [Required]
         public string ContactNumber { get; set; }

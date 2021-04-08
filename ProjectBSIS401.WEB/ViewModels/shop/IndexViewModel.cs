@@ -12,13 +12,11 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
     {
         public Guid? UserId { get; set; }
 
-        public List<Shop> Shops { get; set; }
-
-        public string Keyword { get; set; }
+        public Page<Shop> Shops { get; set; }
 
         public BusinessType businessType { get; set; }
 
-        public List<BusinessType> listbusinessTypes
+        public List<BusinessType> businessTypes
         {
             get
             {

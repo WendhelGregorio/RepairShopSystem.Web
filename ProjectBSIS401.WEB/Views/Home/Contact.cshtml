@@ -53,9 +53,9 @@
     <div class="row">
         <div class="col-lg-8 mb-4">
             <h3>Send us a Message</h3>
-            <form method="post" action="~/home/contact" name="sentMessage" id="contactForm" novalidate>
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary()
+            <form  name="" id="" action="~/home/contact" method="post">
+                @*@Html.AntiForgeryToken()*@
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="control-group form-group">
                     <div class="controls">
                         <label>Full Name:</label>
@@ -81,13 +81,14 @@
                         <textarea rows="10" cols="100" name="Message" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
                     </div>
                 </div>
-                <div id="success" class="alert-success"><h5>@ViewBag.Success</h5></div>
-                <div id="error" class="alert-danger">
-                    <h5> @ViewBag.Error</h5>
-                </div>
+            
                 <!-- For success/fail messages -->
-                <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
+                <button type="submit" class="btn btn-primary" id="sendButton">Send Message</button>
             </form>
+
+            <div id="result">
+
+            </div>
         </div>
 
     </div>
@@ -95,3 +96,41 @@
 
 </div>
 <!-- /.container -->
+
+<script>
+    $(document).ready(function () {
+        $("#sendButton").click(function () {
+            var name = $("#name").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            var message = $("#message").val();
+          
+
+            var obj = {
+                FullName: name,
+                PhoneNumber: phone,
+                EmailAddress: email,
+                Message: message,
+            }
+
+            ContactForm(obj);
+        });
+
+    });
+
+
+    function ContactForm(obj) {
+        var route = "/home/contact";
+        $.ajax({
+            url: route,
+            method: "POST",
+            data: obj,
+            success: function (response) {
+                $("#result").html(response);
+            },
+            error: function (err) {
+                $("#result").html(err);
+            }
+        });
+    }
+</script>

@@ -33,8 +33,10 @@
                                     <a href="#">Settings</a>
                                     <ul>
 
-                                        <li><a class="dropdown-item" href="~/account/profile/@WebUser.UserId">Profile</a></li>
-                                        <li><a class="dropdown-item" href="~/account/change-password/@WebUser.UserId">Change Password</a></li>
+                                        <li><a class="dropdown-item" href="~/chats/index">Chat</a></li>
+                                        <li><a class="dropdown-item" href="~/shop/shop-create/@WebIDS.GetPublicUserId">Create Shop</a></li>
+                                        <li><a class="dropdown-item" href="~/account/profile/@WebIDS.GetPublicUserId">Profile</a></li>
+                                        <li><a class="dropdown-item" href="~/account/change-password/@WebIDS.GetPublicUserId">Change Password</a></li>
                                         <li><a class="dropdown-item" href="~/account/logout">Logout</a></li>
                                     </ul>
                                 </li>
@@ -53,4 +55,6 @@
    
     </div>
 </header><!-- End Header -->
+
+
 

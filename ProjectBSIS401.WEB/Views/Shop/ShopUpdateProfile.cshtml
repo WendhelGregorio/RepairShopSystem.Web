@@ -1,6 +1,7 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopUpdateProfileViewModel
 @{
-    ViewData["Title"] = "ShopUpdateProfile";
+    Layout = null;
+    Layout = "~/Views/Shared/_ShopPartialNav.cshtml";
 }
 
 
@@ -17,7 +18,7 @@
         <div class="form-group">
             <input type="hidden" id="ShopId" name="ShopId" value="@Model.ShopId" />
 
-            <label for="ownershop" class="control-label ml-5 mr-3  mb-1"><strong>Owner Shop</strong> : @Model.OwnerShop</label>
+            <label for="ownershop" class="form-control mb-1"><strong>Owner Shop</strong> : @Model.OwnerShop</label>
         </div>
         <hr />
         <div class="form-group">
@@ -74,7 +75,7 @@
         <hr />
         <div class="ml-5 mr-3">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="~/shop/shop-profile/@Model.ShopId" class="btn btn-danger">Cancel</a>
+            <a href="~/shop/my-dashboard" class="btn btn-danger">Cancel</a>
         </div>
 
 

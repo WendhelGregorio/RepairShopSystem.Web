@@ -1,314 +1,531 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.shop.ShopHomeViewModel
 @using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
 
 
 @{
-    ViewData["Title"] = "ShopHome";
+    Layout = null;
+    Layout = "~/Views/Shared/_ShopPartialNav.cshtml";
 }
 <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="~/style/simple-sidebar.css" rel="stylesheet" />
 
 <br /><br />
-      <div class="d-flex" id="wrapper">
-          <!-- Sidebar -->
-          <div class="bg-light border-right" id="sidebar-wrapper">
-              <h1 class="logo me-auto float-lg-start"><a href="~/shop/update-logo/@Model.Shops.Id"><img src="~/image/shops/logo/@Model.Shops.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8  ; " /></a></h1>
-              <div class="sidebar-heading">&nbsp;@Model.Shops.BusinessName</div>
-              <div class="list-group list-group-flush">
-                  <a href="~/shop-services/index/@Model.Shops.Id" class="list-group-item list-group-item-action bg-light"><i class="fas fa-cogs"></i> &nbsp;Add-Services</a>
-                  <a href="~/feedback/list-feedbacks/@Model.Shops.Id" class="list-group-item list-group-item-action bg-light"><i class="fas fa-comment-dots"></i> &nbsp;Feedbacks <span class="offset-5 text-dark">@Model.Count</span></a>
-                  <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-alt"></i> &nbsp;Profile</a>
-                  <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-circle"></i> &nbsp;Status</a>
-                  <br />
-                  <h6 class="sidebar-heading"><span>Total</span></h6>
-
-                  <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i> &nbsp;Costumer <span class="offset-5 text-dark">@Model.costumerCount</span></a>
-                  <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-list"></i> &nbsp;Services<span class="offset-5 text-dark">@Model.serviceCount</span></a>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <h1 class="logo me-auto float-lg-start"><a href="~/shop/update-logo/@Model.Shop.Id"><img src="~/image/shops/logo/@Model.Shop.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8  ; " /></a></h1>
+        <div class="sidebar-heading">&nbsp;@Model.Shop.BusinessName</div>
+        <div class="list-group list-group-flush">
+            <h5 class="text-black-50"><i class="fas fa-hands"></i>&nbsp;Service</h5>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="~/shop-services/my-services/@Model.Shop.Id" style="text-decoration:none; color:black">My Service</a>
+                    <span class="badge bg-primary rounded-pill">@Model.serviceCount</span>
+                </li>
 
 
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#addNewServiceModal">Add New Service</a>
+                </li>
+
+            </ul>
+            @*<h5 class="text-black-50"><i class="fas fa-chart-line"></i>&nbsp;Data</h5>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Business Insights   <span class="badge bg-primary rounded-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    My Costumers
+                    <span class="badge bg-primary rounded-pill">@Model.costumerCount</span>
+                </li>
+
+            </ul>*@
+            <h5 class="text-black-50"><i class="fas fa-home"></i>&nbsp;Shop</h5>
+            <ul class="list-group">
+                @*<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Shop Feedback   <span class="badge bg-primary rounded-pill">@Model.Count</span>
+                </li>*@
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="~/shop/shop-update-profile/@Model.Shop.Id" style="text-decoration:none; color:black">Shop Update Profile</a>
+                    <span class="badge bg-primary rounded-pill"></span>
+                </li>
+                @*<li class="list-group-item d-flex justify-content-between align-items-center">
+                    My Reports
+                    <span class="badge bg-primary rounded-pill"></span>
+                </li>*@
 
 
-              </div>
+            </ul>
+            <h5 class="text-black-50"><i class="fas fa-comments"></i>&nbsp;Costumer-Service</h5>
+            <ul class="list-group">
+                @*<li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback Modal</a>
+                </li>*@
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a  style="text-decoration:none; color:black;" href="~/shop/my-chat">My Chat</a>
+                    <span class="badge bg-primary rounded-pill"></span>
+                </li>
 
-          </div>
-          <!-- /#sidebar-wrapper -->
-          <!-- Page Content -->
-          <div id="page-content-wrapper">
-              <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                  <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-
-              </nav>
-
-              <div class="container-fluid">
-                  <a href="~/shop/update-banner/@Model.Shops.Id" class="img-hover"><img src="~/image/shops/banner/@Model.Shops.Id/banner.png " style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
-                  <hr />
-                  <button type="button" id="btnToggle" class="btn btn-primary"><i id="icon" class="fas fa-toggle-on"></i></button>
-                  <div class="table-responsive">
-                      <h2>Costumers-list</h2>
-                      <table id="costumerList" class="table table-striped table-sm">
-                          <thead>
-                              <tr>
-                                  <th>Fullname</th>
-                                  <th>Address</th>
-                                  <th>Contact</th>
-                                  <th>Status</th>
-                                  <th>Date</th>
-                                  <th></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              @{ if (Model.Bookings != null)
-                                  {
-                                      if (Model.Bookings.Count > 0)
-                                      {
-                                          foreach (Booking booking in Model.Bookings)
-                                          {
-                                              <tr>
-                                                  <td>@booking.UserName</td>
-                                                  <td>
-                                                      @if (booking.Address.Length <= 15)
-                                                      {
-                                                          @booking.Address
-                                                      }
-                                                      else
-                                                      {
-                                                          @booking.Address.Substring(0, 15)<span>...</span>
-                                                      }
-                                                  </td>
-                                                  <td>@booking.ContactNumber</td>
-                                                  <td>
-                                                      <select class="custom-select" id="reserveStatus">
-                                                          <option selected>Choose...</option>
-                                                          <option value="1">Pending</option>
-                                                          <option value="2">Confirm</option>
-                                                          <option value="3">Completed</option>
-                                                          <option value="3">Cancel</option>
-                                                      </select>
-                                                  </td>
-                                                  <td>@booking.UpdatedAt.ToString("dddd, MM/dd/yy HH:mm tt")</td>
-                                                  <td>
-                                                      <a href="#" onclick="confirmDeleteUser('@booking.Id','@Model.Shops.Id','@booking.UserName')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
-                                                      <a href="~/booking/details/@booking.Id" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
-                                                  </td>
-
-                                              </tr>
-                                          }
-                                      }
-                                  }
-
-                              }
-                          </tbody>
-                      </table>
-
-                  </div>
-                  <button type="button" id="btnToggleService" class="btn btn-primary"><i id="iconService" class="fas fa-toggle-on"></i></button>
-                  <div>
-                      <div class="table-responsive">
-                          <h2>Services-list: @Model.serviceCount</h2>
-                          <table id="serviceList" class="table table-striped table-sm">
-                              <thead>
-                                  <tr>
-                                      <th>Name</th>
-                                      <th>Price</th>
-                                      <th>Description</th>
-                                      <th>Date</th>
-                                      <th></th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  @{ if (Model.ShopServices != null)
-                                      {
-                                          if (Model.ShopServices.Count > 0)
-                                          {
-                                              foreach (ShopService shopService in Model.ShopServices)
-                                              {
-                                                  <tr>
-                                                      <td>@shopService.Service</td>
-                                                      <td>@shopService.Price.ToString("F")</td>
-                                                      <td>
-                                                          @if (shopService.Description.Length <= 25)
-                                                          {
-                                                              @shopService.Description
-                                                          }
-                                                          else
-                                                          {
-                                                              @shopService.Description.Substring(0, 25)<span>...</span>
-                                                          }
-                                                      </td>
-                                                      <td>@shopService.UpdatedAt.ToString("dddd, dd MMMM yyyy HH:mm")</td>
-                                                      <td>
-                                                          <a href="#" onclick="confirmDeleteShopServices('@shopService.Id','@Model.Shops.Id','@shopService.Service')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
-                                                          <a href="~/shop/shop-items-info/@Model.Shops.Id" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
-                                                      </td>
-
-                                                  </tr>
-                                              }
-                                          }
-                                      }
-
-                                  }
-                              </tbody>
-                          </table>
-                      </div>
-
-
-                  </div>
-              </div>
-          </div>
-          <!-- /#page-content-wrapper -->
-          <!--Modal Delete Booking-->
-          <div class="modal" tabindex="-1" role="dialog" id="modal-delete-booking">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">Delete User</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span id="close" aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <p>Are you sure you want to delete <span id="modal-delete-booking-username"></span>?</p>
-                      </div>
-                      <div class="modal-footer">
-                          <a href="#" id="modal-delete-booking-confirm"><button type="button" class="btn btn-primary">Delete Costumer</button></a>
-                          <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-
-          <!--Modal Delete Shop-Services-->
-          <div class="modal" tabindex="-1" role="dialog" id="modal-delete-shop-services">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">Delete User</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span id="closeShopService" aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <p>Are you sure you want to delete <span id="modal-delete-shop-services-name"></span>?</p>
-                      </div>
-                      <div class="modal-footer">
-                          <a href="#" id="modal-delete-shop-services-confirm"><button type="button" class="btn btn-primary">Delete Costumer</button></a>
-                          <button type="button" id="closeButtonShopService" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-
-          <!--Modal ChangeSatus-->
-          <div class="modal" tabindex="-1" role="dialog" id="modal-change-status-booking">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">Change status user booking</h5>
-                          <button type="button" class="btn-close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <p>Are you sure you want to delete <span id="modal-change-status-username"></span>?</p>
-                      </div>
-                      <div class="modal-footer">
-                          <a href="#" id="modal-change-status-confirm"><button type="button" class="btn btn-primary">Confirm change-status</button></a>
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-
-          <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
-          <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-          <script type="text/javascript">
-              $("#btnToggle").click(function (e) {
-                  if (e.click != true) {
-                      $("#icon").attr({
-                          "class": "fas fa-toggle-off"
-                      });
-                  }
-                  else {
-                      $("#icon").attr({
-                          "class": "fas fa-toggle-on"
-                      });
-                  }
-                  e.preventDefault();
-                  $("#costumerList").toggle("slow");
-              });
+            </ul>
 
 
 
-              $("#btnToggleService").click(function (e) {
-                  if (e.click != true) {
-                      $("#iconService").attr({
-                          "class": "fas fa-toggle-off"
-                      });
-                  }
-                  else {
-                      $("#iconService").attr({
-                          "class": "fas fa-toggle-on"
-                      });
-                  }
-                  e.preventDefault();
-                  $("#serviceList").toggle("slow");
-              });
 
-              $("#menu-toggle").click(function (e) {
-                  e.preventDefault();
-                  $("#wrapper").toggleClass("toggled");
-              });
+        </div>
 
-              function confirmDeleteUser(bookingId, shopId, userName) {
-                  $("#modal-delete-booking-username").html(userName);
-                  $("#modal-delete-booking-confirm").attr("href", "/booking/delete-user-booking/" + bookingId + "/" + shopId);
-                  $("#modal-delete-booking").modal("show");
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
-                  $("#close").click(function () {
-                      $("#modal-delete-booking").modal("hide");
-                  })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                  $("#closeButton").click(function () {
-                      $("#modal-delete-booking").modal("hide");
-                  })
+        </nav>
 
-              }
+        <div class="container-fluid">
+            <a href="~/shop/update-banner/@Model.Shop.Id" class="img-hover"><img src="~/image/shops/banner/@Model.Shop.Id/banner.png " style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
+            <hr />
+            <button type="button" id="btnToggle" class="btn btn-primary"><i id="icon" class="fas fa-toggle-on"></i></button>
+            <div class="table-responsive">
+                <h4 class="text-center">My Costumers</h4>
+                <hr />
 
-              function confirmDeleteShopServices(shopServiceId, shopId, Name) {
-                  $("#modal-delete-shop-services-name").html(Name);
-                  $("#modal-delete-shop-services-confirm").attr("href", "/shop-services/delete-services-shop-services/" + shopServiceId + "/" + shopId);
-                  $("#modal-delete-shop-services").modal("show");
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="input-group mt-5">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Booking Status</span>
+                            </div>
+                            <select class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="searchBookStatus" onchange="searchBookTrigger()" placeholder="Reserve Status">
+                                @{
+                                    foreach (ReserveStatus status in Model.reserveStatuses)
+                                    {
+                                        if (Model.ReserveStatus == status)
+                                        {
+                                            <option value="@status" selected>@status.ToString()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@status">@status.ToString()</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-5 ">
+                        <div class="input-group mt-5">
+                            <input type="text" id="searchBookKeyword" placeholder="search booking" class="form-control" aria-label="search bookings" aria-describedby="basic-addon2" value="@Model.BookingsPage.Keyword">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchBookTrigger()"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
 
-                  $("#closeShopService").click(function () {
-                      $("#modal-delete-shop-services").modal("hide");
-                  })
-
-                  $("#closeButtonShopService").click(function () {
-                      $("#modal-delete-shop-services").modal("hide");
-                  })
-
-              }
-              //$("#searchKeyword").keyup(function (event) {
-              //    if (event.keyCode === 13) {
-              //        searchTrigger();
-              //    }
-              //});
-
-              function searchTrigger() {
-                  window.location = "/shop/shop-profile?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&status=" + $("#searchStatus").val();
-              }
-          </script>
+                @if (Model.BookingsPage.Items.Count > 0)
+                {
+                    <table id="costumerList" class="table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Fullname</th>
+                                <th>Address</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 
-          <style>
-              .container-fluid img:hover {
-                  border: 1px #ea1f1f solid;
-              }
-          </style>
+                            @foreach (Booking booking in Model.BookingsPage.Items)
+                            {
+                                <tr>
+                                    <td>@booking.UserName</td>
+                                    <td>
+                                        @if (booking.Address.Length <= 15)
+                                        {
+                                            @booking.Address
+                                        }
+                                        else
+                                        {
+                                            @booking.Address.Substring(0, 15)<span>...</span>
+                                        }
+                                    </td>
+                                    <td>@booking.ShopServicePrice.ToString("F")</td>
+
+                                    <td>@booking.UpdatedAt.ToString(" MM/dd/yy HH:mm tt")</td>
+                                    <td>
+                                        @booking.ReserveStatus
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="changeStatus('@booking.Id','@booking.ShopServiceName', '@booking.ReserveStatus', '@booking.UserId')">
+                                            <i class="fas fa-book" style="color:#17927f"></i>
+                                        </a>
+                                        <a href="#" onclick="confirmDeleteUser('@booking.Id','@Model.Shop.Id','@booking.UserName')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
+                                        <a href="~/booking/details/@booking.Id" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
+                                            <li class="page-item"><input type="number" value="@Model.BookingsPage.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/shop/shop-home?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val())) + '&keyword=@(Model.BookingsPage.Keyword)&status=@(Model.ReserveStatus)" /></li>
+                                            <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.BookingsPage.PageCount&nbsp;&nbsp;&nbsp;</span></li>
+                                            @{
+                                                var prev = Model.BookingsPage.PageIndex - 1;
+                                                if (prev > 0)
+                                                {
+                                                    <li class="page-item"><a class="page-link" href="~/shop/my-dashboard?keyword=@Model.BookingsPage.Keyword&status=@Model.ReserveStatus&pageSize=@Model.BookingsPage.PageSize&pageIndex=@prev"><span aria-hidden="true">&laquo;</span></a></li>
+                                                }
+                                            }
+                                            <li class="page-item"><a class="page-link" href="#">@(Model.BookingsPage.PageIndex)</a></li>
+                                            @{
+                                                var next = Model.BookingsPage.PageIndex + 1;
+                                                if (next <= Model.BookingsPage.PageCount)
+                                                {
+                                                    <li class="page-item"><a class="page-link" href="~/shop/my-dashboard?keyword=@Model.BookingsPage.Keyword&status=@Model.ReserveStatus&pageSize=@Model.BookingsPage.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
+                                                }
+                                            }
+                                        </ul>
+
+                                    </nav>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                }
+                else
+                {
+                    <p>0 search results.</p>
+                }
+            </div>
+            <button type="button" id="btnToggleService" class="btn btn-primary"><i id="iconService" class="fas fa-toggle-on"></i></button>
+            <br />
+            <div>
+                <div class="table-responsive">
+                    <h4 class="text-center">My Services</h4>
+                    <hr />
+                    <table id="serviceList" class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ if (Model.ShopServices != null)
+                                {
+                                    if (Model.ShopServices.Count > 0)
+                                    {
+                                        foreach (ShopService shopService in Model.ShopServices)
+                                        {
+                                            <tr>
+                                                <td>@shopService.Service</td>
+                                                <td>@shopService.Price.ToString("F")</td>
+                                                <td>
+                                                    @if (shopService.Description.Length <= 25)
+                                                    {
+                                                        @shopService.Description
+                                                    }
+                                                    else
+                                                    {
+                                                        @shopService.Description.Substring(0, 25)<span>...</span>
+                                                    }
+                                                </td>
+                                                <td>@shopService.UpdatedAt.ToString("dd MMMM yyyy HH:mm")</td>
+                                                <td>
+                                                    <a href="#" onclick="confirmDeleteShopServices('@shopService.Id','@Model.Shop.Id','@shopService.Service')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
+                                                    <a href="~/shop/shop-items-info/@shopService.Id/@shopService.ShopId" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Modal List Service-->
+<div class="modal fade" id="addNewServiceModal" tabindex="-1" aria-labelledby="addNewServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="btn btn-primary" onclick="GetServices()">
+                    <h5 class="modal-title" id="addNewServiceModalLabel"><span>&#43;</span> Get Services</h5>
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="tableService">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Feedback List-->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Get Feedbacks</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="tableContent">
+                    <table class="table d-none">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Comments</th>
+                                <th scope="col">Likes</th>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="UpdateTable"></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /#page-content-wrapper -->
+<!--Modal Delete Booking-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-booking">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span id="close" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="modal-delete-booking-username"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-delete-booking-confirm"><button type="button" class="btn btn-primary">Delete Costumer</button></a>
+                <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Delete Shop-Services-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-shop-services">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span id="closeShopService" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="modal-delete-shop-services-name"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-delete-shop-services-confirm"><button type="button" class="btn btn-primary">Delete Costumer</button></a>
+                <button type="button" id="closeButtonShopService" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Change Status-->
+<div class="modal" tabindex="-1" role="dialog" id="change-status-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Do you want to change the status of <span class="change-status-modal-item-title"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/booking/change-status" method="post">
+                <div class="modal-body">
+                    <p>Do you want to change the status of <span class="change-status-modal-item-title"></span>?</p>
+                    <input type="hidden" name="BookingId" id="change-status-modal-item-id" />
+                    <input type="hidden" name="UserId" id="change-status-modal-user-id" />
+                    Status : <select class="form-select" name="Status" aria-label="" id="change-status-modal-item-status">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirm">Confirm</option>
+                        <option value="Cancel">Cancel</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/vendor/jquery/shop.js"></script>
+<script type="text/javascript">
+
+    function changeStatus(id, title, status, userId) {
+        console.log(id);
+        console.log(title);
+        console.log(status);
+        $(".change-status-modal-item-title").html(title);
+        $("#change-status-modal-item-id").val(id);
+        $("#change-status-modal-user-id").val(userId);
+        $("#change-status-modal-item-status option[value=" + status + "]").prop('selected', true);
+        $("#change-status-modal").modal("show");
+    }
+
+
+
+    $("#btnToggle").click(function (e) {
+        if (e.click != true) {
+            $("#icon").attr({
+                "class": "fas fa-toggle-off"
+            });
+        }
+        else {
+            $("#icon").attr({
+                "class": "fas fa-toggle-on"
+            });
+        }
+        e.preventDefault();
+        $("#costumerList").toggle("slow");
+    });
+
+
+
+    $("#btnToggleService").click(function (e) {
+        if (e.click != true) {
+            $("#iconService").attr({
+                "class": "fas fa-toggle-off"
+            });
+        }
+        else {
+            $("#iconService").attr({
+                "class": "fas fa-toggle-on"
+            });
+        }
+        e.preventDefault();
+        $("#serviceList").toggle("slow");
+    });
+
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    //Delete costumer
+    function confirmDeleteUser(bookingId, shopId, userName) {
+        $("#modal-delete-booking-username").html(userName);
+        $("#modal-delete-booking-confirm").attr("href", "/booking/delete-user-booking/" + bookingId + "/" + shopId);
+        $("#modal-delete-booking").modal("show");
+
+        $("#close").click(function () {
+            $("#modal-delete-booking").modal("hide");
+        })
+
+        $("#closeButton").click(function () {
+            $("#modal-delete-booking").modal("hide");
+        })
+
+    }
+    //Delete services
+    function confirmDeleteShopServices(shopServiceId, shopId, Name) {
+        $("#modal-delete-shop-services-name").html(Name);
+        $("#modal-delete-shop-services-confirm").attr("href", "/shop-services/delete-services-shop-services/" + shopServiceId + "/" + shopId);
+        $("#modal-delete-shop-services").modal("show");
+
+        $("#closeShopService").click(function () {
+            $("#modal-delete-shop-services").modal("hide");
+        })
+
+        $("#closeButtonShopService").click(function () {
+            $("#modal-delete-shop-services").modal("hide");
+        })
+
+    }
+
+    //Change Status Shop Costumer
+    function ChangeStatus(bookingId, userName) {
+        $("#modal-change-status-name").html(userName);
+        $("#modal-change-status").modal("show");
+
+        $("#closeShopService").click(function () {
+            $("#modal-delete-shop-services").modal("hide");
+        })
+
+        $("#closeButtonShopService").click(function () {
+            $("#modal-delete-shop-services").modal("hide");
+        })
+
+    }
+
+    $("#searchBookKeyword").keyup(function (event) {
+        if (event.keyCode === 13) {
+            searchTrigger();
+        }
+    });
+
+    function searchBookTrigger() {
+        window.location = "/shop/my-dashboard?pageIndex=1&keyword=" + $("#searchBookKeyword").val() + "&status=" + $("#searchBookStatus").val();
+    }
+
+</script>
+
+
+<style>
+    .container-fluid img:hover {
+        border: 1px #ea1f1f solid;
+    }
+</style>

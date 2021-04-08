@@ -1,0 +1,33 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.shop.MyChatViewModel
+@{
+    ViewData["Title"] = "MyChat";
+}
+
+<h2 class="mt-5">MyChat</h2>
+
+
+@{ 
+    var userId = WebIDS.GetShopAdminId;
+}
+
+@if (Model.Chats != null)
+{
+    if (Model.Chats.Count > 0)
+    {
+        @foreach (var c in Model.Chats)
+        {
+
+            <ul>
+                <li>
+                    <a href="~/chats/new-chat/@c.Id">
+                        @c.Users.FirstOrDefault(x => x.UserId == userId).Chat.Name
+
+                    </a>
+                </li>
+            </ul>
+
+
+
+        }
+    }
+}

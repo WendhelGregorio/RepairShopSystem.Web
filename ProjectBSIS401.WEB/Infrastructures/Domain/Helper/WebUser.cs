@@ -138,7 +138,7 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
         public static bool IsUserLogggedIn()
         {
             return Current.User.Identities.Any(x => x.IsAuthenticated);
-        }
+        }   
 
         public static string currentUserId()
         {

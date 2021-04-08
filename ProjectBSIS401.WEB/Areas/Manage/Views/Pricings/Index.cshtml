@@ -1,0 +1,251 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.pricings.IndexViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Models
+
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+
+
+}
+
+<h2>Index</h2>
+
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="input-group mb-3">
+            <input type="text" id="searchKeyword" placeholder="search pricing" class="form-control" aria-label="search groups" aria-describedby="basic-addon2" value="@Model.Pricings.Keyword">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="table-responsive table--no-card m-b-30">
+            <button type="button" class="btn btn-lg btn-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa fa-plus"></i>&nbsp; Create Pricing
+            </button>
+        </div>
+    </div>
+</div>
+
+
+@{
+    Guid? _pricingId = null;
+}
+
+@if (Model.Pricings.Items.Count > 0)
+{
+    <table class="table table-borderless table-striped table-earning">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Month</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Pricing pricing in Model.Pricings.Items)
+                {
+
+                    <tr>
+                        <td>@pricing.Title</td>
+                        <td>@pricing.Month</td>
+                        <td>@pricing.Price.ToString("F")</td>
+                        <td>
+                            <a href="#"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropContentPricing"><i class="fas fa-envelope-open-text"></i></button></a>
+
+                            <a href="#" onclick="addContentPricing('@pricing.Id', '@pricing.Title')" title="Add Content"><button type="button" class="btn"><i class="fas fa-plus"></i></button></a>
+                            <a href="~/manage/pricings/details/@pricing.Id" title="Details Pricing"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
+                            <a href="~/manage/pricings/edit/@pricing.Id" title="Update Pricing"><button type="button" class="btn"><i class="fas fa-pen-square"></i></button></a>
+                            <a href="#" onclick="confirmDeletePricing('@pricing.Id', '@pricing.Title')" title="Delete Pricing"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
+
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
+                            <li class="page-item"><input type="number" value="@Model.Pricings.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/manage/pricings/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val()));" /></li>
+                            <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.Pricings.PageCount&nbsp;&nbsp;&nbsp;</span></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>0 search results.</p>
+}
+
+
+<!-- Modal Pricing Content List -->
+<div class="modal fade" id="staticBackdropContentPricing" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropContentPricingLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Pricing Content List</h5>
+              
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           
+            <div class="modal-body">
+                @foreach (var p in Model.Pricings.Items)
+                {
+                    foreach (var content in p.PricingContents)
+                    {
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item">@content.Content 
+                            
+                               <span class="badge bg-primary rounded-pill"><i class="fas fa-trash"></i></span>
+                            </li>
+                        </ol>
+                    }
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Pricing Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Pricing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <form method="post" action="~/manage/pricings/create">
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="Title" placeholder="input a title" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Price</label>
+                        <input type="text" class="form-control" name="Price" placeholder="input a price" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Month</label>
+                        <input type="text" class="form-control" name="Month" placeholder="input a month" />
+                    </div>
+                    <hr class="h-75" />
+                    <div class="form-group mt-2">
+                        <button type="submit" value="Create" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Add Content Pricing-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-content-pricing">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Content Pricing</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          
+            <form action="~/manage/pricings/create-content-pricing" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <p class="text-warning text-center"></p>
+                    <p>Do you want to add the content of <span class="modal-add-content-pricing"></span>?</p>
+                    <input type="hidden" name="PricingId" id="modal-pricing-id" />
+
+                    <label for="Content" class="control-label ml-5 mr-3  mb-1">Content: <span class="text-warning">You can display 4 content only</span></label>
+                    <textarea type="text" class="form-control" id="content" name="Content" aria-describedby="contentHelp" placeholder="Enter a pricing content"></textarea>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--Modal Delete-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-pricing">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Pricing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="modal-delete-pricing-title"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-delete-pricing-confirm"><button type="button" class="btn btn-primary">Delete Pricing</button></a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function addContentPricing(pricingId, title) {
+        console.log(pricingId);
+        console.log(title);
+        $(".modal-add-content-pricing").html(title);
+        $("#modal-pricing-id").val(pricingId);
+        $("#modal-content-pricing").modal("show");
+
+    }
+
+    function confirmDeletePricing(pricingId, title) {
+        $("#modal-delete-pricing-title").html(title);
+        $("#modal-delete-pricing-confirm").attr("href", "/manage/pricings/delete/" + pricingId);
+        $("#modal-delete-pricing").modal("show");
+    }
+
+    $("#searchKeyword").keyup(function (event) {
+        if (event.keyCode === 13) {
+            searchTrigger();
+        }
+    });
+
+    function searchTrigger() {
+        window.location = "/manage/pricings/index?pageIndex=1&keyword=" + $("#searchKeyword").val();
+    }
+</script>

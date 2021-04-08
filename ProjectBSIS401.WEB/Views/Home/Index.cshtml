@@ -7,15 +7,15 @@
 }
 
 
-<!-- ======= Hero Section ======= -->
+<!-- ======= Background Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
         <div class="row">
             <div class="col-xl-6">
-                <h1>Bettter digital experience with Presento</h1>
-                <h2>We are team of talanted designers making websites with Bootstrap</h2>
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
+                <h1>Bettter digital experience with Fixit</h1>
+                <h2>We are team of talented designers and managers in business</h2>
+                <a href="~/home/about" class="btn-get-started scrollto">Get started</a>
             </div>
         </div>
     </div>
@@ -23,95 +23,8 @@
 </section><!-- End Hero -->
 
 <main id="main">
-    <!-- Section Style 1 Start -->
-    @*<section class="style-1 section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h2>Our Services </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @{
-                    foreach (Service service in Model.PublicServices.Take(6))
-                    {
-                        <div class="col-md-4">
-                            <div class="single-service">
-                                <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                                        <hr />
-                                        <i class="icofont-image"></i>
-                                        <i class="icofont-computer"></i>
-                                        <i class="icofont-chart-bar-graph"></i>
-                                        <i class="icofont-settings"></i>
-                                        <i class="icofont-earth"></i>
-                                        <i class="icofont-tasks-alt"></i>
-                                        <hr />
-                                        <h3>@service.Name</h3>
-                                      
+    <!-- ======= Categories Section ======= -->
+    @Html.Partial("~/Views/Shared/_PartialCategories.cshtml")
 
-                                </div>
-
-                                    <a href="~/manage/service/public-details/@service.Id" class="btn btn-danger">Read More</a>
-                                </div>
-                            </div>
-                    }
-                }
-
-
-            </div>
-        </div>
-    </section>*@
-    <!-- Section Style 1 End -->
-    <!-- End Services Section -->
-    <!-- ======= Portfolio Section ======= -->
-    @*<section id="portfolio" class="portfolio">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Shops</h2>
-                <p>Visit our shop</p>*@
-                @*<div class="row" data-aos="fade-up" data-aos-delay="100">
-            <div class="col-lg-12 d-flex justify-content-center">
-                <ul id="portfolio-flters">
-                    <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-app">App</li>
-                    <li data-filter=".filter-card">Card</li>
-                    <li data-filter=".filter-web">Web</li>
-                </ul>
-            </div>
-        </div>*@
-
-                @*<div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                    @{
-                        foreach (Shop shop in Model.Shops.Take(6))
-                        {
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="~/image/shops/banner/@shop.Id./banner.png" class="img-fluid" alt="@shop.BusinessType">
-                                    <div class="portfolio-info">
-                                        <h4>@shop.BusinessName</h4>
-                                        <p>@shop.BusinessLocation</p>
-
-
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-                    }
-
-
-                </div>
-                @if (!WebUser.IsAuthenticated)
-                {
-                    <a href="~/shop/shop-index" class="btn btn-primary">Shop</a>
-                }
-
-            </div>
-        </div>
-    </section>*@<!-- End Portfolio Section -->
+    
 </main>

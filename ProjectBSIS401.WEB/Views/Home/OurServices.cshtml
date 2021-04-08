@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             @{
-                foreach (Service service in Model.PublicServices.Take(6))
+                foreach (Service service in Model.PublicServices.Take(9))
                 {
                     <div class="col-md-4">
                         <div class="single-service">
@@ -31,7 +31,7 @@
                                 <i class="icofont-earth"></i>
                                 <i class="icofont-tasks-alt"></i>
                                 <hr />
-                                <a href="~/manage/service/details/@service.Id"><h3>@service.Name</h3></a>
+                                <a href="~/shop-services/details/@service.Id"><h3>@service.Name</h3></a>
                                 <p>@service.Description</p>
 
                             </div>

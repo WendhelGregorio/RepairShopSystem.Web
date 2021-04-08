@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectBSIS401.WEB.Areas.Manage.ViewModels.hub;
+using ProjectBSIS401.WEB.Controllers;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 
@@ -31,13 +32,16 @@ namespace ProjectBSIS401.WEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
-            {
+            {    
+                
+               
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-             services.AddAuthentication(options =>
+         
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -50,12 +54,10 @@ namespace ProjectBSIS401.WEB
                 options.Cookie.Name = "ProjectBSIS401";
             });
 
-            //SignarR Authorization
-            services.AddSignalR();
+       
 
             services.AddDbContext<DefaultDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultDbContextMySQL"), m => m.MigrationsAssembly("ProjectBSIS401.WEB")));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddScoped<IAuthorizationHandler, AuthorizeAdminRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, AuthorizeContentAdminRequirementHandler>();
 
@@ -83,6 +85,9 @@ namespace ProjectBSIS401.WEB
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //SignarR Authorization
+            services.AddSignalR();
         }
 
 
@@ -100,17 +105,16 @@ namespace ProjectBSIS401.WEB
                 app.UseHsts();
             }
 
-            
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ChatHub>("/chathub");
-            });
-
+          
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
             app.UseAuthentication();
+            app.UseSignalR(routeses =>
+            {
+                routeses.MapHub<SignalHub>("/signalHub");
+            });
             Infrastructures.Domain.Helper.WebUser.Services = app.ApplicationServices;
             app.UseMvc(routes =>
             {

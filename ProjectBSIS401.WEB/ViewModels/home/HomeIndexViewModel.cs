@@ -13,8 +13,6 @@ namespace ProjectBSIS401.WEB.ViewModels.home
         public List<Shop> Shops { get; set; }
 
 
-        public List<Category> PublicCategories { get; set; }
-
         public List<Service> PublicServices { get; set; }
 
 

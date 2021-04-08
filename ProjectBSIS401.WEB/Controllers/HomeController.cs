@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+using ProjectBSIS401.WEB.Models;
+using ProjectBSIS401.WEB.ViewModels.category;
+using ProjectBSIS401.WEB.ViewModels.home;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
-using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
-using ProjectBSIS401.WEB.Models;
-using ProjectBSIS401.WEB.ViewModels.home;
 
 namespace ProjectBSIS401.WEB.Controllers
 {
@@ -19,8 +22,11 @@ namespace ProjectBSIS401.WEB.Controllers
         {
             _context = context;
         }
-
-        public IActionResult Index()
+        [HttpGet, Route("")]
+        [HttpGet, Route("/home")]
+        [HttpGet, Route("/home/index")]
+        [HttpGet,Route("/home/index/{userId}")]
+        public IActionResult Index(Guid? userId)
         {
             return View();
             
@@ -63,7 +69,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return View();
         }
 
-        [HttpGet,Route("home/contact")]
+        [HttpGet,Route("/home/contact")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -71,7 +77,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return View();
         }
 
-        [HttpPost,Route("home/contact")]
+        [HttpPost,Route("/home/contact")]
         public IActionResult Contact(ContactViewModel model)
         {
             if(!ModelState.IsValid)
@@ -79,11 +85,11 @@ namespace ProjectBSIS401.WEB.Controllers
                 return View(model);
             }
 
-            var userCheck = this._context.Contacts.FirstOrDefault(c => c.FullName == model.FullName  && c.EmailAddress == model.EmailAddress);
-            if(userCheck == null)
+            var contactCheck = this._context.Contacts.FirstOrDefault(c => c.FullName == model.FullName  && c.EmailAddress == model.EmailAddress);
+            if(contactCheck == null)
             {
          
-                Contact contact = new Contact()
+                var contact = new Contact()
                 {
                     Id = Guid.NewGuid(),
                     FullName = model.FullName,
@@ -94,19 +100,13 @@ namespace ProjectBSIS401.WEB.Controllers
                     UpdatedAt = DateTime.UtcNow
                 };
                 this._context.Contacts.Add(contact);
-                this._context.SaveChanges();
-
-                
-
             }
             else
             {
-                 ViewBag.Error = ",You already contact us. The contact page have one message a day.";
-                 return View();
+                contactCheck.MessageCount++;
             }
-
-            ViewBag.Success = "The message sent succesfully. Thank you for messaging us.";
-            return View();
+            this._context.SaveChanges();
+            return Content(@"<p>Thank you for contacting us. We notify you us soon as possible.</p>");
 
         }
 
@@ -115,10 +115,51 @@ namespace ProjectBSIS401.WEB.Controllers
             return View();
         }
 
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+            
+        [HttpGet("api/categories-per-type/{type}")]
+        public List<CategoriesViewModel> GetCategories(string type = "")
+        {
+            if (string.IsNullOrEmpty(type))
+            {
+                return null;
+            }
+
+            BusinessType businessType = (BusinessType)Enum.Parse(typeof(BusinessType), type, true);
+
+            return _context.Shops.Where(s => s.BusinessType == businessType)
+                .Select(s => new CategoriesViewModel()
+                {
+                    Id = s.Id,
+                    BusinessName = s.BusinessName,
+                    BusinessLocation = s.BusinessLocation,
+                    BusinessType = s.BusinessType,
+                    OpenAt = s.OpenAt,
+                    CloseAt = s.CloseAt,
+                    BusinessDescription = s.BusinessDescription
+      
+                    
+                }).ToList();
+        }
+
+
+        //public IViewComponentResult Invoke()
+        //{
+        //    var user = this._context.Users.FirstOrDefault(x => x.Id == WebIDS.UserId);
+
+        //    var chats = this._context.ChatUsers
+        //                    .Include(x => x.Chat)
+        //                    .Where(x => x.UserId == user.Id && x.Chat.Type == ChatType.Room)
+        //                    .Select(x => x.Chat)
+        //                    .ToList();
+
+        //    return ViewComponent(chats);
+        //}
     }
 }

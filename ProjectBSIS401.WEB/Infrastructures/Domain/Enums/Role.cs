@@ -18,6 +18,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Enums
         User = 2,
 
         [Display(Name = "ShopAdmin")]
-        ShopAdmin =3
+        ShopAdmin =3,
+
+       [Display(Name = "Member")]
+        Member = 4
     }
 }

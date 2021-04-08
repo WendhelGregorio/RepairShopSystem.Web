@@ -8,6 +8,8 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
     public class Contact : BaseModel
     {
      
+        public int MessageCount { get; set; }
+
         public string FullName { get; set; }
 
         public string PhoneNumber { get; set; }

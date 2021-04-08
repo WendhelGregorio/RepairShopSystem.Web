@@ -395,16 +395,16 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
         //    var content = response.Content;
 
 
-        //    //using (WebClient client = new WebClient())
-        //    //{
-        //    //    byte[] response = client.UploadValues("http://textbelt.com/text", new NameValueCollection() {
-        //    //        { "phone", "5557727420" },
-        //    //        { "message", "Hello world" },
-        //    //        { "key", "textbelt" },
-        //    //      });
+        //    using (WebClient client = new WebClient())
+        //    {
+        //        byte[] response = client.UploadValues("http://textbelt.com/text", new NameValueCollection() {
+        //            { "phone", "5557727420" },
+        //            { "message", "Hello world" },
+        //            { "key", "textbelt" },
+        //          });
 
-        //    //    string result = System.Text.Encoding.UTF8.GetString(response);
-        //    //}
+        //        string result = System.Text.Encoding.UTF8.GetString(response);
+        //    }
         //}
         #endregion
         #endregion

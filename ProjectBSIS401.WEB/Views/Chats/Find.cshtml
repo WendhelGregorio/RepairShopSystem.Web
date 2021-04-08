@@ -1,0 +1,35 @@
+﻿@model ProjectBSIS401.WEB.ViewModels.chat.FindViewModel
+@{
+    ViewData["Title"] = "Find";
+}
+
+<br /><br />
+<h2>Find</h2>
+
+@if (Model.Users != null)
+{
+    if (Model.Users.Count > 0)
+    {
+
+        <div class="container"></div>
+        <div class="row row-cols-3 align-items-stretch py-5 ">
+            @foreach (var users in Model.Users)
+            {
+                <div class="d-flex flex-column mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="~/image/shops/thumbnail/@users.Id/thumbnail.png" width="96" height="96" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="~/chats/create-private-room/@users.Id">@users.UserName<i class="fas fa-comment-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+
+
+    }
+}
+

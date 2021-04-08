@@ -6,6 +6,29 @@
     ViewData["Title"] = "BookUser";
 }
 <br /><br />
+      <div class="section-title">
+          <h2>Reservation Form</h2>
+      </div>
+<h3 name="Name">@Model.UserName</h3>
+<table class="table"    >
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</thscope="col">
+           
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-hover" >
+            <td scope="row">@Model.TitleShopService</td>
+            <td scope="row">@Model.PriceShopService</td>
+            <td scope="row">@Model.DescriptionShopService</td>
+           
+        </tr>
+    </tbody>
+</table>
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -14,32 +37,40 @@
                 @Html.ValidationSummary()
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="ShopId" aria-describedby="shopidHelp" value="@Model.ShopId">
+                    <input type="hidden" class="form-control" name="ShopServiceId" aria-describedby="shopidHelp" value="@Model.ShopServiceId">
                     <input type="hidden" class="form-control" name="UserId" aria-describedby="useridHelp" value="@Model.UserId">
-                    <input type="hidden" class="form-control" name="Name" aria-describedby="nameHelp" value="@Model.Name" />
+                    <input type="hidden" class="form-control" name="UserName" aria-describedby="nameHelp" value="@Model.UserName" />
+                    <input type="hidden" class="form-control" name="TitleShopService" aria-describedby="nameHelp" value="@Model.TitleShopService" />
+                    <input type="hidden" class="form-control" name="PriceShopService" aria-describedby="nameHelp" value="@Model.PriceShopService" />
+                    <input type="hidden" class="form-control" name="DescriptionShopService" aria-describedby="nameHelp" value="@Model.DescriptionShopService" />
                 </div>
-                <h3 name="Name">@Model.Name</h3>
                 <hr />
-                <div class="form-group">
-                    <label for="contactnumber" class="control-label mb-1">Phone Number</label>
-                    <input type="text" class="form-control" id="contactNumber" name="ContactNumber" aria-describedby="contactNumberHelp" placeholder="Enter phone Number">
-                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="contactnumber" class="control-label mb-1">Phone Number</label>
+                            <input type="text" class="form-control" id="contactNumber" name="ContactNumber" aria-describedby="contactNumberHelp" value="@Model.ContactNumber" placeholder="Enter phone Number">
+                        </div>
 
-                <div class="form-group">
-                    <label for="address" class="control-label mb-1">Address</label>
-                    <input type="text" class="form-control" id="address" name="Address" aria-describedby="addressHelp" placeholder="Enter Address">
-                </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="address" class="control-label mb-1">Address</label>
+                            <input type="text" class="form-control" id="address" name="Address" aria-describedby="addressHelp" placeholder="Enter Address">
+                        </div>
 
-                <div class="form-group">
-                    <label for="description" class="control-label mb-1">Description</label>
-                    <input type="text" class="form-control" id="description" name="Description" aria-describedby="description   Help" placeholder="Enter Description">
+                        <div class="form-group">
+                            <label for="additionalDescription" class="control-label mb-1">Description</label>
+                            <input type="text" class="form-control" id="additionalDescription" name="AdditionalDescription" aria-describedby="additionalDescriptionHelp" placeholder="Enter additonal description">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactnumber" class="control-label mb-1">Date</label>
+                            <input type="datetime-local" class="form-control" id="dateAndTime" name="DateAndTime" aria-describedby="dateAndTime" placeholder="Enter date and time">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="contactnumber" class="control-label mb-1">Date</label>
-                    <input type="datetime-local" class="form-control" id="dateAndTime" name="DateAndTime" aria-describedby="contactNumberHelp" placeholder="Enter date and time">
-                </div>
+                <hr />
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="#" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="w-25 btn btn-primary">Submit</button>
+                <a href="#" class="w-25     btn btn-danger">Cancel</a>
 
 
             </form>

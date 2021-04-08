@@ -1,4 +1,5 @@
 ﻿using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,7 @@ namespace ProjectBSIS401.WEB.ViewModels.account
 {
     public class ProfileViewModel
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string UserName { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string EmailAddress { get; set; }
-
-        public int Age { get; set; }
-
-        public Gender Gender { get; set; }
+        public User User { get; set; }
+        public List<Booking> Bookings { get; set; }
     }
 }

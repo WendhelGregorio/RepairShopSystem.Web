@@ -3,34 +3,79 @@
     ViewData["Title"] = "Login";
 }
 
-<br /><br /><br /><br />
-<form method="post" action="/account/login">
-    <div class="createaccount">
+<br />
 
-        <img src="~/myimages/logotransparent.png" />
-        <h3>Login</h3>
-        <div class="form-group">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
-        </div>
-        <div class="form-group">
-            <input type="email" name="EmailAddress" id="EmailAddress" placeholder="Email Address" />
-        </div>
-        <div class="form-group">
-            <input type="password" name="Password" id="Password" placeholder="Password" />
-        </div>
-        <span>
-            <a class="centerlink" href="~/account/forgot-password">Forgettern Password?</a>
-        </span>
-
-        <div>
-            <a href="~/account/sign-up"><button class="btn btn-primary offset-5 mt-4" type="button" value="Login">Sign Up</button></a>
-        </div>
-
-
-        <div>
-            <button class="btn btn-primary offset-5 mt-3" type="submit" value="Login">Submit</button>
+<div class="section-title">
+    <img src="~/myimages/logotransparent.png"  />
+    <h2>Login</h2>
+</div>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"><a href="~/account/sign-up" class="btn btn-link">Sign-Up</a></div>
+                    <div class="card-body">
+                        <form method="post" action="/account/login">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="EmailAddress" id="email_address" class="form-control" required autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" class="form-control" name="Password" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember"> Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Sign-In
+                                </button>
+                                <a href="~/account/forgot-password" class="btn btn-link">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 
-</form>
+</main>
+<style>
+
+    .my-form {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+        .my-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+    .login-form {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+        .login-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+</style>
