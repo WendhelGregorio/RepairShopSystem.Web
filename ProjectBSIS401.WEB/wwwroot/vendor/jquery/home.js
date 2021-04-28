@@ -4,9 +4,11 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/signalHub").build();
 
+
 connection.on("ReceiveNotification", function (userid, message) {
     if (currentUser == userid) {
         new Noty({ theme: 'metroui', type: 'Notification', layout: 'bottomRight', text: message }).show();
+
     }
 });
 
@@ -23,6 +25,14 @@ connection.on("ReceiveMessage", function (userId, shopId, message) {
 });
 
 
+connection.start().then(function () {
+    console.log("connection started");
+    console.log("Ayos na");
+    messageTextBox.disabled = false;
+    sendButton.disabled = false;
+}).catch(function (err) {
+    return console.error(err.toString());
+});
 
 var sendForm = document.getElementById("send-form");
 var sendButton = document.getElementById("send-button");
@@ -34,7 +44,7 @@ var newUserName = document.getElementById("userName");
 
 function appendMessage(content, time, date, userid) {
     if (newCurrentUser == userid) {
-       
+
         var outgoing_msg = document.createElement("div");
         outgoing_msg.classList.add("outgoing_msg");
 
@@ -54,7 +64,6 @@ function appendMessage(content, time, date, userid) {
 
         messagesList.append(outgoing_msg);
 
-       
     }
     else {
         var incoming_msg = document.createElement("div");
@@ -92,7 +101,7 @@ function appendMessage(content, time, date, userid) {
         messagesList.appendChild(incoming_msg);
     }
 
- 
+
 }
 
 sendForm.addEventListener("submit", function (evt) {
@@ -107,30 +116,22 @@ sendForm.addEventListener("submit", function (evt) {
     });
     evt.preventDefault();
 });
+
+
 connection.on("SendMessage", function (sender, message, time, date, userid, otherusers) {
     appendMessage(sender + ': ' + message, time, date, userid);
     if (currentShopOwner == otherusers) {
         new Noty({ theme: 'metroui', type: 'Notification', layout: 'bottomRight', text: sender + ': ' + message + ' ' + time + ' ' + date }).show();
 
     }
-       
-  
-    
-}); 
+});
+
 connection.on("SendAction", function (sender, action) {
     console.log(sender + ' ' + action);
     new Noty({ theme: 'metroui', type: 'Notification', layout: 'bottomRight', text: sender + ' ' + action }).show();
     appendMessage(sender + ' ' + action);
 });
 
-connection.start().then(function () {
-    console.log("connection started");
-    console.log("Ayos na");
-    messageTextBox.disabled = false;
-    sendButton.disabled = false;
-        }).catch(function (err) {
-            return console.error(err.toString());
-});
 
 
 
@@ -159,7 +160,7 @@ function Send(obj) {
         method: "POST",
         data: obj,
         success: function (redirectToIndex) {
-            alert(redirectToIndex); 
+            alert(redirectToIndex);
         },
         error: function (err) {
             $("#ErrorList").html(err);
@@ -193,7 +194,7 @@ function getCategories(type) {
                         </div>
                         `;
         var markup = "";
-            
+
         $.each(data, function (index, categories) {
             markup = markup + template.replace("#ID#", categories.id).replace("#SHOPID#", categories.id).replace("#SHOPNAME#", categories.businessName).replace("#SHOPLOCATION#", categories.businessLocation).replace("#BUSINESSTYPE#", categories.businessType).replace("#OPENAT#", categories.openAt).replace("#CLOSEAT#", categories.closeAt).replace("#DESCRIPTION#", categories.businessDescription);
         });
@@ -203,5 +204,4 @@ function getCategories(type) {
     });
 }
 
-                   
-       
+

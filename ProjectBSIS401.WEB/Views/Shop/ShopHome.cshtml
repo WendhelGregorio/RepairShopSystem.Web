@@ -31,39 +31,39 @@
 
             </ul>
             @*<h5 class="text-black-50"><i class="fas fa-chart-line"></i>&nbsp;Data</h5>
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Business Insights   <span class="badge bg-primary rounded-pill"></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    My Costumers
-                    <span class="badge bg-primary rounded-pill">@Model.costumerCount</span>
-                </li>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Business Insights   <span class="badge bg-primary rounded-pill"></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        My Costumers
+                        <span class="badge bg-primary rounded-pill">@Model.costumerCount</span>
+                    </li>
 
-            </ul>*@
+                </ul>*@
             <h5 class="text-black-50"><i class="fas fa-home"></i>&nbsp;Shop</h5>
             <ul class="list-group">
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                    Shop Feedback   <span class="badge bg-primary rounded-pill">@Model.Count</span>
-                </li>*@
+                        Shop Feedback   <span class="badge bg-primary rounded-pill">@Model.Count</span>
+                    </li>*@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="~/shop/shop-update-profile/@Model.Shop.Id" style="text-decoration:none; color:black">Shop Update Profile</a>
                     <span class="badge bg-primary rounded-pill"></span>
                 </li>
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                    My Reports
-                    <span class="badge bg-primary rounded-pill"></span>
-                </li>*@
+                        My Reports
+                        <span class="badge bg-primary rounded-pill"></span>
+                    </li>*@
 
 
             </ul>
             <h5 class="text-black-50"><i class="fas fa-comments"></i>&nbsp;Costumer-Service</h5>
             <ul class="list-group">
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback Modal</a>
-                </li>*@
+                        <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback Modal</a>
+                    </li>*@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a  style="text-decoration:none; color:black;" href="~/shop/my-chat">My Chat</a>
+                    <a style="text-decoration:none; color:black;" href="~/shop/my-chat">My Chat</a>
                     <span class="badge bg-primary rounded-pill"></span>
                 </li>
 
@@ -132,14 +132,17 @@
 
                 @if (Model.BookingsPage.Items.Count > 0)
                 {
+                    
+
                     <table id="costumerList" class="table table-borderless table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Fullname</th>
-                                <th>Address</th>
-                                <th>Price</th>
-                                <th>Date</th>
-                                <th>Status</th>
+                                <th scope="col">Fullname</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Payment</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -166,10 +169,18 @@
                                     <td>
                                         @booking.ReserveStatus
                                     </td>
+                                    <td colspan="2">
+                                        @booking.PaymentType
+                                    </td>
                                     <td>
                                         <a href="#" onclick="changeStatus('@booking.Id','@booking.ShopServiceName', '@booking.ReserveStatus', '@booking.UserId')">
                                             <i class="fas fa-book" style="color:#17927f"></i>
                                         </a>
+
+                                        <a href="#" onclick="paymentChangeStatus('@booking.Id','@booking.ShopServiceName', '@booking.PaymentType', '@booking.UserId')">
+                                            <i class="fas fa-dollar-sign" style="color:#1c6926"></i>
+                                        </a>
+
                                         <a href="#" onclick="confirmDeleteUser('@booking.Id','@Model.Shop.Id','@booking.UserName')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
                                         <a href="~/booking/details/@booking.Id" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
                                     </td>
@@ -254,7 +265,7 @@
                                                 <td>@shopService.UpdatedAt.ToString("dd MMMM yyyy HH:mm")</td>
                                                 <td>
                                                     <a href="#" onclick="confirmDeleteShopServices('@shopService.Id','@Model.Shop.Id','@shopService.Service')" title="Delete Costumer"><button type="button" class="btn"><i class="fas fa-trash-alt fas" style="color:#d11111"></i></button></a>
-                                                    <a href="~/shop/shop-items-info/@shopService.Id/@shopService.ShopId" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
+                                                    <a href="~/shop-services/shop-services-details/@shopService.Id" title="Details"><button type="button" class="btn"><i class="fas fa-info" style="color:#1e7d28;"></i></button></a>
                                                 </td>
 
                                             </tr>
@@ -410,6 +421,38 @@
 </div>
 
 
+
+<!--Payment Change Status-->
+<div class="modal" tabindex="-1" role="dialog" id="change-payment-status-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Do you want to change the payment status of <span class="change-payment-status-modal-item-title"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/booking/change-payment-status" method="post">
+                <div class="modal-body">
+                    <p>Do you want to change the payment status of <span class="change-payment-status-modal-item-title"></span>?</p>
+                    <input type="hidden" name="BookingId" id="change-payment-status-modal-item-id" />
+                    <input type="hidden" name="UserId" id="change-payment-status-modal-user-id" />
+                    Status : <select class="form-select" name="PaymentType" aria-label="" id="change-payment-status-modal-item-status">
+                        <option value="Paid">Paid</option>
+                        <option value="Unpaid">Unpaid</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
 <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="~/vendor/jquery/shop.js"></script>
@@ -426,6 +469,18 @@
         $("#change-status-modal").modal("show");
     }
 
+
+
+    function paymentChangeStatus(id, title, paymentStatus, userId) {
+        console.log(id);
+        console.log(title);
+        console.log(paymentStatus);
+        $(".change-payment-status-modal-item-title").html(title);
+        $("#change-payment-status-modal-item-id").val(id);
+        $("#change-payment-status-modal-user-id").val(userId);
+        $("#change-payment-status-modal-item-status option[value=" + paymentStatus + "]").prop('selected', true);
+        $("#change-payment-status-modal").modal("show");
+    }
 
 
     $("#btnToggle").click(function (e) {

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using BCrypt;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ProjectBSIS401.WEB.Areas.Manage.ViewModels.user;
@@ -13,21 +15,27 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [AllowAnonymous]
     public class UsersController : Controller
     {
         private readonly DefaultDbContext _context;
         protected readonly IConfiguration _config;
+        private IHostingEnvironment _env;
         private string emailUserName;
         private string emailPassword;
  
 
-        public UsersController(DefaultDbContext context, IConfiguration iConfiguration)
+        public UsersController(DefaultDbContext context, IConfiguration iConfiguration ,IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
             this._config = iConfiguration;
             var emailConfig = this._config.GetSection("Email");
             emailUserName = (emailConfig["Username"]).ToString();
@@ -86,6 +94,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 });
             }
 
+      
         [Authorize(Policy = "AuthorizeAdmin")]
         [HttpGet, Route("manage/users/invite")]
         public IActionResult Invite()
@@ -189,13 +198,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
 
-        private Random random = new Random();
-        private string RandomString(int length)
-        {
-            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+       
 
         [Authorize(Policy = "AuthorizeAdmin")]
         [HttpGet, Route("manage/users/delete/{userId}")]
@@ -211,6 +214,28 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
+        [Authorize(Policy = "AuthorizeAdmin")]
+        [HttpGet, Route("manage/users/profile/{userId}")]
+        public IActionResult Profile(Guid? userId)
+        {
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+
+           
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(new ProfileViewModel
+            {
+                User = user,
+               
+            });
+
+        }
+
 
         [Authorize(Policy = "AuthorizeAdmin")]
         [HttpGet, Route("manage/users/update-profile/{userId}")]
@@ -254,6 +279,86 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
+
+        [Authorize(Policy = "AuthorizeAdmin")]
+        [HttpGet, Route("manage/users/update-thumbnail/{userId}")]
+        public IActionResult Thumbnail(Guid? userId)
+        {
+            return View(new ThumbnailViewModel() { UserId = userId });
+        }
+
+
+        [Authorize(Policy = "AuthorizeAdmin")]
+        [HttpPost, Route("manage/users/update-thumbnail")]
+        public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
+        {
+            //Check file size of the uploaded thumbnail
+            //reject if the file is greater than 2mb
+            var fileSize = model.Thumbnail.Length;
+            if ((fileSize / 1048576.0) > 2)
+            {
+                ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
+                return View(model);
+            }
+            //Check file type of the uploaded thumbnail
+            //reject if the file is not a jpeg or png
+            if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
+            {
+                ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
+                return View(model);
+            }
+            //Formulate the directory where the file will be saved
+            //create the directory if it does not exist
+            var dirPath = _env.WebRootPath + "/userprofile/users/" + model.UserId.ToString();
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            //always name the file thumbnail.png
+            var filePath = dirPath + "/thumbnail.png";
+            if (model.Thumbnail.Length > 0)
+
+            {
+                //Open a file stream to read all the file data into a byte array
+                byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
+                //load the file into the third party (ImageSharp) Nuget Plugin                
+                using (Image<Rgba32> image = Image.Load(bytes))
+                {
+                    //use the Mutate method to resize the image 150px wide by 150px long
+                    image.Mutate(x => x.Resize(150, 150));
+                    //save the image into the path formulated earlier
+                    image.Save(filePath);
+                }
+            }
+            return RedirectToAction("Profile", new { UserId = model.UserId });
+        }
+
+        #region Helpers
+        //generate randomstring password
+
+        private Random random = new Random();
+        private string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+       
+        public async Task<byte[]> FileBytes(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+        #endregion
 
         #region Notifications
         #region Email

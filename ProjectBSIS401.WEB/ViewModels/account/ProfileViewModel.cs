@@ -10,6 +10,6 @@ namespace ProjectBSIS401.WEB.ViewModels.account
     public class ProfileViewModel
     {
         public User User { get; set; }
-        public List<Booking> Bookings { get; set; }
+        public List<BookViewModel> Bookings { get; set; }
     }
 }

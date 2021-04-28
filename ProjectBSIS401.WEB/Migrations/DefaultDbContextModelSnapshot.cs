@@ -32,6 +32,8 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("DateAndTime");
 
+                    b.Property<int>("PaymentType");
+
                     b.Property<int>("ReserveStatus");
 
                     b.Property<Guid?>("ShopId");
@@ -264,7 +266,7 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Month");
+                    b.Property<int>("Month");
 
                     b.Property<decimal>("Price");
 

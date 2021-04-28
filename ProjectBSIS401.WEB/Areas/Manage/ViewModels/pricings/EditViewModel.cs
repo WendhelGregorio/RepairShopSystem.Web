@@ -13,7 +13,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.ViewModels.pricings
 
         public decimal Price { get; set; }
 
-        public string Month { get; set; }
+        public int Month { get; set; }
 
 
     }

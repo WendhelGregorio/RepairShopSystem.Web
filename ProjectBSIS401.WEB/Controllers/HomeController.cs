@@ -34,7 +34,12 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet,Route("~/home/pricing")]
         public IActionResult Pricing()
         {
-            return View();
+            var pricings = this._context.Pricings.Include(p => p.PricingContents).ToList();
+
+            return View(new PricingViewModel
+            {
+                Pricings = pricings
+            });
         }
 
        [HttpGet,Route("~/home/team")]

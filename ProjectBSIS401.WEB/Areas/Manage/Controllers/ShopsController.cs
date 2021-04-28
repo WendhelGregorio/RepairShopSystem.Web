@@ -82,7 +82,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             return View(new IndexViewModel()
             {
                 Shops = result,
-               status = status
+               Status = status
             });
         }
 

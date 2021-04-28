@@ -11,7 +11,7 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public decimal Price { get; set; }
 
-        public string Month { get; set; }
+        public int Month { get; set; }
 
         public List<PricingContent> PricingContents { get; set; }
     }

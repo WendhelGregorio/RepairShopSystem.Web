@@ -80,12 +80,12 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n\r\n<br /><br /><br /><br />\r\n");
             EndContext();
             BeginContext(152, 1194, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "57e3ff769c8e47dcb92f84a0c000d22d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8cb3d6f4d3d46bab0ae359603a12f30", async() => {
                 BeginContext(207, 86, true);
                 WriteLiteral("\r\n    <div class=\"container\">\r\n\r\n\r\n        <div class=\"createaccount\">\r\n\r\n            ");
                 EndContext();
                 BeginContext(293, 44, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "80b9b502c89d4e95a3b8f79216dc08e6", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "749db78084384a42943a620eb0c76865", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -136,7 +136,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                 ");
                 EndContext();
                 BeginContext(1009, 122, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bf213e13f6ec451ba43f918125f7dc2f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3544bcf61a5d477e91a92902f3f69631", async() => {
                     BeginContext(1037, 90, true);
                     WriteLiteral("<button class=\"btn btn-primary offset-5 mt-4\" type=\"button\" value=\"Login\">Sign Up</button>");
                     EndContext();

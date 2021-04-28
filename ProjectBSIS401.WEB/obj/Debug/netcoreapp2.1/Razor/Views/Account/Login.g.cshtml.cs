@@ -82,7 +82,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n<br />\r\n\r\n<div class=\"section-title\">\r\n    ");
             EndContext();
             BeginContext(147, 45, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a6d60ada479c4b0587a84cb53c98c0a8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0571659ca9d0464d8d9fa63877474609", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -100,7 +100,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n    <h2>Login</h2>\r\n</div>\r\n<main class=\"login-form\">\r\n    <div class=\"cotainer\">\r\n        <div class=\"row justify-content-center\">\r\n            <div class=\"col-md-8\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">");
             EndContext();
             BeginContext(444, 60, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3652d2a5ec3a4116ab8188012490abb2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8d28f6f8c7ac4e3eaa8238eb0c38c722", async() => {
                 BeginContext(493, 7, true);
                 WriteLiteral("Sign-Up");
                 EndContext();
@@ -122,7 +122,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("</div>\r\n                    <div class=\"card-body\">\r\n                        ");
             EndContext();
             BeginContext(581, 2028, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4713e34fa56f40dcaa6aa2510eaa10ca", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1b9098ee5597482fbd3b8eb83be3d0e0", async() => {
                 BeginContext(625, 30, true);
                 WriteLiteral("\r\n                            ");
                 EndContext();
@@ -174,7 +174,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                                 ");
                 EndContext();
                 BeginContext(2386, 154, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b655710ffcc94e3282ce6251a204d355", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ba60ab2c668943b2800818b38a78c010", async() => {
                     BeginContext(2443, 93, true);
                     WriteLiteral("\r\n                                    Forgot Your Password?\r\n                                ");
                     EndContext();

@@ -12,7 +12,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.ViewModels.shops
     {
         public Page<Shop> Shops { get; set; }
 
-        public Status status { get; set; }
+        public Status Status { get; set; }
 
         public List<Status> Statuses
         {

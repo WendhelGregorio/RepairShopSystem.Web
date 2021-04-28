@@ -1,0 +1,130 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.user.ProfileViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<h2>Profile</h2>
+
+<br /><br /><br /><br />
+@Html.AntiForgeryToken()
+@Html.ValidationSummary()
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+
+                            <div class="image-container">
+                                <a href="~/manage/users/update-thumbnail/@Model.User.Id">
+                                    <img src="~/userprofile/users/@Model.User.Id/thumbnail.png " id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                </a>
+                               
+                                <div class="middle">
+
+                                    <a href="~/manage/users/update-profile/@Model.User.Id" class="btn btn-primary">Update-profile</a>
+
+                                </div>
+
+
+                                <div class="ml-auto">
+                                    <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">My Info</button>
+                                @*<button class="nav-link" id="nav-book-tab" data-bs-toggle="tab" data-bs-target="#nav-book" type="button" role="tab" aria-controls="nav-book" aria-selected="false">My Books</button>*@
+                                @*<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>*@
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">First Name</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.FirstName
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Last Name</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.LastName
+                                    </div>
+                                </div>
+                                <hr />
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">User Name</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.UserName
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Gender</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.Gender
+                                    </div>
+                                </div>
+                                <hr />
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Email-Address</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.EmailAddress
+                                    </div>
+                                </div>
+                                <hr />
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-5">
+                                        <label style="font-weight:bold;">Age</label>
+                                    </div>
+                                    <div class="col-md-8 col-6">
+                                        @Model.User.Age
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="tab-pane fade" id="nav-book" role="tabpanel" aria-labelledby="nav-book-tab">
+                               
+
+                            </div>
+                            @*<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3333</div>*@
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

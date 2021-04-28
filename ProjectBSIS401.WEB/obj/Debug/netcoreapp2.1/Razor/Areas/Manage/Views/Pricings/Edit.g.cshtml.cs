@@ -52,7 +52,7 @@ namespace AspNetCore
             WriteLiteral("\r\n\r\n");
             EndContext();
             BeginContext(144, 943, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10a615027f4f43148e527b3533e31259", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "79585a4f9db441749429fdefe86c701c", async() => {
                 BeginContext(196, 36, true);
                 WriteLiteral("\r\n    <input type=\"hidden\" name=\"Id\"");
                 EndContext();
@@ -97,7 +97,7 @@ WriteAttributeValue("", 817, Model.Month, 817, 12, false);
                 WriteLiteral(" placeholder=\"input a month\" />\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n        <button type=\"submit\" value=\"Create\" class=\"btn btn-success\">Save</button>\r\n        ");
                 EndContext();
                 BeginContext(999, 67, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37d3edb0cb8945d7bdbef63d52945ad8", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b7f0759761714e55aedd86e3ace9a5be", async() => {
                     BeginContext(1056, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

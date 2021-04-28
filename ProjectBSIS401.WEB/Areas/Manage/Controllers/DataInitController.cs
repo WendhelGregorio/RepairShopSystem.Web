@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 
 namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 {
@@ -333,7 +334,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                                  RegistrationCode = "ABCDEFG",
                                  EmailAddress = "gregorio.wendhel@gmail.com",
                                  Gender = Infrastructures.Domain.Enums.Gender.Male,
-                                 Password = BCrypt.BCryptHelper.HashPassword("Wendhelaton23", BCrypt.BCryptHelper.GenerateSalt(9)),
+                                 Password = BCrypt.BCryptHelper.HashPassword("123456789", BCrypt.BCryptHelper.GenerateSalt(9)),
                                  PhoneNumber = "09504145737",
                                  DateOfBirth = DateTime.Parse("06-23-1998"),
                                  UserName = "Wendhel Aton",
@@ -934,7 +935,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                             TimeStamps = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow,
                             CreatedAt = DateTime.UtcNow,
-                            ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                            ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                            PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                         });
@@ -956,10 +958,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                            UpdatedAt = DateTime.UtcNow,
                            
                            CreatedAt = DateTime.UtcNow,
-                           ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                           ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                            PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
-
-                       });
+                        });
 
                 this._context.Bookings.Add(
                        new Infrastructures.Domain.Models.Booking()
@@ -977,8 +979,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                            UpdatedAt = DateTime.UtcNow,
                           
                            CreatedAt = DateTime.UtcNow,
-                           ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
-
+                           ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                           PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
                        });
 
@@ -999,10 +1001,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
                          
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
-
-                      });
+                         });
 
                 this._context.Bookings.Add(
                         new Infrastructures.Domain.Models.Booking()
@@ -1020,10 +1022,11 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                               UpdatedAt = DateTime.UtcNow,
                             
                               CreatedAt = DateTime.UtcNow,
-                              ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                              ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                             PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
-                          });
+                        });
 
                 // 3 Booking of Goshen shop
                 this._context.Bookings.Add(
@@ -1042,7 +1045,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1063,7 +1067,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1084,7 +1089,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1107,7 +1113,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1128,7 +1135,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1149,7 +1157,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1171,7 +1180,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1192,7 +1202,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1213,7 +1224,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1236,7 +1248,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1257,7 +1270,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1278,7 +1292,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1302,7 +1317,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1323,7 +1339,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1344,7 +1361,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1369,7 +1387,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1390,7 +1409,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1411,7 +1431,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1435,7 +1456,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1456,7 +1478,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1477,7 +1500,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1500,7 +1524,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1521,7 +1546,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1542,7 +1568,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1566,7 +1593,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1587,7 +1615,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1608,7 +1637,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -1631,7 +1661,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                           UpdatedAt = DateTime.UtcNow,
 
                           CreatedAt = DateTime.UtcNow,
-                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                          ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                          PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                       });
@@ -1652,7 +1683,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
 
                        CreatedAt = DateTime.UtcNow,
-                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                       ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                       PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                    });
@@ -1673,7 +1705,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       UpdatedAt = DateTime.UtcNow,
 
                       CreatedAt = DateTime.UtcNow,
-                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending
+                      ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                      PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid
 
 
                   });
@@ -3873,9 +3906,88 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       });
 
             }
-                #endregion
+            #endregion
 
-                this._context.SaveChanges();
+
+            #region Pricing
+            if (this._context.Pricings.Count() < 1)
+            {
+                // Pricing //
+                this._context.Pricings.Add(
+                    new Infrastructures.Domain.Models.Pricing()
+                    {
+                        Id = Guid.Parse("e9b18bd6-2d23-406f-9939-d3482409249a"),
+                        Title = "Basic",
+                        Month = 1,
+                        Price = 299,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                        
+                        
+                    });
+                // 3 Pricing Content //
+
+                // 1
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                     Id = Guid.Parse("05432ada-a6e5-4e49-a7e2-1e4d2d75885b"),
+                     PricingId = Guid.Parse("e9b18bd6-2d23-406f-9939-d3482409249a"),
+                     Content = "Create your own shop online",
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow,
+
+                });
+                // 2
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("b0ee92ca-6c41-448e-8269-448d3c8ebac3"),
+                    PricingId = Guid.Parse("e9b18bd6-2d23-406f-9939-d3482409249a"),
+                    Content = "Take a limited services we offer for your shop",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+                // 3
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("445d7717-92b1-490e-96ab-63ea38160d9b"),
+                    PricingId = Guid.Parse("e9b18bd6-2d23-406f-9939-d3482409249a"),
+                    Content = "No time-limit for your own shop",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+
+
+                //this._context.Pricings.Add(
+                //   new Infrastructures.Domain.Models.Pricing()
+                //   {
+                //       Id = Guid.Parse(""),
+                //       Title = "All including business owner online",
+                //       Month = "Business Owner",
+                //       Price = 1,
+                //       CreatedAt = DateTime.UtcNow,
+                //       UpdatedAt = DateTime.UtcNow,
+
+
+                //   });
+
+                //this._context.PricingContents.Add(new PricingContent()
+                //{
+                //    Id = Guid.Parse(""),
+                //    PricingId = Guid.Parse(""),
+                //    Content = "",
+                //    CreatedAt = DateTime.UtcNow,
+                //    UpdatedAt = DateTime.UtcNow,
+
+                //});
+
+              
+            }
+            #endregion
+            this._context.SaveChanges();
             return Ok("OK");
         }
     }

@@ -466,9 +466,32 @@ namespace ProjectBSIS401.WEB.Controllers
         {
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
 
-            var bookings = this._context.Bookings.Where(b => b.UserId == user.Id)
-                                                 .OrderByDescending(b => b.UpdatedAt)
-                                                 .ToList();
+            var Books = this._context.Bookings.Where(ub => ub.UserId == userId)
+                                          .OrderByDescending(ub => ub.CreatedAt == DateTime.Today)
+                                          .Take(10)
+                                          .Select(ub => new BookViewModel()
+                                          {
+                                              Id = ub.Id,
+                                              ShopServiceName = ub.ShopServiceName,
+                                              ShopServiceDescription = ub.ShopServiceDescription,
+                                              ShopServicePrice = ub.ShopServicePrice,
+                                              ShopServiceId = ub.ShopServiceId,
+                                              AdditionalDescription = ub.AdditionalDescription,
+                                              Address = ub.Address,
+                                              ContactNumber = ub.ContactNumber,
+                                              UserName = ub.UserName,
+                                              DateAndTime = ub.DateAndTime,
+                                              ReserveStatus = ub.ReserveStatus,
+                                              PaymentType = ub.PaymentType,
+                                              CreatedAt = ub.CreatedAt,
+                                              UpdatedAt = ub.CreatedAt,
+                                              TimeStamps = ub.TimeStamps,
+                                              ShopId = ub.ShopId,
+                                              UserId = ub.UserId
+                                             
+
+                                          }).ToList();
+
             if (user == null)
             {
                 return NotFound();
@@ -478,7 +501,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return View(new ProfileViewModel
             {
                 User = user,
-                Bookings = bookings
+                Bookings = Books
             });
 
         }
@@ -503,14 +526,14 @@ namespace ProjectBSIS401.WEB.Controllers
             if ((fileSize / 1048576.0) > 2)
             {
                 ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
-                return View(model);
+                return Redirect("Profile");
             }
             //Check file type of the uploaded thumbnail
             //reject if the file is not a jpeg or png
             if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
             {
                 ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
-                return View(model);
+                return Redirect("Profile");
             }
             //Formulate the directory where the file will be saved
             //create the directory if it does not exist

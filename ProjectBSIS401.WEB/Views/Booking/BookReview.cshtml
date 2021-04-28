@@ -2,16 +2,15 @@
 @{
     ViewData["Title"] = "BookReview";
 }
-
 <br /><br /><br />
 <div class="section-title">
-    <h2>Invoice</h2>
+    <h2>Booking Details</h2>
 </div>
 <div id="invoice">
     <div class="toolbar hidden-print">
         <div class="text-right">
-            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-                <button class="btn btn-info"><i class="fa fa-file-pdf"></i> Export as PDF</button>
+            @*<button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                <button class="btn btn-info"><i class="fa fa-file-pdf"></i> Export as PDF</button>*@
         </div>
         <hr>
     </div>
@@ -37,14 +36,14 @@
             <main>
                 <div class="row contacts">
                     <div class="col invoice-to">
-                        <div class="text-gray-light">INVOICE TO:</div>
+                        <div class="text-gray-light">Details:</div>
                         <h2 class="to">@Model.Booking.UserName</h2>
                         <div class="address">@Model.Booking.Address</div>
                         <div class="email"><a href="#">@Model.User.EmailAddress</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE ID</h1>
-                        <div class="date">Date of Invoice: @Model.Booking.UpdatedAt.ToString("MM/dd/yyyy")</div>
+                        <h1 class="invoice-id">ID : #</h1>
+                        <div class="date">Date of Book: @Model.Booking.UpdatedAt.ToString("MM/dd/yyyy")</div>
                         <div class="date">Due Date: @Model.Booking.UpdatedAt.AddDays(30).ToString("MM/dd/yyyy")</div>
                     </div>
                 </div>
@@ -98,10 +97,10 @@
                                     <td>&#8369;@Model.TotalPrice.ToString("F")</td>
                                 </tr>
                                 @*<tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">TAX 25%</td>
-                            <td>$1,300.00</td>
-                        </tr>*@
+                                        <td colspan="2"></td>
+                                        <td colspan="2">TAX 25%</td>
+                                        <td>$1,300.00</td>
+                                    </tr>*@
                                 <tr>
                                     <td colspan="2"></td>
                                     <td colspan="2">GRAND TOTAL</td>
@@ -115,14 +114,14 @@
                 <div class="thanks">Thank you!</div>
                 <div class="notices">
                     <div>NOTICE:</div>
-                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                    <div class="notice">Your booking is pending for a while. We notify you as soon as possible.</div>
                 </div>
                 <hr />
-               
+
             </main>
-            <footer>
-                Invoice was created on a computer and is valid without the signature and seal.
-            </footer>
+            @*<footer>
+                    Invoice was created on a computer and is valid without the signature and seal.
+                </footer>*@
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
         <div></div>

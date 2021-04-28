@@ -84,7 +84,7 @@ namespace ProjectBSIS401.WEB.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
-                    Month = table.Column<string>(nullable: true)
+                    Month = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,7 +237,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     Address = table.Column<string>(nullable: true),
                     DateAndTime = table.Column<DateTime>(nullable: false),
                     TimeStamps = table.Column<DateTime>(nullable: false),
-                    ReserveStatus = table.Column<int>(nullable: false)
+                    ReserveStatus = table.Column<int>(nullable: false),
+                    PaymentType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

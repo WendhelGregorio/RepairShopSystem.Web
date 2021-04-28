@@ -111,7 +111,7 @@ Write(Html.ValidationSummary());
                                 ");
             EndContext();
             BeginContext(550, 137, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "90f8d59360264b2e8da3f1fa0de594a9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6a8c436f9585454d89a77dee9ae25d3c", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -141,7 +141,7 @@ AddHtmlAttributeValue("", 580, Model.User.Id, 580, 14, false);
             WriteLiteral("\r\n                                <div class=\"middle\">\r\n\r\n                                    ");
             EndContext();
             BeginContext(781, 92, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "495b74d2368d47d4857e6d5bfdfbd0ec", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a4d2d20a9174a7e834d166c7ecc7dc6", async() => {
                 BeginContext(855, 14, true);
                 WriteLiteral("Update-profile");
                 EndContext();
@@ -411,7 +411,7 @@ AddHtmlAttributeValue("", 815, Model.User.Id, 815, 14, false);
             WriteLiteral("                                                            <td>\r\n                                                                ");
             EndContext();
             BeginContext(7979, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6c03b0eb9bec419198810e56b1bd93d3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3ab117fba26c4aa19bc4f1a943f27772", async() => {
                 BeginContext(8014, 32, true);
                 WriteLiteral("<i class=\"fas fa-comment-o\"></i>");
                 EndContext();

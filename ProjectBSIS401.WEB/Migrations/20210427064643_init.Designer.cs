@@ -9,7 +9,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 namespace ProjectBSIS401.WEB.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210408031301_init")]
+    [Migration("20210427064643_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<DateTime>("DateAndTime");
+
+                    b.Property<int>("PaymentType");
 
                     b.Property<int>("ReserveStatus");
 
@@ -266,7 +268,7 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Month");
+                    b.Property<int>("Month");
 
                     b.Property<decimal>("Price");
 

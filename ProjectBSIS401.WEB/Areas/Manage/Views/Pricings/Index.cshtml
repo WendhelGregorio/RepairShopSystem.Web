@@ -29,9 +29,6 @@
 </div>
 
 
-@{
-    Guid? _pricingId = null;
-}
 
 @if (Model.Pricings.Items.Count > 0)
 {
@@ -98,28 +95,29 @@ else
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Pricing Content List</h5>
-              
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-           
+
             <div class="modal-body">
                 @foreach (var p in Model.Pricings.Items)
                 {
                     foreach (var content in p.PricingContents)
                     {
                         <ol class="list-group list-group-numbered">
-                            <li class="list-group-item">@content.Content 
-                            
-                               <span class="badge bg-primary rounded-pill"><i class="fas fa-trash"></i></span>
-                            </li>
-                        </ol>
-                    }
+                            <li class="list-group-item">
+                                @content.Content
+
+                            <span class="badge bg-primary rounded-pill"><i class="fas fa-trash"></i></span>
+                        </li>
+                    </ol>
                 }
+            }
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              
+
             </div>
         </div>
     </div>
@@ -177,7 +175,7 @@ else
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          
+
             <form action="~/manage/pricings/create-content-pricing" method="post">
                 @Html.AntiForgeryToken()
                 <div class="modal-body">

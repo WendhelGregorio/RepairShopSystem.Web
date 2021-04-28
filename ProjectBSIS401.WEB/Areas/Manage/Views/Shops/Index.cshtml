@@ -19,7 +19,7 @@
                 @{
                     foreach (Status statuss in Model.Statuses)
                     {
-                        if (Model.status == statuss)
+                        if (Model.Status == statuss)
                         {
                             <option value="@statuss" selected>@statuss.ToString()</option>
                         }
@@ -45,8 +45,8 @@
     <div class="col-lg-3">
         <div class="table-responsive table--no-card m-b-30 mt-md-5">
             <a href="~/manage/shop/create" class="btn btn-lg-3 btn-success btn-block">
-                <i class="fa fa-plus"></i>&nbsp;
-                <span>Register Shop</span>
+                @*<i class="fa fa-plus"></i>&nbsp;
+                <span></span>*@
             </a>
         </div>
     </div>
@@ -112,13 +112,13 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
-                            <li class="page-item"><input type="number" value="@Model.Shops.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/manage/shop/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val())) + '&keyword=@(Model.Shops.Keyword)&status=@(Model.status)" /></li>
+                            <li class="page-item"><input type="number" value="@Model.Shops.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/manage/shops/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val())) + '&keyword=@(Model.Shops.Keyword)&sTaTus=@(Model.Status)" /></li>
                             <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.Shops.PageCount&nbsp;&nbsp;&nbsp;</span></li>
                             @{
                                 var prev = Model.Shops.PageIndex - 1;
                                 if (prev > 0)
                                 {
-                                    <li class="page-item"><a class="page-link" href="~/manage/shop?keyword=@Model.Shops.Keyword&status=@Model.status&pageSize=@Model.Shops.PageSize&pageIndex=@prev"><span aria-hidden="true">&laquo;</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="~/manage/shops/index?keyword=@Model.Shops.Keyword&sTaTus=@Model.Status&pageSize=@Model.Shops.PageSize&pageIndex=@prev"><span aria-hidden="true">&laquo;</span></a></li>
                                 }
                             }
                             <li class="page-item"><a class="page-link" href="#">@(Model.Shops.PageIndex)</a></li>
@@ -126,7 +126,7 @@
                                 var next = Model.Shops.PageIndex + 1;
                                 if (next <= Model.Shops.PageCount)
                                 {
-                                    <li class="page-item"><a class="page-link" href="~/manage/shop?keyword=@Model.Shops.Keyword&status=@Model.status&pageSize=@Model.Shops.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="~/manage/shops/index?keyword=@Model.Shops.Keyword&sTaTus=@Model.Status&pageSize=@Model.Shops.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
                                 }
                             }
                         </ul>
@@ -270,7 +270,7 @@ else
     });
 
     function searchTrigger() {
-        window.location = "/manage/shop?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&sTaTus=" + $("#searchStatus").val();
+        window.location = "/manage/shops/index?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&sTaTus=" + $("#searchStatus").val();
     }
 
 

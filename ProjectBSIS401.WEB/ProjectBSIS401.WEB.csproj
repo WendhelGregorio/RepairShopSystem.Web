@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Manage\Data\" />
-    <Folder Include="Areas\Manage\Models\" />
     <Folder Include="Areas\Manage\Views\ShopServices\" />
     <Folder Include="SignalR\Models\" />
     <Folder Include="wwwroot\userprofile\users\" />

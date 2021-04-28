@@ -10,6 +10,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 using ProjectBSIS401.WEB.ViewModels.booking;
+using ProjectBSIS401.WEB.ViewModels.shop;
 
 namespace ProjectBSIS401.WEB.Controllers
 {
@@ -198,9 +199,28 @@ namespace ProjectBSIS401.WEB.Controllers
                 _context.SaveChanges();
             }
             //Post to Hub
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", booking.UserId, "Your booking " + booking.ShopServiceName + " has been updated to " + booking.ReserveStatus + " date of " + booking.UpdatedAt);
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", booking.UserId, "Your booking " + booking.ShopServiceName + " has been updated to " + booking.ReserveStatus + " " + " date of " + booking.UpdatedAt);
 
        
+            return RedirectPermanent("~/shop/my-dashboard");
+        }
+
+        [HttpPost("/booking/change-payment-status")]
+        public async Task<IActionResult> PaymentChangeStatus(PaymentChangeStatusViewModel model)
+        {
+            var booking = _context.Bookings.FirstOrDefault(p => p.Id == model.BookingId);
+
+            if (booking != null)
+            {
+                booking.PaymentType = model.PaymentType;
+
+                _context.Bookings.Update(booking);
+                _context.SaveChanges();
+            }
+            //Post to Hub
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", booking.UserId, "Your booking " + booking.ShopServiceName + " has been updated to " + booking.PaymentType + " " + "date of" + booking.UpdatedAt);
+
+
             return RedirectPermanent("~/shop/my-dashboard");
         }
 

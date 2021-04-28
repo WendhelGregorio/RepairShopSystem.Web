@@ -99,6 +99,8 @@ namespace ProjectBSIS401.WEB.Controllers
            
         }
 
+       
+
         [HttpGet, Route("shop-services/my-services/{shopId}")]
         public IActionResult MyShopService(Guid? shopId)
         {
@@ -112,8 +114,24 @@ namespace ProjectBSIS401.WEB.Controllers
             });
         }
 
+        [HttpGet,Route("shop-services/shop-services-details/{id}")]
+        public IActionResult ShopServiceDetails(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        [HttpGet,Route("shop-services/details/{id}")]
+            var shopService = this._context.ShopServices.FirstOrDefault(ss => ss.Id == id);
+            if (shopService == null)
+            {
+                return NotFound();
+            }
+
+            return View(shopService);
+        }
+
+       [HttpGet,Route("shop-services/details/{id}")]
         public IActionResult PublicServiceDetails(Guid? id)
         {
             if(id == null)
