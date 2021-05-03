@@ -70,10 +70,10 @@ namespace ProjectBSIS401.WEB.Controllers
             }
 
             var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower());
-            var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
-           
+             
             if (user != null)
             {
+                var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
                 if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
                 {
                     if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
@@ -176,10 +176,14 @@ namespace ProjectBSIS401.WEB.Controllers
                     }
                 }
 
-                ModelState.AddModelError("", "Invalid Login.");
-                return View();
             
 
+            }
+            else
+            {
+
+                ModelState.AddModelError("", "Invalid login. Please create your account first.");
+                return View();
             }
 
 
@@ -206,7 +210,7 @@ namespace ProjectBSIS401.WEB.Controllers
             if (model.Password != model.ConfirmPassword)
             {
                 ModelState.AddModelError("", "Password and confirm-password does not match");
-
+                return View();
             }
 
             var registrationCode = RandomString(6);

@@ -99,7 +99,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("                <div class=\"d-flex flex-column mb-3\">\r\n                    <div class=\"card\" style=\"width: 18rem;\">\r\n                        ");
             EndContext();
             BeginContext(509, 113, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "2c68a8ecbd374b0ab494dd160d7bb773", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "fd5d36bf30c94ad8aa9334dd0d18a4c3", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -129,7 +129,7 @@ AddHtmlAttributeValue("", 543, users.Id, 543, 9, false);
             WriteLiteral("\r\n                        <div class=\"card-body\">\r\n                            ");
             EndContext();
             BeginContext(701, 101, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05d921ac8d1a490b9fb425cf3283e0cc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "813f0e796115421c9c52890327dc19cd", async() => {
                 BeginContext(750, 14, false);
 #line 22 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\Views\Chats\Find.cshtml"
                                                                        Write(users.UserName);

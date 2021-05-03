@@ -34,7 +34,7 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet,Route("~/home/pricing")]
         public IActionResult Pricing()
         {
-            var pricings = this._context.Pricings.Include(p => p.PricingContents).ToList();
+            var pricings = this._context.Pricings.Include(p => p.PricingContents).OrderBy(p => p.UpdatedAt).ToList();
 
             return View(new PricingViewModel
             {

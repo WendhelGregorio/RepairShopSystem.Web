@@ -54,7 +54,7 @@ namespace AspNetCore
             WriteLiteral("\r\n<h2>Thumbnail</h2>\r\n\r\n<text class=\"text-warning\">2mb only for profile pic</text>\r\n");
             EndContext();
             BeginContext(225, 709, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "69e28f3117fb481da61cddd17c2f119a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "453feec017744430b859aedaa8aa5f76", async() => {
                 BeginContext(316, 74, true);
                 WriteLiteral("\r\n    <div class=\"form-group\">\r\n        <input type=\"hidden\" name=\"UserId\"");
                 EndContext();
@@ -69,7 +69,7 @@ WriteAttributeValue("", 398, Model.UserId, 398, 13, false);
                 WriteLiteral(" />\r\n        <label for=\"Thumbnail\">Thumbnail:</label><br />\r\n        ");
                 EndContext();
                 BeginContext(482, 136, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f002b234efbc458eb95fcfb45df4e421", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "744097a81a65407f8322962f8ecc2291", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

@@ -3960,31 +3960,109 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 });
 
 
+                // Pricing //
+                this._context.Pricings.Add(
+                new Infrastructures.Domain.Models.Pricing()
+                {
+                    Id = Guid.Parse("b8ab1d95-8acc-49ed-9cba-337207149b3e"),
+                    Title = "Business",
+                    Month = 6,
+                    Price = 1399,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
 
-                //this._context.Pricings.Add(
-                //   new Infrastructures.Domain.Models.Pricing()
-                //   {
-                //       Id = Guid.Parse(""),
-                //       Title = "All including business owner online",
-                //       Month = "Business Owner",
-                //       Price = 1,
-                //       CreatedAt = DateTime.UtcNow,
-                //       UpdatedAt = DateTime.UtcNow,
+
+                });
+
+                // 3 Pricing Content //
+
+                // 1
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("96bb0030-0d3b-4404-9cb7-8e9dfe23fd49"),
+                    PricingId = Guid.Parse("b8ab1d95-8acc-49ed-9cba-337207149b3e"),
+                    Content = "Create your virtual business",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+                //2
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("7d142767-11d4-473b-a224-251939cabf4f"),
+                    PricingId = Guid.Parse("b8ab1d95-8acc-49ed-9cba-337207149b3e"),
+                    Content = "Take a unli service provided by Fixit.PH",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
 
 
-                //   });
+                //3
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("a883b52d-b454-4fa6-8f74-7e29604f9470"),
+                    PricingId = Guid.Parse("b8ab1d95-8acc-49ed-9cba-337207149b3e"),
+                    Content = "Advertizing your business for 6 months.",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
 
-                //this._context.PricingContents.Add(new PricingContent()
-                //{
-                //    Id = Guid.Parse(""),
-                //    PricingId = Guid.Parse(""),
-                //    Content = "",
-                //    CreatedAt = DateTime.UtcNow,
-                //    UpdatedAt = DateTime.UtcNow,
+                });
 
-                //});
 
-              
+
+                // Pricing //
+                this._context.Pricings.Add(
+                new Infrastructures.Domain.Models.Pricing()
+                {
+                    Id = Guid.Parse("43935dca-57e1-4793-824a-92a8626a4dea"),
+                    Title = "Pro",
+                    Month = 9,
+                    Price = 3299,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+
+                });
+
+                // 3 Pricing Content //
+
+                // 1
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("c7632014-06f9-48dc-a789-6c23fc0a5d86"),
+                    PricingId = Guid.Parse("43935dca-57e1-4793-824a-92a8626a4dea"),
+                    Content = "Create your virtual business and advertize by FIxit.PH",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+                //2
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("ab99563b-fce2-4b0e-9f9f-02254738cb44"),
+                    PricingId = Guid.Parse("43935dca-57e1-4793-824a-92a8626a4dea"),
+                    Content = "Create your own services and unli services ",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+
+                //3
+                this._context.PricingContents.Add(new PricingContent()
+                {
+                    Id = Guid.Parse("846c3b4d-c3ac-44f3-af19-fa77333e399a"),
+                    PricingId = Guid.Parse("43935dca-57e1-4793-824a-92a8626a4dea"),
+                    Content = "Advertizing your business for 9 months.",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                });
+
+
             }
             #endregion
             this._context.SaveChanges();

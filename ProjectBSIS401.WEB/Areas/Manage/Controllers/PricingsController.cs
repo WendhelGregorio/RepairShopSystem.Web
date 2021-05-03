@@ -38,7 +38,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 pageSize = 1;
             }
 
-            IQueryable<Pricing> priQuery = (IQueryable<Pricing>)this._context.Pricings.Include(p => p.PricingContents);
+            IQueryable<Pricing> priQuery = (IQueryable<Pricing>)this._context.Pricings.Include(p => p.PricingContents).OrderBy(p => p.UpdatedAt);
             if (string.IsNullOrEmpty(keyword) == false)
             {
                 priQuery = priQuery.Where(p => p.Title.Contains(keyword)

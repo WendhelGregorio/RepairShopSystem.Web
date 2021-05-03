@@ -9,7 +9,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 namespace ProjectBSIS401.WEB.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210427064643_init")]
+    [Migration("20210503005704_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
