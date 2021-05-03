@@ -927,6 +927,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                             Id = Guid.Parse("79b8b2ab-71af-4fe7-b0a3-b784c4d58f7b"),
                             UserId = Guid.Parse("65546B99-35EF-45AE-BF73-E92C6F416F01"),
                             ShopId = Guid.Parse("528aeca1-004b-4c28-a52a-bfc6ae23e5f6"),
+
                             UserName = "Goshen Jimenez costumer",
                             Address = "Lincoln ,Dinalupihan,Bataan",
                             ContactNumber = "1234566789",

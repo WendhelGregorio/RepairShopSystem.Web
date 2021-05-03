@@ -129,18 +129,23 @@
                                                             {
                                                                 count++;
                                                         <tr>
-                                                            <td>@count</td>
-                                                            <td>@bookings.ShopServiceName</td>
-                                                            <td>@bookings.ShopServicePrice.ToString("F")</td>
-                                                            <td>@bookings.ReserveStatus</td>
-                                                            <td>@bookings.UpdatedAt.ToString("MM/dd/yyyy")</td>
-                                                            @if (bookings.ReserveStatus == ReserveStatus.Confirm || bookings.ReserveStatus == ReserveStatus.Completed)
-                                                            {
-                                                            <td>
-                                                                <a href="~/shop/@bookings.ShopId" ><i class="fas fa-comment-o"></i></a>
 
-                                                            </td>
+                                                            @if (bookings.ShopServiceName != null)
+                                                            {
+                                                                <td>@count</td>
+                                                                <td>@bookings.ShopServiceName</td>
+                                                                <td>@bookings.ShopServicePrice.ToString("F")</td>
+                                                                <td>@bookings.ReserveStatus</td>
+                                                                <td>@bookings.UpdatedAt.ToString("MM/dd/yyyy")</td>
+                                                                @if (bookings.ReserveStatus == ReserveStatus.Confirm || bookings.ReserveStatus == ReserveStatus.Completed)
+                                                                {
+                                                                    <td>
+                                                                        <a href="~/shop/@bookings.ShopId"><i class="fas fa-comment-o"></i></a>
+
+                                                                    </td>
+                                                                }
                                                             }
+
 
                                                         </tr>
                                                             }

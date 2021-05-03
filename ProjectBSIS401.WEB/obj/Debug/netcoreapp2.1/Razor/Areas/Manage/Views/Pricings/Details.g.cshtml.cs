@@ -108,7 +108,7 @@ namespace AspNetCore
             WriteLiteral("\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(1084, 100, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65e01f093420472f93e9cc8a301127c2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "62d72fb8e6204e3398b99f25f0001046", async() => {
                 BeginContext(1176, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -144,7 +144,7 @@ AddHtmlAttributeValue("", 1165, Model.Id, 1165, 9, false);
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(1190, 73, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0c92bdd99f3e4744b3607ef30cfe3158", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aec2343fe84e4828a8ecc66c3ffabcc4", async() => {
                 BeginContext(1247, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();

@@ -95,7 +95,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                         <li><i class=""bx bx-chevron-right""></i> ");
             EndContext();
             BeginContext(781, 25, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c903180c49f847ab85013ca562d21a46", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2e26ea5761364861a87bc14767ac21af", async() => {
                 BeginContext(798, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -116,7 +116,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("</li>\r\n                        <li><i class=\"bx bx-chevron-right\"></i> ");
             EndContext();
             BeginContext(877, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "320244e350334944828fcd7156d22f68", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7fcf6973fbf8408baac249c2f9e325aa", async() => {
                 BeginContext(900, 8, true);
                 WriteLiteral("About us");
                 EndContext();
@@ -137,7 +137,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("</li>\r\n                        <li><i class=\"bx bx-chevron-right\"></i> ");
             EndContext();
             BeginContext(983, 41, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d52d00449980459a8876fdf609445df2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4dd73d3283e04ff8927c9948289687b6", async() => {
                 BeginContext(1012, 8, true);
                 WriteLiteral("Services");
                 EndContext();
@@ -167,7 +167,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n                <div class=\"col-lg-4 col-md-6 footer-newsletter\">\r\n                    <h4>Join Our Newsletter</h4>\r\n                    <p>Come and join us </p>\r\n                    ");
             EndContext();
             BeginContext(2094, 208, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a87104a269024f1496477c507c75a549", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ace924d60f4c4e2ab36e73a6a23ee047", async() => {
                 BeginContext(2124, 171, true);
                 WriteLiteral("\r\n                        <input type=\"email\" name=\"email\" disabled=\"disabled\" placeholder=\"Not working yet \"><input type=\"submit\" value=\"Subscribe\">\r\n                    ");
                 EndContext();

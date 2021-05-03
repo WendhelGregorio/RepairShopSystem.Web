@@ -81,7 +81,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n\r\n<div class=\"section-title mt-5\">\r\n    <h2>Create Shop</h2>\r\n</div>\r\n<div class=\"container\">\r\n    ");
             EndContext();
             BeginContext(212, 4261, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6841001b98a449019e0c3199700beffc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "80bf1af32c104f429e5789a12349f578", async() => {
                 BeginContext(260, 10, true);
                 WriteLiteral("\r\n        ");
                 EndContext();
@@ -194,7 +194,7 @@ WriteAttributeValue("", 721, Model.OwnerShop, 721, 16, false);
                 WriteLiteral("                            ");
                 EndContext();
                 BeginContext(3504, 51, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8604c96fe4f1498e92442a7b21e6f013", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b0eb638292e343d0b3ab604073d57bea", async() => {
                     BeginContext(3529, 17, false);
 #line 72 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\Views\Shop\CreateShop.cshtml"
                                                Write(option.ToString());
@@ -252,7 +252,7 @@ WriteAttributeValue("", 721, Model.OwnerShop, 721, 16, false);
                ");
                 EndContext();
                 BeginContext(4306, 64, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65f012ea8ebc4c59b90e707a2838f61a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "25cfe424cc5141c3b0361089bf39ba24", async() => {
                     BeginContext(4360, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

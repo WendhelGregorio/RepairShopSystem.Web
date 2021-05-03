@@ -79,12 +79,12 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("<br /><br /><br /><br />\r\n\r\n\r\n\r\n");
             EndContext();
             BeginContext(136, 626, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2194a688cb245568f4cecc7cd1ac722", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ebeb776b02b4a6b948543c30e45c1b6", async() => {
                 BeginContext(181, 43, true);
                 WriteLiteral("\r\n    <div class=\"verifyaccount\">\r\n        ");
                 EndContext();
                 BeginContext(224, 44, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "de9a0fa10cd04e06bc4b303588840e50", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "7e543147db304ab1a61b155de352d88c", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

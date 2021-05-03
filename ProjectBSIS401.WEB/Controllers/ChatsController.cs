@@ -146,11 +146,15 @@ namespace ProjectBSIS401.WEB.Controllers
         public IActionResult Find()
         {
             var users = this._context.Users.Where(x => x.Id != WebIDS.UserId)
-                .Include(x => x.Shops)
                 .ToList();
 
+            var user = this._context.Users.FirstOrDefault(u => u.Id != WebIDS.UserId);
+
+            var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id);
+
             return View(new FindViewModel
-            {
+            {   
+                Shop = shop,
                 Users = users
             });
         }

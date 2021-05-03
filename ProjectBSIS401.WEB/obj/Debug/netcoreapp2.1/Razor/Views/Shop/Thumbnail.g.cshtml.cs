@@ -83,7 +83,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n<br /><br /><br />\r\n<div class=\"section-title\">\r\n    <h2>Update Thumbnail</h2>\r\n</div>\r\n\r\n");
             EndContext();
             BeginContext(199, 70, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f7353e17c4274961be6abeb8edf6f1dd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a96f6378c15d499388c19493ecd4665d", async() => {
                 BeginContext(253, 12, true);
                 WriteLiteral("My Dashboard");
                 EndContext();
@@ -105,7 +105,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n<div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n        ");
             EndContext();
             BeginContext(326, 759, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "774896454a86477390def1529c04a70e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "89d60caf9203415081301308e2af35a0", async() => {
                 BeginContext(414, 90, true);
                 WriteLiteral("\r\n            <div class=\"form-group\">\r\n                <input type=\"hidden\" name=\"ShopId\"");
                 EndContext();
@@ -120,7 +120,7 @@ WriteAttributeValue("", 512, Model.ShopId, 512, 13, false);
                 WriteLiteral(" />\r\n                <label for=\"Thumbnail\">Thumbnail:</label><br />\r\n                ");
                 EndContext();
                 BeginContext(612, 123, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a73a70f8cd5c45bb8e4f3d6040e8386e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6f19987db84748d389a22e09aa9c124f", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

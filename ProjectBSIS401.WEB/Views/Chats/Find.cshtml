@@ -1,4 +1,5 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.chat.FindViewModel
+@using ProjectBSIS401.WEB.Infrastructures.Domain.Enums
 @{
     ViewData["Title"] = "Find";
 }
@@ -15,14 +16,17 @@
         <div class="row row-cols-3 align-items-stretch py-5 ">
             @foreach (var users in Model.Users)
             {
+               
                 <div class="d-flex flex-column mb-3">
                     <div class="card" style="width: 18rem;">
-                        <img src="~/image/shops/thumbnail/@users.Id/thumbnail.png" width="96" height="96" class="card-img-top" alt="...">
+                        <img src="~/myimages/user1.png"  class="card-img-top" alt="...">
                         <div class="card-body">
                             <a href="~/chats/create-private-room/@users.Id">@users.UserName<i class="fas fa-comment-alt"></i></a>
                         </div>
                     </div>
                 </div>
+                
+
 
             }
 

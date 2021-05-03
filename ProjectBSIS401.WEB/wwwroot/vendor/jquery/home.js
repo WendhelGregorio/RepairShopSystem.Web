@@ -43,7 +43,7 @@ var newChatId = document.getElementById("chatId");
 var newUserName = document.getElementById("userName");
 
 function appendMessage(content, time, date, userid) {
-    if (newCurrentUser == userid) {
+    if (currentUser == userid) {
 
         var outgoing_msg = document.createElement("div");
         outgoing_msg.classList.add("outgoing_msg");
