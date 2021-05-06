@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
@@ -74,6 +75,7 @@ namespace ProjectBSIS401.WEB.Controllers
             if (user != null)
             {
                 var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id);
                 if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
                 {
                     if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
@@ -117,14 +119,47 @@ namespace ProjectBSIS401.WEB.Controllers
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
 
                         WebUser.SetUser(user, roles, groups);
-                        WebIDS.SetUserId(user.Id,user.UserName, roles, groups);
+                        WebIDS.SetUserId(user.Id,user.UserName,user.EmailAddress, roles, groups);
                         WebIDS.SetAdminId(user.Id, roles, groups);
+
+                        //Send email login alert!
+                        this.EmailSendNow(
+                                    EmailLoginAlert(user.UserName),
+                                    model.EmailAddress,
+                                    user.UserName,
+                                    "Welcome To Fixit.PH"
+                        );
                         await this.SignIn();
 
 
                         return RedirectPermanent("~/manage/users");
                     }
-                    else if(user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.ShopAdmin && user.LoginStatus == LoginStatus.Active && shop.Id != null)
+                    {
+                        user.LoginStatus = LoginStatus.Active;
+                        user.LoginRetries = 0;
+                        this._context.Users.Update(user);
+                        this._context.SaveChanges();
+
+                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                        WebIDS.SetShopId(shop.Id);
+                        WebIDS.SetUserId(user.Id, user.UserName, user.EmailAddress, roles, groups);
+                        WebIDS.SetShopAdminId(user.Id, roles, groups);
+                        await this.SignIn();
+
+                        this.EmailSendNow(
+                                      EmailLoginAlert(user.UserName),
+                                      model.EmailAddress,
+                                      user.UserName,
+                                      "Welcome To Fixit.PH"
+                          );
+                        return RedirectPermanent("~/shop/my-dashboard");
+                    }
+
+                    else if(userRole.Role == Infrastructures.Domain.Enums.Role.User && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
                     {
                         user.LoginRetries = 0;
                         user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
@@ -139,25 +174,20 @@ namespace ProjectBSIS401.WEB.Controllers
                         //var shops = this._context.Shops.Where(s => ).Select(s => s.Id).ToList;
 
                         WebUser.SetUser(user, roles, groups);
-                        WebIDS.SetUserId(user.Id, user.UserName, roles, groups);
+                        WebIDS.SetUserId(user.Id, user.UserName,user.EmailAddress, roles, groups);
                         WebIDS.SetPublicUserId(user.Id, roles,groups);
+                        
+                        //Send email login alert!
+                        this.EmailSendNow(
+                                    EmailLoginAlert(user.UserName),
+                                    model.EmailAddress,
+                                    user.UserName,
+                                    "Welcome To Fixit.PH"
+                        );
                         await this.SignIn();
-                
-                        var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id && s.IsPublished == true);
-                        if (shop != null)
-                        {
-                            WebIDS.SetShopId(shop.Id);
-                            WebIDS.SetUserId(user.Id, user.UserName, roles, groups);
-                            WebIDS.SetShopAdminId(user.Id, roles, groups);
-                            await this.SignIn();
-                            return RedirectPermanent("~/shop/my-dashboard");
-                        }
-
-
-                          //return RedirectPermanent("~/account/update-profile/" + user.Id);
-                
+  
                         return RedirectPermanent("~/shop/index");
-                    }
+                    }    
                     else
                     {
                         user.LoginRetries = user.LoginRetries + 1;
@@ -196,12 +226,16 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("/account/sign-up")]
         public IActionResult SignUp()
         {
+            //ViewBag.ShopId = new SelectList(_context.Shops, "Id", "BusinessName");
+
             return View();
         }
 
         [HttpPost, Route("/account/sign-up")]
         public IActionResult SignUp(RegisterViewModel model)
         {
+            //ViewBag.ShopId = new SelectList(_context.Shops, "Id", "BusinessName", model.ShopId);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -266,23 +300,30 @@ namespace ProjectBSIS401.WEB.Controllers
 
         }
 
-
+        
         [HttpGet,Route("account/welcome")]
         public IActionResult Welcome()
         {
             return View();
         }
 
-
+        
         [HttpGet, Route("/account/verify")]
         public IActionResult Verify()
         {
             return View();
         }
+       
         [HttpPost, Route("/account/verify")]
         public IActionResult Verify(VerifyViewModel model)
         {
-            var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower() && u.RegistrationCode == model.RegistrationCode);
+            if(!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Verification code is required!");
+                return View(model);
+            }
+
+            var user = this._context.Users.FirstOrDefault(u => u.RegistrationCode == model.RegistrationCode);
             if (user != null)
             {
                 user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
@@ -291,7 +332,7 @@ namespace ProjectBSIS401.WEB.Controllers
                 this._context.SaveChanges();
 
 
-                return RedirectToAction("login");
+                return RedirectToAction("Welcome");
             }
 
             return View();
@@ -303,9 +344,6 @@ namespace ProjectBSIS401.WEB.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
-
-   
-
 
         [HttpGet, Route("account/forgot-password")]
         public IActionResult ForgotPassword()
@@ -325,9 +363,9 @@ namespace ProjectBSIS401.WEB.Controllers
 
             if (user != null)
             {
-                var newPassword = RandomString(8);
-                user.Password = BCryptHelper.HashPassword("", BCryptHelper.GenerateSalt(9));
-                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword;
+                var newPassword = RandomString(9);
+                user.Password = BCryptHelper.HashPassword(newPassword, BCryptHelper.GenerateSalt(9));
+                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
 
                 this._context.Users.Update(user);
                 this._context.SaveChanges();
@@ -353,6 +391,17 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("account/logout")]
         public async Task<IActionResult> Logout()
         {
+            if(WebIDS.UserId != null)
+            {
+                //Send email login alert!
+                this.EmailSendNow(
+                            EmailLogoutAlert(WebIDS.Name),
+                            WebIDS.EmailAddress,
+                            WebIDS.Name,
+                            " Thank you for visiting Fixit.PH"
+                );
+            }
+          
             await this.SignOut();
             return RedirectToAction("login");
         }
@@ -367,25 +416,29 @@ namespace ProjectBSIS401.WEB.Controllers
                 return RedirectToAction("~/account/login");
             
             }
-            return View();
+            return View(new ChangePasswordViewModel
+            {
+                UserId = user.Id
+            });
         }
 
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("account/change-password")]
         public IActionResult ChangePassword(ChangePasswordViewModel model)
         {
-            
-
-            if (model.NewPassword != model.ConfirmNewPassword)
+            if(!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "New Password does not match Confirm New Password");
+                ModelState.AddModelError("", "Invalid input!");
                 return View();
             }
 
+            if (model.NewPassword != model.ConfirmNewPassword)
+            {
+                ModelState.AddModelError("", "New Password does not match to Confirm New Password");
+                return View();
+            }
 
-            var user = this._context.Users.FirstOrDefault(u =>
-                    u.Id == WebUser.UserId);
-
+            var user = this._context.Users.FirstOrDefault(u =>u.Id == model.UserId);
             if (user != null)
             {
                 if (BCryptHelper.CheckPassword(model.OldPassword, user.Password) == false)
@@ -400,14 +453,28 @@ namespace ProjectBSIS401.WEB.Controllers
                 this._context.Users.Update(user);
                 this._context.SaveChanges();
 
-                return RedirectPermanent("/home/index");
+                this.EmailSendNow(
+                         ChangePasswordEmailTemplate(user.Password, user.UserName),
+                         user.EmailAddress,
+                         user.UserName,
+                         "Fixit.ph Website - Forgot Password"
+                );
+
+                return RedirectPermanent("Notify");
             }
 
             return View();
         }
 
+        [HttpGet, Route("/account/notify")]
+        public IActionResult Notify()
+        {
+            return View();
+        }
+
+
         [AllowAnonymous]
-        //[Authorize(Policy = "SignedIn")]
+        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/update-profile/{userId}")]
         public IActionResult UserUpdateProfile(Guid? userId)
         {
@@ -631,7 +698,11 @@ namespace ProjectBSIS401.WEB.Controllers
             WebUser.LastName = string.Empty;
             WebUser.UserId = null;
             WebUser.Roles = new List<Role>();
-            
+            WebIDS.UserId = Guid.Empty;
+            WebIDS.Name = string.Empty;
+            WebIDS.Roles = new List<Role>();
+            WebIDS.Groups = new List<Group>();
+            WebIDS.EmailAddress = string.Empty;
 
             HttpContext.Session.Clear();
         }
@@ -655,7 +726,7 @@ namespace ProjectBSIS401.WEB.Controllers
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, emailPassword),
-                Timeout = 20000
+                Timeout = 500000
             };
 
             var toAddress = new MailAddress(messageTo, messageName);
@@ -703,6 +774,37 @@ namespace ProjectBSIS401.WEB.Controllers
                     </tr>", recepientName, "Fixit.ph Website - Password Reset");
         }
 
+        private string ChangePasswordEmailTemplate(string password, string recepientName)
+        {
+            return EmailTemplateLayout(@"<tr>
+                        <td><h3 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px;'>Greetings from Fixit.ph!</h3></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0 30px 20px;text-align:center;'>
+                                You've change your password at " + DateTime.Now.ToString("") + @".<br />.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:20px 30px 0; text-align:center;'>
+                                <strong>Use this new password so you can login:</strong>
+                            </p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif;color:#FF9046; font-weight:700; font-size:32px; text-align:center; margin:0;'>
+                                " + password + @"
+                            </p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0 30px 20px;text-align:center;'>we notify you to make sure it was you.</p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:15px 30px 30px; text-align:center;'>
+                                <span style='font-size:12px; color:#999;'>
+                                    (Please do not reply this is a system generated email)
+                                </span>
+                            </p>
+                        </td>
+                    </tr>", recepientName, "Fixit.ph Website - Password Reset");
+        }
+
+
         private string WelcomeEmailTemplate(string registrationCode, string recepientName)
         {
             return EmailTemplateLayout(@"<tr>
@@ -746,6 +848,74 @@ namespace ProjectBSIS401.WEB.Controllers
                                     </td>
                                 </tr>
                                 " + message + @"
+                                <tr>
+                                    <td>
+                                        <h4 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px 30px 0;'>Kind Regards,</h4>
+                                        <p style='margin:0 30px 30px;'>CSM Bataan Apps Team</p>
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0; font-size:12px; color:#999; text-align:center;'>&copy; " + @DateTime.Now.Year + @" FIXIT.PH - DINALUPIHAN BATAAN | All Rights Reserved</p></td>         
+                                </tr>
+                        </table>
+                    </body>
+                    </html>";
+        }
+
+        private string EmailLoginAlert(string recepientName)
+        {
+            return @"<!doctype html>
+                        <html>
+                        <head>
+                            <meta charset='utf-8'>
+                            <title>" + recepientName + @"</title>
+                        </head>
+                        <body style='background:#DDD; margin:0; padding:20px 0;'>
+                            <a href='#' target='_blank'>
+                                <p style='margin:0 auto; width:600px;'><img src='~/image/webLogo/fixit.png' width='600' height='140' /></p>
+                            </a>
+                            <table style='background:#FFF; width:600px; margin:0 auto;'>
+                                <tr>
+                                    <td>
+                                        <h4 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px 30px 0;'>Dear <i>" + recepientName + @"</i>,</h4>
+                                    </td>
+                                </tr>
+                                    <p style='text-align:justify; margin-left:20px;'></p>Your Fixit Account was just signed in. Date of " + @DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + @". You're getting this email to make sure it was you.
+                                <tr>
+                                    <td>
+                                        <h4 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px 30px 0;'>Kind Regards,</h4>
+                                        <p style='margin:0 30px 30px;'>CSM Bataan Apps Team</p>
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0; font-size:12px; color:#999; text-align:center;'>&copy; " + @DateTime.Now.Year + @" FIXIT.PH - DINALUPIHAN BATAAN | All Rights Reserved</p></td>         
+                                </tr>
+                        </table>
+                    </body>
+                    </html>";
+        }
+
+        private string EmailLogoutAlert(string recepientName)
+        {
+            return @"<!doctype html>
+                        <html>
+                        <head>
+                            <meta charset='utf-8'>
+                            <title>" + recepientName + @"</title>
+                        </head>
+                        <body style='background:#DDD; margin:0; padding:20px 0;'>
+                            <a href='#' target='_blank'>
+                                <p style='margin:0 auto; width:600px;'><img src='~/image/webLogo/fixit.png' width='600' height='140' /></p>
+                            </a>
+                            <table style='background:#FFF; width:600px; margin:0 auto;'>
+                                <tr>
+                                    <td>
+                                        <h4 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px 30px 0;'>Dear <i>" + recepientName + @"</i>,</h4>
+                                    </td>
+                                </tr>
+                                    <p style='text-align:justify; margin-left:20px;'></p>Your Fixit Account was just signed out. Date of " + @DateTime.Now.ToString("MM/dd/yyyy h:mm tt") + @". You're getting this email to make sure it was you.
                                 <tr>
                                     <td>
                                         <h4 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px 30px 0;'>Kind Regards,</h4>

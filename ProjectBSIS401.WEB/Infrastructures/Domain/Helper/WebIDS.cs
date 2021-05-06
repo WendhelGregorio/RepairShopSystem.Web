@@ -10,6 +10,7 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
 {
     public static class WebIDS
     {
+  
         public static Guid? GetAdminUserId { get; set; }
 
         public static Guid? GetShopAdminId { get; set; }
@@ -29,6 +30,8 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
 
         public static string Name { get; set; }
 
+        public static string EmailAddress { get; set; }
+
         public static void SetRoomId(Guid Id)
         {
             RoomId = Id;
@@ -46,14 +49,16 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Helper
 
         }
 
-        public static void SetUserId(Guid? Id,string name, List<Role> roles, List<Group> groups)
+        public static void SetUserId(Guid? Id,string name, string emailAddress, List<Role> roles, List<Group> groups)
         {
-
+          
             UserId = Id;
             Roles = roles;
             Groups = groups;
             Name = name;
-           
+            EmailAddress = emailAddress;
+
+
         }
 
         public static void SetPublicUserId(Guid? Id, List<Role> roles, List<Group> groups)

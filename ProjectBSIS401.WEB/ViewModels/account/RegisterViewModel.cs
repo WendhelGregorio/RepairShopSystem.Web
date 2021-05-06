@@ -8,6 +8,8 @@ namespace ProjectBSIS401.WEB.ViewModels.account
 {
     public class RegisterViewModel
     {
+        public Guid? ShopId { get; set; }
+
         [Required(ErrorMessage = "First-name is required to register")]
         public string FirstName { get; set; }
 

@@ -15,7 +15,12 @@
             <div class="form-group">
                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
                 <label for="Thumbnail">Thumbnail:</label><br />
-                <img src="~/image/shops/thumbnail/@Model.ShopId/thumbnail.png" style="max-width:150px;max-height:150px;" alt="Thumbnail" /></br></br>
+                @if (Model.Shop.Thumbnail == true)
+                {
+                    <img src="~/image/shops/thumbnail/@Model.ShopId/thumbnail.png" style="max-width:150px;max-height:150px;" alt="Thumbnail" />
+
+                }
+                <img src="~/image/default/DefaultThumbnail.png" style="max-width:150px;max-height:150px;" alt="Thumbnail" />
                 <input type="file" class="form-control" name="thumbnail" />
                 @Html.ValidationSummary()
             </div>

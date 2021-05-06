@@ -99,8 +99,11 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                         UpdatedAt = DateTime.UtcNow,
                         IsPublished = true,
                         BusinessDescription = "we offer all the service !",
-                        Status = Infrastructures.Domain.Enums.Status.Active
-
+                        Status = Infrastructures.Domain.Enums.Status.Active,
+                        Banner = true,
+                        Logo = true,
+                        Thumbnail = true,
+                        
 
                     });
 
@@ -123,8 +126,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                          UpdatedAt = DateTime.UtcNow,
                          IsPublished = true,
                          BusinessDescription = "we offer all the service !",
-                         Status = Infrastructures.Domain.Enums.Status.Active
-
+                         Status = Infrastructures.Domain.Enums.Status.Active,
+                         Banner = true,
+                         Logo = true,
+                         Thumbnail = true,
 
                      });
 
@@ -146,7 +151,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                        UpdatedAt = DateTime.UtcNow,
                        IsPublished = true,
                        BusinessDescription = "we offer all the service !",
-                       Status = Infrastructures.Domain.Enums.Status.Active
+                       Status = Infrastructures.Domain.Enums.Status.Active,
+                       Banner = true,
+                       Logo = true,
+                       Thumbnail = true,
 
                    });
 
@@ -170,7 +178,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                      UpdatedAt = DateTime.UtcNow,
                      IsPublished = true,
                      BusinessDescription = "we offer all the service !",
-                     Status = Infrastructures.Domain.Enums.Status.Active
+                     Status = Infrastructures.Domain.Enums.Status.Active,
+                     Banner = true,
+                     Logo = true,
+                     Thumbnail = true,
 
                  });
 
@@ -192,7 +203,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                  UpdatedAt = DateTime.UtcNow,
                  IsPublished = true,
                  BusinessDescription = "we offer all the service !",
-                 Status = Infrastructures.Domain.Enums.Status.Active
+                 Status = Infrastructures.Domain.Enums.Status.Active,
+                 Banner = true,
+                 Logo = true,
+                 Thumbnail = true,
 
              });
 
@@ -214,7 +228,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 UpdatedAt = DateTime.UtcNow,
                 IsPublished = true,
                 BusinessDescription = "we offer all the service !",
-                Status = Infrastructures.Domain.Enums.Status.Active
+                Status = Infrastructures.Domain.Enums.Status.Active,
+                Banner = true,
+                Logo = true,
+                Thumbnail = true,
 
             });
 
@@ -237,7 +254,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                     UpdatedAt = DateTime.UtcNow,
                     IsPublished = true,
                     BusinessDescription = "we offer all the service !",
-                    Status = Infrastructures.Domain.Enums.Status.Active
+                    Status = Infrastructures.Domain.Enums.Status.Active,
+                    Banner = true,
+                    Logo = true,
+                    Thumbnail = true,
 
                 });
 
@@ -259,7 +279,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                     UpdatedAt = DateTime.UtcNow,
                     IsPublished = true,
                     BusinessDescription = "we offer all the service !",
-                    Status = Infrastructures.Domain.Enums.Status.Active
+                    Status = Infrastructures.Domain.Enums.Status.Active,
+                    Banner = true,
+                    Logo = true,
+                    Thumbnail = true,
 
                 });
 
@@ -281,7 +304,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                     UpdatedAt = DateTime.UtcNow,
                     IsPublished = true,
                     BusinessDescription = "we offer all the service !",
-                    Status = Infrastructures.Domain.Enums.Status.Active
+                    Status = Infrastructures.Domain.Enums.Status.Active,
+                    Banner = true,
+                    Logo = true,
+                    Thumbnail = true,
 
                 });
 
@@ -306,7 +332,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                     UpdatedAt = DateTime.UtcNow,
                     IsPublished = true,
                     BusinessDescription = "we offer all the service !",
-                    Status = Infrastructures.Domain.Enums.Status.Active
+                    Status = Infrastructures.Domain.Enums.Status.Active,
+                    Banner = true,
+                    Logo = true,
+                    Thumbnail = true,
 
                 });
 
@@ -338,6 +367,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                                  PhoneNumber = "09504145737",
                                  DateOfBirth = DateTime.Parse("06-23-1998"),
                                  UserName = "Wendhel Aton",
+                                 Thumbnail = true,
                              });
 
 
@@ -357,7 +387,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                              PhoneNumber = "123456789",
                              DateOfBirth = DateTime.Parse("06-23-1998"),
                              UserName = "Goshen Jimenez",
-                         });
+                             
+            });
 
                 this._context.Users.Add(
                           new Infrastructures.Domain.Models.User()
@@ -374,6 +405,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                               PhoneNumber = "09504145737",
                               DateOfBirth = DateTime.Parse("06-23-1998"),
                               UserName = "jake carlo renzo",
+                              
                           });
 
                 this._context.Users.Add(
@@ -539,6 +571,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                       PhoneNumber = "09504145737",
                       DateOfBirth = DateTime.Parse("06-23-1998"),
                       UserName = "Dog army",
+                      Thumbnail = true,
 
 
 

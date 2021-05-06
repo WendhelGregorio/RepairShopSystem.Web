@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Areas\Manage\Views\ShopServices\" />
     <Folder Include="SignalR\Models\" />
+    <Folder Include="wwwroot\image\user\" />
     <Folder Include="wwwroot\userprofile\users\" />
   </ItemGroup>
 

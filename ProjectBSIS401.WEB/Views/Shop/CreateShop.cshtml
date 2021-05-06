@@ -1,6 +1,6 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.shop.CreateShopViewModel
 @{
-    ViewData["Title"] = "CreateShop";
+    Layout = "~/views/shared/_secondaryLayout.cshtml";
 }
 
 
@@ -11,7 +11,7 @@
 <div class="container">
     <form method="post" action="~/shop/shop-create">
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary()
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="alert-danger">
             <h4>
                 @ViewBag.Error
@@ -20,20 +20,20 @@
         <div class="form-group">
             <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
             <span class="ml-5 text-success">Owner:</span>
-            <input type="text" class="form-control" id="ownerShop" name="OwnerShop" value="@Model.OwnerShop" disabled="disabled"/>
+            <input type="text" class="form-control" id="ownerShop" name="OwnerShop" value="@Model.OwnerShop"/>
         </div>
         <div class="row">
             <div class="col-6">
                 <label for="businessName" class="control-label ml-5 mr-3  mb-1" id="">Shop Name</label>
                 <input type="text" class="form-control" id="businessName" name="BusinessName" aria-describedby="businessNameHelp" placeholder="Enter shop name">
             </div>
-          
+
             <div class="col-6">
                 <label for="phonenumber" class="control-label ml-5 mr-3 mb-1">Phone Number</label>
                 <input type="text" class="form-control" id="phoneNumber" name="BusinessContact" aria-describedby="phoneNumberHelp" placeholder="Enter shop phone Number">
 
             </div>
-            
+
         </div>
 
         <div class="row">
@@ -49,7 +49,7 @@
 
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-4">
                 <label for="openAt" class="control-label ml-5 mr-3  mb-1">Open Time</label>
@@ -84,17 +84,59 @@
             </div>
         </div>
         <br />
-       <div class="row">
-           <div class="col-4"> </div>
-           <div class="col-4">
-               <button type="submit" class="btn btn-lg btn-primary">Submit</button>
-               <a href="~/home/index" class="btn btn-lg  btn-danger">Cancel</a>
-           </div>
-           <div class="col-4">
+        <div class="row">
+            <div class="col-4"> </div>
+            <div class="col-4">
+                <button type="submit" id="submit" class="btn btn-lg btn-primary">Submit</button>
+                <a href="~/home/index" class="btn btn-lg  btn-danger">Cancel</a>
+            </div>
+            <div class="col-4">
 
-           </div>
-       </div>
- 
+            </div>
+        </div>
+
     </form>
 
 </div>
+
+
+<script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submit").attr('disabled', 'disabled');
+
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#submit").attr('disabled', 'disabled');
+            // Validating Fields
+            var businessName = $("#businessName").val();
+            var phoneNumber = $("#phoneNumber").val();
+            var businessEmailAddress = $("#businessEmailAddress").val();
+            var businessLocation = $("#businessLocation").val();
+            var openAt = $("#openAt").val();
+            var closeAt = $("#closeAt").val();
+            var businessDescription = $("#businessDescription").val();
+          
+            if (!(businessName == "" || phoneNumber == "" || businessEmailAddress == "" || businessLocation == "" || openAt == "" || closeAt == "" || businessDescription == "")) {
+
+                // To Enable Submit Button
+                $("#submit").removeAttr('disabled');
+                $("#submit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
+
+            }
+        });
+        // On Click Of Submit Button
+        $("#submit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+
+</script>

@@ -9,7 +9,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 namespace ProjectBSIS401.WEB.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210503005704_init")]
+    [Migration("20210506033415_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -361,6 +361,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Banner");
+
                     b.Property<Guid?>("BookingsId");
 
                     b.Property<string>("BusinessContact");
@@ -392,6 +394,8 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<bool>("LikesEnabled");
 
+                    b.Property<bool>("Logo");
+
                     b.Property<string>("OpenAt");
 
                     b.Property<string>("OwnerShop");
@@ -403,6 +407,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<Guid?>("ShopServicesId");
 
                     b.Property<int>("Status");
+
+                    b.Property<bool>("Thumbnail");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -474,6 +480,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("RegistrationCode");
+
+                    b.Property<bool>("Thumbnail");
 
                     b.Property<DateTime>("UpdatedAt");
 

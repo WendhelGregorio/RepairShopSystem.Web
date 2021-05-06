@@ -29,17 +29,11 @@
                         <li class="drop-down">
                             <a href="">Account</a>
                             <ul>
-                                <li class="drop-down">
-                                    <a href="#">Settings</a>
-                                    <ul>
-
-                                        <li><a class="dropdown-item" href="~/chats/index">Chat</a></li>
-                                        <li><a class="dropdown-item" href="~/shop/shop-create/@WebIDS.GetPublicUserId">Create Shop</a></li>
-                                        <li><a class="dropdown-item" href="~/account/profile/@WebIDS.GetPublicUserId">Profile</a></li>
-                                        <li><a class="dropdown-item" href="~/account/change-password/@WebIDS.GetPublicUserId">Change Password</a></li>
-                                        <li><a class="dropdown-item" href="~/account/logout">Logout</a></li>
-                                    </ul>
-                                </li>
+                                <li><a class="dropdown-item" href="~/chats/index">Chat</a></li>
+                                <li><a class="dropdown-item" href="~/shop/shop-create/@WebIDS.GetPublicUserId">Create Shop</a></li>
+                                <li><a class="dropdown-item" href="~/account/profile/@WebIDS.GetPublicUserId">Profile</a></li>
+                                <li><a class="dropdown-item" href="~/account/change-password/@WebIDS.GetPublicUserId">Change your password</a></li>
+                                <li><a class="dropdown-item" href="~/account/logout">Logout</a></li>
                             </ul>
                         </li>
 
@@ -51,10 +45,19 @@
 
             </ul>
         </nav><!-- .nav-menu -->
-
+        <div class="text-sm-center"></div>
    
     </div>
 </header><!-- End Header -->
 
 
 
+<style>
+    #header {
+        border-bottom: 6px solid transparent;
+        -moz-border-image: -moz-linear-gradient(top, #BA5D08 0%, #A22216 100%);
+        -webkit-border-image: -webkit-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+        border-image: linear-gradient(to bottom, #BA5D08 0%, #A22216 100%);
+        border-image-slice: 1;
+    }
+</style>

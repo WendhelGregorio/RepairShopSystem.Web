@@ -198,7 +198,72 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
 
-       
+
+        [Authorize(Policy = "SignedIn")]
+        [HttpGet, Route("manage/users/change-password/{userId}")]
+        public IActionResult ChangePassword(Guid? userId)
+        {
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return RedirectToAction("~/account/login");
+
+            }
+            return View(new ChangePasswordViewModel
+            {
+                UserId = user.Id
+            });
+        }
+
+        [Authorize(Policy = "SignedIn")]
+        [HttpPost, Route("manage/users/change-password")]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Invalid input!");
+                return View();
+            }
+
+            if (model.NewPassword != model.ConfirmNewPassword)
+            {
+                ModelState.AddModelError("", "New Password does not match to Confirm New Password");
+                return View();
+            }
+
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            if (user != null)
+            {
+                if (BCryptHelper.CheckPassword(model.OldPassword, user.Password) == false)
+                {
+                    ModelState.AddModelError("", "Incorrect old Password.");
+                    return View();
+                }
+
+                user.Password = BCryptHelper.HashPassword(model.NewPassword, BCryptHelper.GenerateSalt(8));
+                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+
+                this._context.Users.Update(user);
+                this._context.SaveChanges();
+
+                this.EmailSendNow(
+                         ChangePasswordEmailTemplate(user.Password, user.UserName),
+                         user.EmailAddress,
+                         user.UserName,
+                         "Fixit.ph Website - Forgot Password"
+                );
+
+                return RedirectPermanent("Notify");
+            }
+
+            return View();
+        }
+
+        [HttpGet, Route("manage/users/notify")]
+        public IActionResult Notify()
+        {
+            return View();
+        }
 
         [Authorize(Policy = "AuthorizeAdmin")]
         [HttpGet, Route("manage/users/delete/{userId}")]
@@ -256,7 +321,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 );
             }
 
-            return RedirectToAction("create");
+            return RedirectToAction("Profile");
         }
 
         [Authorize(Policy = "AuthorizeAdmin")]
@@ -277,7 +342,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 this._context.SaveChanges();
             }
 
-            return RedirectToAction("index");
+            return RedirectToAction("Profile");
         }
 
 
@@ -285,7 +350,8 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
         [HttpGet, Route("manage/users/update-thumbnail/{userId}")]
         public IActionResult Thumbnail(Guid? userId)
         {
-            return View(new ThumbnailViewModel() { UserId = userId });
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            return View(new ThumbnailViewModel() { UserId = userId, User = user });
         }
 
 
@@ -293,6 +359,7 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
         [HttpPost, Route("manage/users/update-thumbnail")]
         public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
         {
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             //Check file size of the uploaded thumbnail
             //reject if the file is greater than 2mb
             var fileSize = model.Thumbnail.Length;
@@ -331,6 +398,10 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                     image.Save(filePath);
                 }
             }
+            user.Thumbnail = true;
+            this._context.Users.Update(user);
+            this._context.SaveChanges();
+
             return RedirectToAction("Profile", new { UserId = model.UserId });
         }
 
@@ -388,6 +459,35 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
                 Body = body,
                 IsBodyHtml = true
             });
+        }
+        private string ChangePasswordEmailTemplate(string password, string recepientName)
+        {
+            return EmailTemplateLayout(@"<tr>
+                        <td><h3 style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:30px;'>Greetings from Fixit.ph!</h3></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0 30px 20px;text-align:center;'>
+                                You've change your password at " + DateTime.Now.ToString("") + @".<br />.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:20px 30px 0; text-align:center;'>
+                                <strong>Use this new password so you can login:</strong>
+                            </p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif;color:#FF9046; font-weight:700; font-size:32px; text-align:center; margin:0;'>
+                                " + password + @"
+                            </p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:0 30px 20px;text-align:center;'>we notify you to make sure it was you.</p>
+                            <p style='font-family:Segoe, Segoe UI, Arial, sans-serif; margin:15px 30px 30px; text-align:center;'>
+                                <span style='font-size:12px; color:#999;'>
+                                    (Please do not reply this is a system generated email)
+                                </span>
+                            </p>
+                        </td>
+                    </tr>", recepientName, "Fixit.ph Website - Password Reset");
         }
 
         private string ResetPasswordEmailTemplate(string password, string recepientName)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -38,7 +39,7 @@ namespace ProjectBSIS401.WEB.Controllers
         }
 
 
-        //foreach shop can access this action.
+        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("booking/book-costumer/{shopId}/{userId}/{shopServiceId}")]
         public IActionResult BookUser(Guid? shopId,Guid? userId,Guid? shopServiceId)
         {
@@ -73,7 +74,7 @@ namespace ProjectBSIS401.WEB.Controllers
                 
             });
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("booking/book-costumer")]
         public IActionResult BookUser(BookingViewModel model)
         {
@@ -134,6 +135,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return Redirect("~/booking/book-review/" + WebIDS.GetBookingId);
 
         }
+        [Authorize(Policy = "SignedIn")]
         [HttpGet,Route("/booking/book-review/{bookingId}")]
         public IActionResult BookReview(Guid? bookingId)
         {
@@ -157,7 +159,7 @@ namespace ProjectBSIS401.WEB.Controllers
 
             });
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet,Route("booking/details/{bookingId}")]
         public IActionResult Details(Guid? bookingId)
         {
@@ -170,6 +172,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return View(booking);
         }
 
+        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("booking/delete-user-booking/{bookingId}/{shopId}")]
         public IActionResult Delete(Guid? bookingId, Guid? shopId)
         {
@@ -185,7 +188,7 @@ namespace ProjectBSIS401.WEB.Controllers
             //return RedirectToAction("index");
         }
 
-
+        [Authorize(Policy = "SignedIn")]
         [HttpPost("/booking/change-status")]
         public async Task<IActionResult> ChangeStatus(ChangeStatusViewModel model)
         {
@@ -205,6 +208,7 @@ namespace ProjectBSIS401.WEB.Controllers
             return RedirectPermanent("~/shop/my-dashboard");
         }
 
+        [Authorize(Policy = "SignedIn")]
         [HttpPost("/booking/change-payment-status")]
         public async Task<IActionResult> PaymentChangeStatus(PaymentChangeStatusViewModel model)
         {

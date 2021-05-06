@@ -15,7 +15,12 @@
             <div class="form-group">
                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
                 <label for="Logo">Logo:</label><br />
-                <img src="~/image/shops/logo/@Model.ShopId/logo.png" style="max-width:200px;max-height:200px;" alt="Logo" /></br></br>
+                @if (Model.Shop.Logo == true)
+                {
+                    <img src="~/image/shops/logo/@Model.ShopId/logo.png" style="max-width:200px;max-height:200px;" alt="Logo" />
+
+                }
+                <img src="~/image/default/DefaultLogo.jpg" style="max-width:150px;max-height:150px;" alt="Thumbnail" />
                 <input type="file" class="form-control" name="logo" />
                 @Html.ValidationSummary()
             </div>

@@ -7,6 +7,7 @@
     Layout = null;
     Layout = "~/Views/Shared/_ShopPartialNav.cshtml";
 }
+
 <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="~/style/simple-sidebar.css" rel="stylesheet" />
 
@@ -14,14 +15,23 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <h1 class="logo me-auto float-lg-start"><a href="~/shop/update-logo/@Model.Shop.Id"><img src="~/image/shops/logo/@Model.Shop.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8  ; " /></a></h1>
+        @if (Model.Shop.Logo == true)
+        {
+            <h1 class="logo me-auto float-lg-start"><a href="~/shop/update-logo/@Model.Shop.Id"><img src="~/image/shops/logo/@Model.Shop.Id/logo.png" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8  ; " /></a></h1>
+
+        }
+        else
+        {
+            <h1 class="logo me-auto float-lg-start"><a href="~/shop/update-logo/@Model.Shop.Id"><img src="~/image/default/DefaultLogo.jpg" style="width:75px; height:75px;border-radius: 50%; border: 1px solid #9fc0d8  ; " /></a></h1>
+
+        }
         <div class="sidebar-heading">&nbsp;@Model.Shop.BusinessName</div>
         <div class="list-group list-group-flush">
             <h5 class="text-black-50"><i class="fas fa-hands"></i>&nbsp;Service</h5>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="~/shop-services/my-services/@Model.Shop.Id" style="text-decoration:none; color:black">My Service</a>
-                    <span class="badge bg-primary rounded-pill">@Model.serviceCount</span>
+                    @*<span class="badge bg-primary rounded-pill">@Model.serviceCount</span>*@
                 </li>
 
 
@@ -31,37 +41,37 @@
 
             </ul>
             @*<h5 class="text-black-50"><i class="fas fa-chart-line"></i>&nbsp;Data</h5>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Business Insights   <span class="badge bg-primary rounded-pill"></span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        My Costumers
-                        <span class="badge bg-primary rounded-pill">@Model.costumerCount</span>
-                    </li>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Business Insights   <span class="badge bg-primary rounded-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    My Costumers
+                    <span class="badge bg-primary rounded-pill">@Model.costumerCount</span>
+                </li>
 
-                </ul>*@
+            </ul>*@
             <h5 class="text-black-50"><i class="fas fa-home"></i>&nbsp;Shop</h5>
             <ul class="list-group">
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                        Shop Feedback   <span class="badge bg-primary rounded-pill">@Model.Count</span>
-                    </li>*@
+                    Shop Feedback   <span class="badge bg-primary rounded-pill">@Model.Count</span>
+                </li>*@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="~/shop/shop-update-profile/@Model.Shop.Id" style="text-decoration:none; color:black">Shop Update Profile</a>
                     <span class="badge bg-primary rounded-pill"></span>
                 </li>
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                        My Reports
-                        <span class="badge bg-primary rounded-pill"></span>
-                    </li>*@
+                    My Reports
+                    <span class="badge bg-primary rounded-pill"></span>
+                </li>*@
 
 
             </ul>
             <h5 class="text-black-50"><i class="fas fa-comments"></i>&nbsp;Costumer-Service</h5>
             <ul class="list-group">
                 @*<li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback Modal</a>
-                    </li>*@
+                    <a href="#" style="text-decoration:none; color:black;" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback Modal</a>
+                </li>*@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a style="text-decoration:none; color:black;" href="~/shop/my-chat">My Chat</a>
                     <span class="badge bg-primary rounded-pill"></span>
@@ -88,7 +98,16 @@
         </nav>
 
         <div class="container-fluid">
-            <a href="~/shop/update-banner/@Model.Shop.Id" class="img-hover"><img src="~/image/shops/banner/@Model.Shop.Id/banner.png " style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
+            @if (Model.Shop.Banner == true)
+            {
+                <a href="~/shop/update-banner/@Model.Shop.Id" class="img-hover"><img src="~/image/shops/banner/@Model.Shop.Id/banner.png " style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
+
+            }
+            else
+            {
+                <a href="~/shop/update-banner/@Model.Shop.Id" class="img-hover"><img src="~/image/default/DefaultBanner.png" style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
+
+            }
             <hr />
             <button type="button" id="btnToggle" class="btn btn-primary"><i id="icon" class="fas fa-toggle-on"></i></button>
             <div class="table-responsive">
@@ -132,7 +151,7 @@
 
                 @if (Model.BookingsPage.Items.Count > 0)
                 {
-                    
+
 
                     <table id="costumerList" class="table table-borderless table-striped table-hover">
                         <thead>

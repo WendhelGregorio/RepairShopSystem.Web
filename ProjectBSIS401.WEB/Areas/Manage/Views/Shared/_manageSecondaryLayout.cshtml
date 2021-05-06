@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@ViewData["Title"] - ProjectBSIS401.WEB</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!--FontAwesome-->
+    <link href="~/fontawesome/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="~/style/style.css" rel="stylesheet">
+    <!-- My own Style-->
+    <link href="~/style/MyStyleSheet.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/style/simple-sidebar.css" rel="stylesheet">
+
+    <link href="~/vendor/jquery/jquery-ui-1.12/" />
+    <script src="~/vendor/jquery/home.js"></script>
+
+    <!-- Noty -->
+    <link href="~/vendor/noty/noty.css" rel="stylesheet" type="text/css" />
+    <link href="~/vendor/noty/themes/metroui.css" rel="stylesheet" type="text/css" />
+    <script src="~/vendor/noty/noty.min.js"></script>
+    <style>
+        .noty_bar {
+            z-index: 1000;
+            background-color: beige;
+        }
+    </style>
+
+</head>
+<body>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+  
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+    <script src="~/vendor/jquery/jquery-ui-1.12/jquery-ui.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/fontawesome/js/all.min.js"></script>
+    <script src="~/vendor/noty/noty.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/vendor/jquery/home.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/main/main.js"></script>
+
+
+    @RenderSection("Scripts", false)
+
+
+</body>
+</html>

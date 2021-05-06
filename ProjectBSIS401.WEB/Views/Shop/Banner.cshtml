@@ -14,8 +14,14 @@
         <form action="~/shop/update-banner" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="ShopId" value="@Model.ShopId" />
-                <label for="Banner">Banner:</label><br />
-                <img src="~/image/shops/banner/@Model.ShopId/banner.png" style="max-width:750px;max-height:300px;" alt="Banner" /></br></br>
+                <label for="Banner">Banner:</label>
+                <br />
+                @if (Model.Shop.Banner == true)
+                {
+                    <img src="~/image/shops/banner/@Model.ShopId/banner.png" style="max-width:750px;max-height:300px;" alt="Banner" />
+
+                }
+                <img src="~/image/default/DefaultBanner.png" style="max-width:750px;max-height:300px;" alt="Banner" />
                 <input type="file" class="form-control" name="banner" />
                 @Html.ValidationSummary()
             </div>

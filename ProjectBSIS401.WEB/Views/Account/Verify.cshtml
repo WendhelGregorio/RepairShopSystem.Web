@@ -6,24 +6,54 @@
 
 
 
-<form method="post" action="/account/verify">
-    <div class="verifyaccount">
-        <img src="~/myimages/logotransparent.png" />
-        <h3>Verify Account</h3>
+
+<div class="verifyaccount">
+    <img src="~/myimages/logotransparent.png" />
+    <h3>Verify Account</h3>
+    <form method="post" action="~/account/verify">
+        <div asp-validation-summary="All" class="text-danger text-center"></div>
         <div class="form-group">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
         </div>
-        <p>Please verify your account first.Check your email address to get the code.</p>
-        <input type="email" name="EmailAddress" placeholder="Email address" />
-        <input type="text" name="RegistrationCode" placeholder="Code" />
+        <p>Please verify your account first. You'll recieve an verification code thru email.</p>
+        <input type="text" id="registrationCode" name="RegistrationCode" placeholder="Code" />
+        <div class="form-group">
+            <input class="btn btn-primary" id="submit" type="submit" value="Save Changes" />
+        </div>
+    </form>
+</div>
 
-        <button type="submit" value="Verify">Submit</button>
-    </div>
+<script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submit").attr('disabled', 'disabled');
 
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#submit").attr('disabled', 'disabled');
+            // Validating Fields
+            var registrationCode = $("#registrationCode").val();
 
-</form>
+            if (!(registrationCode == "")) {
 
-@*
+                // To Enable Submit Button
+                $("#submit").removeAttr('disabled');
+                $("#submit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
 
-    <button type="submit" value="Verify">Verify</button>*@
+            }
+        });
+        // On Click Of Submit Button
+        $("#submit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+</script>

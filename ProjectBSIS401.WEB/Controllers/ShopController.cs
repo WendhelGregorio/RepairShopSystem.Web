@@ -82,6 +82,7 @@ namespace ProjectBSIS401.WEB.Controllers
                businessType = businessType
             });
         }
+        [Authorize(Policy = "SignedIn")]
         [HttpGet("shop/{shopId}")]
         public IActionResult Shop(Guid? shopId)
         {
@@ -146,21 +147,20 @@ namespace ProjectBSIS401.WEB.Controllers
             return NotFound();
         }
 
+
         [HttpGet, Route("shop/shop-items/{shopId}")]
         public IActionResult ShopItems(Guid? shopId)
         {
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
-            //var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
-            var user = this._context.Users.FirstOrDefault(u => u.Id == WebIDS.GetPublicUserId);
             var shopServices = this._context.ShopServices.Where(u => u.ShopId == shop.Id).ToList();
+         
             if (shop == null)
             {
-
-                return View();
-            }
-            if(shopServices == null)
-            {
-                return Redirect("~/shop/index");
+                if (shopServices == null)
+                {
+                    return Redirect("~/shop/index");
+                }
+                
             }
 
             return View(new ShopItemsViewModel {
@@ -168,7 +168,6 @@ namespace ProjectBSIS401.WEB.Controllers
                 ShopServices = shopServices,
                 ShopId = shopId,
               
-                
             });
         }
 
@@ -213,9 +212,20 @@ namespace ProjectBSIS401.WEB.Controllers
             {
                 return View(model);
             }
-            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId && u.UserName == model.OwnerShop);
-            if (user == null)
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            var userRole = this._context.UserRoles.FirstOrDefault(u => u.UserId == user.Id);
+            if(userRole.Role != Role.ShopAdmin)
             {
+                this._context.UserRoles.Add(new UserRole()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = user.Id.Value,
+                    Role = Infrastructures.Domain.Enums.Role.ShopAdmin
+
+                });
+
+                if (user != null)
+                {
                     Shop shop = new Shop()
                     {
 
@@ -231,19 +241,26 @@ namespace ProjectBSIS401.WEB.Controllers
                         Status = Infrastructures.Domain.Enums.Status.Active,
                         BusinessDescription = model.BusinessDescription,
                         OwnerShop = model.OwnerShop,
+                        IsPublished = true,
 
                     };
+
+                   
                     this._context.Shops.Add(shop);
-                    this._context.SaveChanges();     
+                    this._context.SaveChanges();
+                }
+               
             }
-            else
-            {
-                ViewBag.Error = "You already have shop";
-                return View("~/shop/shop-create/" + model.UserId);
-            }
-            return View(model);
+           
+            return RedirectToAction("Welcome");
         }
 
+
+        [HttpGet,Route("shop/welcome")]
+        public IActionResult Welcome()
+        {
+            return View();
+        }
 
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("shop/my-dashboard")]
@@ -284,54 +301,22 @@ namespace ProjectBSIS401.WEB.Controllers
             bookResult.PageIndex = pageIndex;
             bookResult.Keyword = keyword;
 
-           
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == WebIDS.GetShopId);
-
-            var booking = this._context.Bookings.Where(b => b.ShopId == shop.Id)
-                                                .OrderByDescending(b => b.UpdatedAt);
-
-            var bookId = this._context.Bookings.FirstOrDefault(b => b.ShopId == shop.Id);
-
             var shopServices = this._context.ShopServices.Where(ss => ss.ShopId == shop.Id)
                                                          .OrderByDescending(ss => ss.UpdatedAt)
                                                          .ToList();
 
-
-            var shopFeedbacks = this._context.FeedBacks.Where(s => s.ShopId == shop.Id)
-                                                       .OrderByDescending(s => s.UpdatedAt)
-                                                       .ToList();
-
-            int count = shopFeedbacks.Count();
-            int serviceCount = shopServices.Count();
-            int costumerCounts = booking.Count();
-            if (shop == null)
-            {
-                return NotFound();
-            }
-            if(booking == null)
-            {
-                return NotFound();
-            }
-            if(shopServices == null)
-            {
-                return NotFound();
-            }
             return View(new ShopHomeViewModel
             {
                 BookingsPage = bookResult,
                 ReserveStatus = reserveStatus,
-
-                BookingId = bookId.Id,
-                ShopServices = shopServices,
+                ShopServices = (shopServices != null ? shopServices : null),
                 Shop = shop,
-                Bookings = booking.ToList(),
-                Count = count,
-                serviceCount = serviceCount,
-                costumerCount = costumerCounts
+
             });
             
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet,Route("/shop/profile/{shopId}")]
         public IActionResult Profile(Guid? shopId)
         {
@@ -348,13 +333,13 @@ namespace ProjectBSIS401.WEB.Controllers
                 
             });
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet,Route("/shop/business-insight")]
         public IActionResult BusinessInsight()
         {
             return View();
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet,Route("/shop/my-chat")]
         public IActionResult MyChat()
         {
@@ -485,12 +470,15 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("/shop/update-banner/{shopId}")]
         public IActionResult Banner(Guid? shopId)
         {
-            return View(new BannerImageViewModel() { ShopId = shopId });
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            return View(new BannerImageViewModel() { ShopId = shopId, Shop = shop });
         }
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/shop/update-banner")]
         public async Task<IActionResult> Banner(BannerImageViewModel model)
         {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == model.ShopId);
+
             var fileSize = model.Banner.Length;
             if ((fileSize / 1048576.0) > 5)
             {
@@ -517,6 +505,11 @@ namespace ProjectBSIS401.WEB.Controllers
                     image.Save(filePath);
                 }
             }
+
+            shop.Banner = true;
+            this._context.Shops.Update(shop);
+            this._context.SaveChanges();
+
             return RedirectToAction("Banner", new { ShopId = model.ShopId });
         }
 
@@ -542,12 +535,15 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("/shop/shop-update-thumbnail/{shopId}")]
         public IActionResult Thumbnail(Guid? shopId)
         {
-            return View(new ThumbnailViewModel() { ShopId = shopId });
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            return View(new ThumbnailViewModel() { ShopId = shopId, Shop = shop});
         }
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/shop/shop-update-thumbnail")]
         public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
         {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == model.ShopId);
+
             var fileSize = model.Thumbnail.Length;
             if ((fileSize / 1048576.0) > 2)
             {
@@ -574,6 +570,11 @@ namespace ProjectBSIS401.WEB.Controllers
                     image.Save(filePath);
                 }
             }
+
+            shop.Thumbnail = true;
+            this._context.Shops.Update(shop);
+            this._context.SaveChanges();
+
             return RedirectToAction("Thumbnail", new { ShopId = model.ShopId });
         }
 
@@ -582,12 +583,15 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("/shop/update-logo/{shopId}")]
         public IActionResult Logo(Guid? shopId)
         {
-            return View(new LogoImageViewModel() { ShopId = shopId });
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
+            return View(new LogoImageViewModel() { ShopId = shopId, Shop = shop });
         }
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/shop/update-logo")]
         public async Task<IActionResult> Logo(LogoImageViewModel model)
         {
+            var shop = this._context.Shops.FirstOrDefault(s => s.Id == model.ShopId);
+
             var fileSize = model.Logo.Length;
             if ((fileSize / 1048576.0) > 3)
             {
@@ -614,6 +618,11 @@ namespace ProjectBSIS401.WEB.Controllers
                     image.Save(filePath);
                 }
             }
+
+            shop.Logo = true;
+            this._context.Shops.Update(shop);
+            this._context.SaveChanges();
+
             return RedirectToAction("Logo", new { ShopId = model.ShopId });
         }
 

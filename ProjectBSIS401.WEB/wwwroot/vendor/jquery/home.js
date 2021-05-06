@@ -175,28 +175,48 @@ function Send(obj) {
 
 function getCategories(type) {
     $.get("api/categories-per-type/" + type, function (data, status) {
-        var template = `
-                         <div class='post col-md-4'>
+
+        var banner = "/image/shops/banner/#newID#/banner.png";
+        var defaultBanner = "/image/default/DefaultBanner.png";
+
+        var image = (data.banner ? banner : defaultBanner);
+        var template =  `
+                         <div class='col-md-4'>
                             <div class='post-thumbnail'>
-                            <img src="image/shops/banner/#ID#/banner.png" class="img-fluid" style="width:336px;height:252px;border:2px solid gray;" alt="banner">
-                            <a href='shop/shop-items/#SHOPID#'>#SHOPNAME#</a>
+                            <img src='#IMAGE#' class="img-fluid" style="width:336px;height:252px;border:6px solid #08BA9E; border-right:6px solid #08BA9E;" alt="banner">
+                            <div class='text-center'>
+                                <a href='shop/shop-items/#SHOPID#'>
+                                    <h2 class='m-1'>#SHOPNAME#</h2>
+                                </a>
+                            </div>
                             </div>
                             <div class='post-details'>
-                                <div class='post-meta d-flex justify-content-between'>  
+                                <div class='text-sm-center text-muted' > 
+                                     <p class=''>#DESCRIPTION#</p>
+                                </div> 
+
+                               <hr>
+                               <div class='text-sm-center'>  
                                     <div class='location'>#SHOPLOCATION#</div>
                                 </div>
-                                <div class="col">
-                                <label>Open: #OPENAT#</label>
-                                <label>Close: #CLOSEAT#</label>
+                                <hr>
+                                <div class='row m-2'>
+                                    <div class="col">
+                                        <small>Open: #OPENAT#</small>
+                                    </div>
+                                    <div class="col">
+                                         <small>Close: #CLOSEAT#</small>
+                                    </div>
                                 </div>
-                                <p class='text-muted'>#DESCRIPTION#</p>
+                               
+                               
                             </div>
                         </div>
                         `;
         var markup = "";
 
         $.each(data, function (index, categories) {
-            markup = markup + template.replace("#ID#", categories.id).replace("#SHOPID#", categories.id).replace("#SHOPNAME#", categories.businessName).replace("#SHOPLOCATION#", categories.businessLocation).replace("#BUSINESSTYPE#", categories.businessType).replace("#OPENAT#", categories.openAt).replace("#CLOSEAT#", categories.closeAt).replace("#DESCRIPTION#", categories.businessDescription);
+            markup = markup + template.replace("#ID#", categories.id).replace("#SHOPID#", categories.id).replace("#SHOPNAME#", categories.businessName).replace("#SHOPLOCATION#", categories.businessLocation).replace("#BUSINESSTYPE#", categories.businessType).replace("#OPENAT#", categories.openAt).replace("#CLOSEAT#", categories.closeAt).replace("#DESCRIPTION#", categories.businessDescription).replace("#IMAGE#", categories.banner == true ? banner : defaultBanner).replace("#newID#", categories.id);
         });
 
         $("#categories-list").html(markup);

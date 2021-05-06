@@ -160,6 +160,7 @@ namespace ProjectBSIS401.WEB.Migrations
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
                     RegistrationCode = table.Column<string>(nullable: true),
+                    Thumbnail = table.Column<bool>(nullable: false),
                     ChatId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -295,6 +296,9 @@ namespace ProjectBSIS401.WEB.Migrations
                     IsPublished = table.Column<bool>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     BusinessType = table.Column<int>(nullable: false),
+                    Banner = table.Column<bool>(nullable: false),
+                    Logo = table.Column<bool>(nullable: false),
+                    Thumbnail = table.Column<bool>(nullable: false),
                     Likes = table.Column<int>(nullable: false),
                     Rating = table.Column<decimal>(nullable: false),
                     Views = table.Column<int>(nullable: false),

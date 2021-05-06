@@ -528,7 +528,6 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_PartialCategories.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Booking\BookReview.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Chats\Index.g.cshtml.cs
-C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\ShopAccount\Index.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ShopPartialNav.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\ShopServices\MyShopService.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shop\Shop.g.cshtml.cs
@@ -546,3 +545,9 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\ShopServices\ShopServiceDetails.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Users\Profile.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Users\Thumbnail.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Users\ChangePassword.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Users\Notify.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Shared\_manageSecondaryLayout.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Notify.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_SecondaryLayout.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shop\Welcome.g.cshtml.cs

@@ -19,22 +19,10 @@ namespace ProjectBSIS401.WEB.ViewModels.shop
                 return Enum.GetValues(typeof(ReserveStatus)).Cast<ReserveStatus>().ToList();
             }
         }
-        public Guid? BookingId { get; set; }
-
+     
         public List<ShopService> ShopServices { get; set; }
 
-        public List<Booking> Bookings { get; set; }
-
         public Shop Shop { get; set; }
-
-      
-
-      
-        
-        public int Count { get; set; }
-
-        public int serviceCount { get; set; }
-
-        public int costumerCount { get; set; }
+    
     }
 }

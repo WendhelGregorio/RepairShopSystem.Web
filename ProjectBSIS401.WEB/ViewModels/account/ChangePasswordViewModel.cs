@@ -7,6 +7,8 @@ namespace ProjectBSIS401.WEB.ViewModels.account
 {
     public class ChangePasswordViewModel
     {
+        public Guid? UserId { get; set; }
+
         public string OldPassword { get; set; }
 
         public string NewPassword { get; set; }

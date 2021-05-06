@@ -93,13 +93,14 @@ namespace ProjectBSIS401.WEB.Controllers
             var contactCheck = this._context.Contacts.FirstOrDefault(c => c.FullName == model.FullName  && c.EmailAddress == model.EmailAddress);
             if(contactCheck == null)
             {
-         
+
                 var contact = new Contact()
                 {
                     Id = Guid.NewGuid(),
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNumber,
                     EmailAddress = model.EmailAddress,
+                    MessageCount = 1,
                     Message = model.Message,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
@@ -147,8 +148,11 @@ namespace ProjectBSIS401.WEB.Controllers
                     BusinessType = s.BusinessType,
                     OpenAt = s.OpenAt,
                     CloseAt = s.CloseAt,
-                    BusinessDescription = s.BusinessDescription
-      
+                    BusinessDescription = s.BusinessDescription,
+                    Banner = s.Banner,
+                    Logo = s.Logo,
+                    Thumbnail = s.Thumbnail,
+                    
                     
                 }).ToList();
         }

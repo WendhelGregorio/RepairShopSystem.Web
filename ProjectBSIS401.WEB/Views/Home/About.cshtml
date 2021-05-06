@@ -62,12 +62,15 @@
 
     <!-- Intro Content -->
     <div class="row">
-        <div class="col-lg-6">
-            <img class="img-fluid rounded mb-4 border" src="~/myimages/fixitlogo.png" style="width: 750px; height: 300px; border-bottom: 2px #0094ff solid" alt="">
+        <div class="col-lg-6" id="logo">
+            <img class="img-fluid rounded mb-4 border" src="~/myimages/fixitlogo.png" style=" border-bottom: 2px #0094ff solid" alt="">
         </div>
         <div class="col-lg-6">
-            <h2>About Fixit.Ph</h2>
-            <p>
+            <div class="text-center">
+                <h2>Fixit.PH</h2>
+            </div>
+
+            <p class="text-center">
                 Fixit website is created to keep pace with the modernization of the world and to give service to the people.
                 It is located at College of Subic Montessori, Inc.,Sta. Isabel, Dinalupihan, Bataan.
                 Computer service includes desktop/laptop repair (MacBook Pro, Air, Mac, Imac), computer maintenance and virus removal, back up and data recovery. In cellphone repair we offer LCD replacement, screen replacement and battery replacement for both Iphone and Android phone.
@@ -75,8 +78,11 @@
         </div>
         <!-- /.row -->
         <!-- Team Members -->
-        <h2>Our Team</h2>
 
+
+            <div class="text-center">
+                <h2>Team</h2>
+            </div>
         <div class="row">
             <div class="col-lg-4 mb-4">
                 <div class="card h-100 text-center">
@@ -124,3 +130,13 @@
     </div>
 </div>
 <!-- /.container -->
+
+<style>
+    #logo {
+        border: 10px solid transparent;
+        -moz-border-image: -moz-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+        -webkit-border-image: -webkit-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+        border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
+        border-image-slice: 1;
+    }
+</style>

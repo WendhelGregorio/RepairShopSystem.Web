@@ -35,6 +35,12 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public BusinessType BusinessType { get; set; }
 
+        public bool Banner { get; set; }
+
+        public bool Logo { get; set; }
+
+        public bool Thumbnail { get; set; }
+
         public int Likes { get; set; }
         public decimal Rating { get; set; }
         public int Views { get; set; }
