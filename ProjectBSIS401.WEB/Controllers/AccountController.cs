@@ -457,12 +457,7 @@ namespace ProjectBSIS401.WEB.Controllers
                 this._context.Users.Update(user);
                 this._context.SaveChanges();
 
-                this.EmailSendNow(
-                         ChangePasswordEmailTemplate(user.Password, user.UserName),
-                         user.EmailAddress,
-                         user.UserName,
-                         "Fixit.ph Website - Forgot Password"
-                );
+               
 
                 return RedirectPermanent("Notify");
             }

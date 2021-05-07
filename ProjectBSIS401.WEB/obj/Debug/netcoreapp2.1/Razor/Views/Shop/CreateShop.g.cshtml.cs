@@ -84,7 +84,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n\r\n<div class=\"section-title mt-5\">\r\n    <h2>Create Shop</h2>\r\n</div>\r\n<div class=\"container\">\r\n    ");
             EndContext();
             BeginContext(229, 4266, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d0567e0cdff940e5b589e64f4b98ce15", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "963828e48bc947e5b736ca3cd2a0300f", async() => {
                 BeginContext(277, 10, true);
                 WriteLiteral("\r\n        ");
                 EndContext();
@@ -99,7 +99,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                 WriteLiteral("\r\n        ");
                 EndContext();
                 BeginContext(321, 60, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96ea5cfba9e34f0bbc296a3b683ac653", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b391037225e14ef7af810391551b89aa", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -211,7 +211,7 @@ WriteAttributeValue("", 773, Model.OwnerShop, 773, 16, false);
                 WriteLiteral("                            ");
                 EndContext();
                 BeginContext(3506, 51, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c7747bd8a21476a96b0b33c521abcd1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6744f68874904f22a5bf466a4b6a4d8b", async() => {
                     BeginContext(3531, 17, false);
 #line 72 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\Views\Shop\CreateShop.cshtml"
                                                Write(option.ToString());
@@ -269,7 +269,7 @@ WriteAttributeValue("", 773, Model.OwnerShop, 773, 16, false);
                 ");
                 EndContext();
                 BeginContext(4325, 64, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9eec3217286e4859814f3e93f11c6bb1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfc6c97478f5421ebba77ea0b65242e0", async() => {
                     BeginContext(4379, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();
@@ -313,7 +313,7 @@ WriteAttributeValue("", 773, Model.OwnerShop, 773, 16, false);
             WriteLiteral("\r\n\r\n</div>\r\n\r\n\r\n");
             EndContext();
             BeginContext(4511, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "07f1c84264654914b7b263565512a8db", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10bb439057304e01b07e8df26b104c8a", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

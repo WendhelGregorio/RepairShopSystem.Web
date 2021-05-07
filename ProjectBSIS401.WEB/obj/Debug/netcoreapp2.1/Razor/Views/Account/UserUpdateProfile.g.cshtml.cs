@@ -104,7 +104,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             ");
             EndContext();
             BeginContext(414, 872, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "957cafed0a884ac9a70355ae4c684b96", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d6defd233dac4d3eab480f3fbb3db6d9", async() => {
                 BeginContext(500, 98, true);
                 WriteLiteral("\r\n                <div class=\"form-group\">\r\n                    <input type=\"hidden\" name=\"UserId\"");
                 EndContext();
@@ -119,7 +119,7 @@ WriteAttributeValue("", 606, Model.UserId, 606, 13, false);
                 WriteLiteral(" />\r\n                    <label for=\"Thumbnail\">Thumbnail:</label><br />\r\n                    ");
                 EndContext();
                 BeginContext(714, 136, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "d2e6b227ae3a4eeab4b2ff94fb35399d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "38c245c8c0c74c78919356f1a2582c28", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -194,7 +194,7 @@ AddHtmlAttributeValue("", 744, Model.UserId, 744, 13, false);
             WriteLiteral("\r\n        </div><!--/col-3-->\r\n        <div class=\"col-sm-9\">\r\n\r\n            <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\" id=\"home\">\r\n                    <hr>\r\n                    ");
             EndContext();
             BeginContext(3225, 3662, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14fe99517c6542b0aa41492714803b80", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17550855e6fe47ebb68e60efe03b3f5b", async() => {
                 BeginContext(3314, 80, true);
                 WriteLiteral("\r\n                        <div class=\"form-group\">\r\n                            ");
                 EndContext();
@@ -304,7 +304,7 @@ WriteAttributeValue("", 4772, Model.PhoneNumber, 4772, 18, false);
                 WriteLiteral("                                                ");
                 EndContext();
                 BeginContext(5818, 72, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0277096edfee44da874e94eead4ed2b9", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff2774de6bb14869ad6649aae6c9d0bb", async() => {
                     BeginContext(5858, 23, false);
 #line 117 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\Views\Account\UserUpdateProfile.cshtml"
                                                                                   Write(genderOption.ToString());
@@ -350,7 +350,7 @@ WriteAttributeValue("", 4772, Model.PhoneNumber, 4772, 18, false);
                 WriteLiteral("                                                ");
                 EndContext();
                 BeginContext(6084, 63, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db1a613f278d46a1970f11eea4f145ce", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e43144875c1c498eac0c05221f776b5a", async() => {
                     BeginContext(6115, 23, false);
 #line 121 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\Views\Account\UserUpdateProfile.cshtml"
                                                                          Write(genderOption.ToString());
@@ -402,7 +402,7 @@ WriteAttributeValue("", 4772, Model.PhoneNumber, 4772, 18, false);
                                 ");
                 EndContext();
                 BeginContext(6710, 80, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b750ebf7580f4a5f8e3277bcf8e58416", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "953de8ea4a0d4731919d4224b8e4126c", async() => {
                     BeginContext(6782, 4, true);
                     WriteLiteral("Back");
                     EndContext();
@@ -475,7 +475,7 @@ AddHtmlAttributeValue("", 6737, Model.UserId, 6737, 13, false);
             ");
             EndContext();
             BeginContext(7561, 561, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "641f6e222c734186acbb245c358d7fd3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f34e7e0c8d2436dab48a3638d23fdd2", async() => {
                 BeginContext(7651, 145, true);
                 WriteLiteral("\r\n                <div class=\"modal-body\">\r\n                    <input type=\"file\" class=\"form-control\" name=\"ImageFile\" />\r\n                    ");
                 EndContext();

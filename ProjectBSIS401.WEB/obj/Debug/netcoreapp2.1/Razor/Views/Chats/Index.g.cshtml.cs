@@ -102,7 +102,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("ate Room &nbsp;<i class=\"fas fa-plus\"></i>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        ");
             EndContext();
             BeginContext(1274, 233, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c03246a116aa45aa95804506223231dc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "93915a511f45411594761c28f8b7321a", async() => {
                 BeginContext(1325, 178, true);
                 WriteLiteral("\r\n                            <svg class=\"bi me-2\" width=\"16\" height=\"16\"><use xlink:href=\"#speedometer2\"></use></svg>\r\n                            Find\r\n                        ");
                 EndContext();
@@ -124,7 +124,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
             EndContext();
             BeginContext(1586, 242, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0c4c98809ccf4d4b8e78b173e4c0c201", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49dd1c83ecf74e8da8e379efac1762e0", async() => {
                 BeginContext(1640, 184, true);
                 WriteLiteral("\r\n                            <svg class=\"bi me-2\" width=\"16\" height=\"16\"><use xlink:href=\"#speedometer2\"></use></svg>\r\n                            My Private\r\n                        ");
                 EndContext();
@@ -171,7 +171,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("                            <div class=\"d-inline-flex p-1\">\r\n                                <div class=\"card-header\">\r\n                                    <div class=\"text-center\">\r\n                                        ");
             EndContext();
             BeginContext(3476, 81, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1734053adfa14723891ee26b0e66480d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bbb290f42b294b558de3a57263ad0d3d", async() => {
                 BeginContext(3514, 23, true);
                 WriteLiteral("<h5 class=\"card-title\">");
                 EndContext();
@@ -250,7 +250,7 @@ AddHtmlAttributeValue("", 3503, chats.Id, 3503, 9, false);
                 ");
             EndContext();
             BeginContext(4364, 367, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0f732fca80124276809e81542103d654", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fc60a2fe4e90495596dfb576876d1936", async() => {
                 BeginContext(4413, 56, true);
                 WriteLiteral("\r\n                    <input type=\"hidden\" name=\"userId\"");
                 EndContext();
