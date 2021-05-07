@@ -51,7 +51,7 @@ namespace AspNetCore
             WriteLiteral("\r\n<div class=\"section-title\">\r\n    <h2>Edit</h2>\r\n    <p></p>\r\n</div>\r\n\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col\">\r\n            ");
             EndContext();
             BeginContext(297, 4198, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af08bb198247406eb937b0dd118b9cfa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fad36c6ddd1941c5a61054937970faed", async() => {
                 BeginContext(345, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
@@ -253,7 +253,7 @@ WriteAttributeValue("", 4157, Model.CloseAt, 4157, 14, false);
                 WriteLiteral(" placeholder=\"Enter Close Time\">\r\n                </div>\r\n\r\n\r\n\r\n                <div class=\"mt-2\">\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n                    ");
                 EndContext();
                 BeginContext(4375, 75, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d1c5e509b8924f73ac527cdd8372d704", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "510cf32a594b4d8499909000319beb46", async() => {
                     BeginContext(4440, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

@@ -377,12 +377,16 @@ namespace ProjectBSIS401.WEB.Controllers
                            "Fixit.ph Website - Forgot Password"
                );
 
-                return RedirectToAction("login");
+                return RedirectToAction("OTP");
             }
-
+            ModelState.AddModelError("", "Email-Address does'nt exist!");
+            return View(model);
+        }
+        [HttpGet, Route("account/otp")]
+        public IActionResult OTP()
+        {
             return View();
         }
-
 
      
 
