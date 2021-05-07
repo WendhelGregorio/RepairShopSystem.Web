@@ -551,3 +551,4 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Notify.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_SecondaryLayout.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shop\Welcome.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\GitHubRepairSystem\ProjectBSIS401.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\OTP.g.cshtml.cs

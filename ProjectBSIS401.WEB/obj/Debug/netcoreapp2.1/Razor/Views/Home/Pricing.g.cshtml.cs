@@ -182,7 +182,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n                        <div class=\"btn-wrap\">\r\n                            ");
             EndContext();
             BeginContext(1640, 55, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c3b6f85c56b4d0190f6376b42ea676a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9aa062ea46c842d7a8b9a6b523a5fb3b", async() => {
                 BeginContext(1681, 10, true);
                 WriteLiteral("Contact Us");
                 EndContext();

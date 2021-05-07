@@ -82,12 +82,12 @@ Write(Html.ValidationSummary());
                                 ");
             EndContext();
             BeginContext(603, 270, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "61aa0e9c682d41a5a96b1a705d880497", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15b7b27eff5c4b7bb77937111ed41c7c", async() => {
                 BeginContext(660, 38, true);
                 WriteLiteral("\r\n                                    ");
                 EndContext();
                 BeginContext(698, 137, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "932bb44e719547eb94f068cc74f30a61", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0be2e9c856064987979bf553e6d4f7cf", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -140,7 +140,7 @@ AddHtmlAttributeValue("", 644, Model.User.Id, 644, 14, false);
             WriteLiteral("\r\n                               \r\n                                <div class=\"middle\">\r\n\r\n                                    ");
             EndContext();
             BeginContext(1000, 97, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "51a70ba85a3e4f9bae976689da74d3b9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "69fb136119b34a09a20ff49321f54c8f", async() => {
                 BeginContext(1079, 14, true);
                 WriteLiteral("Update-profile");
                 EndContext();

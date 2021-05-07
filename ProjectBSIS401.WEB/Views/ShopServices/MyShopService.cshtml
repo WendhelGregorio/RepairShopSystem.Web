@@ -1,7 +1,7 @@
 ﻿@model ProjectBSIS401.WEB.ViewModels.shopServices.MyShopServiceViewModel
 @{
     Layout = null;
-    Layout = "~/Views/Shared/_ShopPartialNav.cshtml";
+    Layout = "~/views/shared/_ShopPartialNav.cshtml";
 }
 
 
@@ -14,7 +14,7 @@
         if (Model.ShopServices.Count > 0)
         {
 
-        <div>
+        <div class="mt-5">
             <a href="#" class="img-hover"><img src="~/image/shops/banner/@WebIDS.GetShopId/banner.png" style="min-width:1100px; height:300px;" class="img-fluid" alt="Responsive image"></a>
         </div>
         <!-- Section Style 1 Start -->
@@ -30,25 +30,16 @@
                 <div class="row">
                     @foreach (var shopService in Model.ShopServices)
                     {
-                        <div class="col-md-4">
-                            <div class="single-service">
-                                <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                                    <hr />
-
-                                    <i class="icofont-computer"></i>
-                                    <i class="icofont-chart-bar-graph"></i>
-                                    <i class="icofont-settings"></i>
-                                    <i class="icofont-earth"></i>
-                                    <i class="icofont-tasks-alt"></i>
-                                    <hr />
-                                    <a href="#">
-                                        <h3 class="text-black-50">@shopService.Service</h3>
-                                        <p>@shopService.Description</p>
-                                        <small>@shopService.Price.ToString("F")</small>
-
-                                </div>
-
+                        <div class="col-4">
+                           <div class="text-center">
+                               <h3 class="text-black-50">@shopService.Service</h3>
+                           </div>
+                            <div class="text-center">
+                                <p>@shopService.Description</p>
+                                <hr />
+                                <small> &#8369;@shopService.Price.ToString("F")</small>
                             </div>
+                           
                         </div>
                     }
 

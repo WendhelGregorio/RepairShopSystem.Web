@@ -19,12 +19,50 @@
 
     <div class="form-group">
         <label for="Price" class="form-label">Price</label>
-        <input class="form-control" type="text" name="Price" placeholder="Price" />
+        <input class="form-control" id="price" type="text" name="Price" placeholder="Price" />
     </div>
     <br />
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         <a href="~/shop/my-dashboard" class="btn btn-danger">Cancel</a>
     </div>
 </form>
+
+
+
+<script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submit").attr('disabled', 'disabled');
+
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#submit").attr('disabled', 'disabled');
+            // Validating Fields
+            var price = $("#price").val();
+       
+
+
+            if (!(price == "")) {
+
+                // To Enable Submit Button
+                $("#submit").removeAttr('disabled');
+                $("#submit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
+
+            }
+        });
+        // On Click Of Submit Button
+        $("#submit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+</script>

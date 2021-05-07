@@ -83,7 +83,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n\r\n<br /><br /><br /><br />\r\n<div class=\"container\">\r\n        <div class=\"createaccount\">\r\n\r\n            ");
             EndContext();
             BeginContext(228, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9ac3d2a1671542e48f52390aaaf8a937", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "11f522800a624d27ab4f07d4ef15f4d2", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -101,12 +101,12 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n            <h3>Change Password</h3>\r\n            <p class=\"text-muted text-center\">\r\n                It\'s a good idea to use a strong password that you don\'t use elsewhere\r\n            </p>\r\n            ");
             EndContext();
             BeginContext(478, 1256, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c655e4083016430688ad57e401b038d9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1c4ff88ae0dc4bc19c5482767b1d7d60", async() => {
                 BeginContext(533, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(551, 72, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "adfab0835ed6499daa508221eca4f6c9", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b288398046bd414fbec089a4973f7cf2", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -172,7 +172,7 @@ WriteAttributeValue("", 854, Model.UserId, 854, 13, false);
                 ");
                 EndContext();
                 BeginContext(1457, 64, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aa00a6825a424247b2792b4b8a697883", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c4d5d4ad781647028d04bc153df2e482", async() => {
                     BeginContext(1493, 24, true);
                     WriteLiteral("Forgotten your password?");
                     EndContext();
@@ -215,7 +215,7 @@ WriteAttributeValue("", 854, Model.UserId, 854, 13, false);
             WriteLiteral("\r\n         \r\n        </div>\r\n </div>\r\n\r\n  \r\n");
             EndContext();
             BeginContext(1778, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "797aa4bab2134cbd930eb402b37228b4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a0abab5d063c49d4bd1c70419a5856e8", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
