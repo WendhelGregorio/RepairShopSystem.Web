@@ -40,5 +40,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public List<Shop> Shop { get; set; }
 
+        public Guid? TermAndConditionId { get; set; }
+
+        public virtual TermAndCondition TermAndCondition {get; set;}
+
     }
 }

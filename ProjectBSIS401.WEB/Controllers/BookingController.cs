@@ -46,18 +46,20 @@ namespace ProjectBSIS401.WEB.Controllers
             var shop = this._context.Shops.FirstOrDefault(u => u.Id == shopId);
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
             var shopService = this._context.ShopServices.FirstOrDefault(u => u.Id == shopServiceId);
+
+            
             if (shop == null)
             {
-                return BadRequest();
+                if (user == null)
+                {
+                    if (shopService == null)
+                    {
+                         return BadRequest();
+                    }
+                }
             }
-            if(user == null)
-            {
-                return BadRequest();
-            }
-            if(shopService == null)
-            {
-                return BadRequest();
-            }
+
+            
 
             return View(new BookingViewModel
             {
@@ -85,8 +87,10 @@ namespace ProjectBSIS401.WEB.Controllers
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == model.ShopId);
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             var shopServices = this._context.ShopServices.FirstOrDefault(ss => ss.Id == model.ShopServiceId);
+            var tacId = Guid.Parse("0919fe8a-f05b-4f1f-a0ee-db37664fad38");
+            var tac = this._context.TermAndConditions.FirstOrDefault(t => t.Id == tacId);
 
-            if(shop != null)
+            if (shop != null)
             {
                 if(user != null)
                 {
@@ -109,8 +113,9 @@ namespace ProjectBSIS401.WEB.Controllers
                             UpdatedAt = DateTime.UtcNow,
                             DateAndTime = model.DateAndTime,
                             CreatedAt = DateTime.UtcNow,
-                            TimeStamps = DateTime.UtcNow
-
+                            TimeStamps = DateTime.UtcNow,
+                            TermAndConditionId = tacId,
+                            TermAndCondition = tac,
                         };
                         WebIDS.SetBookingId(bookings.Id);
                    
@@ -228,6 +233,29 @@ namespace ProjectBSIS401.WEB.Controllers
             return RedirectPermanent("~/shop/my-dashboard");
         }
 
+
+        private void TermAndCondition(Guid? bookingId)
+        {
+            Guid? tacId = Guid.Parse("0919fe8a-f05b-4f1f-a0ee-db37664fad38");
+
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+            var tac = this._context.TermAndConditions.FirstOrDefault(t => t.Id == tacId);
+
+            if(booking != null)
+            {   
+                if(tac != null)
+                {
+                    booking.TermAndConditionId = tacId;
+                    booking.TermAndCondition = tac;
+
+                    this._context.Bookings.Update(booking);
+                    this._context.SaveChanges();
+                }
+                
+            }
+               
+            
+        }
 
     }
 }

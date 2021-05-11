@@ -179,7 +179,7 @@ WriteAttributeValue("", 2027, pricing.Title, 2027, 14, false);
             WriteLiteral(" title=\"Add Content\"><button type=\"button\" class=\"btn\"><i class=\"fas fa-plus\"></i></button></a>\r\n                            ");
             EndContext();
             BeginContext(2169, 146, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d50c2eb948bd4a798c08a913f21fe7ae", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c3ab30a208d44ce9bfc9986975a9ca1", async() => {
                 BeginContext(2241, 70, true);
                 WriteLiteral("<button type=\"button\" class=\"btn\"><i class=\"fas fa-info\"></i></button>");
                 EndContext();
@@ -208,7 +208,7 @@ AddHtmlAttributeValue("", 2204, pricing.Id, 2204, 11, false);
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(2345, 148, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ebca311616c74a4ebf41386bf50bb204", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4a7e7a8e8ccb4d1881b2c5fc89e67460", async() => {
                 BeginContext(2413, 76, true);
                 WriteLiteral("<button type=\"button\" class=\"btn\"><i class=\"fas fa-pen-square\"></i></button>");
                 EndContext();
@@ -387,7 +387,7 @@ else
                 ");
             EndContext();
             BeginContext(6340, 1095, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "250625a77da94aa8a36dbbd3c2d577f7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7f8cd3fceac94a86b2753ff8bfba532a", async() => {
                 BeginContext(6394, 24, true);
                 WriteLiteral("\r\n\r\n                    ");
                 EndContext();
@@ -459,7 +459,7 @@ else
             ");
             EndContext();
             BeginContext(8110, 1060, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9599c8126774c2597719b345baa0a31", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fc16e8ffc93c4cf8aa5518169c8a33bb", async() => {
                 BeginContext(8180, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();

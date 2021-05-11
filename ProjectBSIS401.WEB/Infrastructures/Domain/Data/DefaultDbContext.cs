@@ -42,6 +42,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<ChatUser> ChatUsers { get; set; }
 
+        public DbSet<TermAndCondition> TermAndConditions { get; set; }
+        public DbSet<Agreement> Agreements { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

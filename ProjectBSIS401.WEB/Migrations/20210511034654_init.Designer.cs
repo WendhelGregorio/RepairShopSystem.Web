@@ -9,7 +9,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 namespace ProjectBSIS401.WEB.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210506033415_init")]
+    [Migration("20210511034654_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,6 +18,22 @@ namespace ProjectBSIS401.WEB.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Agreement", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<Guid>("TermAndConditionId");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Agreements");
+                });
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking", b =>
                 {
@@ -48,6 +64,10 @@ namespace ProjectBSIS401.WEB.Migrations
 
                     b.Property<decimal>("ShopServicePrice");
 
+                    b.Property<Guid?>("TermAndConditionId");
+
+                    b.Property<Guid?>("TermAndConditionId1");
+
                     b.Property<DateTime>("TimeStamps");
 
                     b.Property<DateTime>("UpdatedAt");
@@ -57,6 +77,8 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TermAndConditionId1");
 
                     b.HasIndex("UserId");
 
@@ -452,6 +474,38 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.ToTable("ShopServices");
                 });
 
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.TermAndCondition", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AgreementId");
+
+                    b.Property<Guid?>("BookingId");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<DateTime>("DateAndTime");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<Guid?>("ShopId");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgreementId");
+
+                    b.ToTable("TermAndConditions");
+                });
+
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", b =>
                 {
                     b.Property<Guid?>("Id")
@@ -538,6 +592,10 @@ namespace ProjectBSIS401.WEB.Migrations
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Booking", b =>
                 {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.TermAndCondition", "TermAndCondition")
+                        .WithMany()
+                        .HasForeignKey("TermAndConditionId1");
+
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -630,6 +688,13 @@ namespace ProjectBSIS401.WEB.Migrations
                     b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", "Users")
                         .WithOne("Shops")
                         .HasForeignKey("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Shop", "UserId");
+                });
+
+            modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.TermAndCondition", b =>
+                {
+                    b.HasOne("ProjectBSIS401.WEB.Infrastructures.Domain.Models.Agreement")
+                        .WithMany("TermAndConditions")
+                        .HasForeignKey("AgreementId");
                 });
 
             modelBuilder.Entity("ProjectBSIS401.WEB.Infrastructures.Domain.Models.User", b =>

@@ -89,7 +89,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                             ");
             EndContext();
             BeginContext(801, 72, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a0970ab1f1ca4b54a0e83b917b4f479c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "7463ca33fc52484c9b416b67ca4441ab", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -337,7 +337,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                 ");
             EndContext();
             BeginContext(5853, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "062febf4e6cd462b81a60bab81d880d2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c20f0998f06f4bacabeafe6c8f87a4bf", async() => {
                 BeginContext(5876, 77, true);
                 WriteLiteral("<input type=\"button\" class=\"form-control btn-success bg-success\" value=\"Ok\"/>");
                 EndContext();

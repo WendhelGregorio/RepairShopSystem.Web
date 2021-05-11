@@ -1,0 +1,61 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.termAndcondtions.CreateViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<h2>Create</h2>
+
+<link rel="stylesheet" href="~/richtexteditor/rte_theme_default.css" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="text-center">
+                <h2></h2>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+
+<di class="container">
+    <div class="row">
+        <form action="~/manage/terms-and-conditions/create" method="post">
+            <div class="form-group">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger text-center"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Title">Title</label>
+                <input type="text" placeholder="Title"  name="Title"class="form-control" />
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="Description" class="control-label ml-5 mr-3  mb-1">Description</label>
+                    <textarea type="text" class="form-control" id="description" name="Description" aria-describedby="descriptionHelp" placeholder="Enter desciption"></textarea>
+
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit" />
+                <a href="~/manage/terms-and-conditions/index" class="btn btn-danger">Back</a>
+            </div>
+        </form>
+    </div>
+</di>
+
+
+
+
+<script type="text/javascript" src="~/richtexteditor/rte.js"></script>
+<script type="text/javascript" src="~/richtexteditor/plugins/all_plugins.js"></script>
+<script>
+    var editor1 = new RichTextEditor("#description");
+    
+    //editor1.setHTMLCode("Use inline HTML or setHTMLCode to init the default content.");
+</script>

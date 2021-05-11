@@ -4099,7 +4099,34 @@ namespace ProjectBSIS401.WEB.Areas.Manage.Controllers
 
             }
             #endregion
-            this._context.SaveChanges();
+
+            #region
+            if (this._context.TermAndConditions.Count() < 1)
+            {
+                // Pricing //
+                this._context.TermAndConditions.Add(
+                    new Infrastructures.Domain.Models.TermAndCondition()
+                    {
+                        Id = Guid.Parse("0919fe8a-f05b-4f1f-a0ee-db37664fad38"),
+                        Title = "Term and Condition",
+                        Description = "TERMS AND CONDITIONS OF USE :"+
+                                        " " +
+                                        "Welcome to our digital information network." +
+                                        "These our terms and conditions for use of the network," +
+                                        "which you may access in several ways," +
+                                        "including but not limited to the World Wide Web" +
+                                        ".Users must always try to advise the shop owners via messaging as soon as possible in accordance of cancellation of appointment." +
+                                      " For shop owners the cancellation of appointments must be within 24 hours after the booking of the user,",
+                                      
+                        IsPublished = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+
+
+                    });
+            }
+                #endregion
+                this._context.SaveChanges();
             return Ok("OK");
         }
     }

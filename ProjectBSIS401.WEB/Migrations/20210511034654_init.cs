@@ -8,6 +8,20 @@ namespace ProjectBSIS401.WEB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Agreements",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    TermAndConditionId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agreements", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Chat",
                 columns: table => new
                 {
@@ -143,6 +157,33 @@ namespace ProjectBSIS401.WEB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TermAndConditions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DateAndTime = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: true),
+                    ShopId = table.Column<Guid>(nullable: true),
+                    BookingId = table.Column<Guid>(nullable: true),
+                    IsPublished = table.Column<bool>(nullable: false),
+                    AgreementId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TermAndConditions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TermAndConditions_Agreements_AgreementId",
+                        column: x => x.AgreementId,
+                        principalTable: "Agreements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -239,11 +280,19 @@ namespace ProjectBSIS401.WEB.Migrations
                     DateAndTime = table.Column<DateTime>(nullable: false),
                     TimeStamps = table.Column<DateTime>(nullable: false),
                     ReserveStatus = table.Column<int>(nullable: false),
-                    PaymentType = table.Column<int>(nullable: false)
+                    PaymentType = table.Column<int>(nullable: false),
+                    TermAndConditionId = table.Column<Guid>(nullable: true),
+                    TermAndConditionId1 = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Booking_TermAndConditions_TermAndConditionId1",
+                        column: x => x.TermAndConditionId1,
+                        principalTable: "TermAndConditions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Booking_User_UserId",
                         column: x => x.UserId,
@@ -456,6 +505,11 @@ namespace ProjectBSIS401.WEB.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Booking_TermAndConditionId1",
+                table: "Booking",
+                column: "TermAndConditionId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Booking_UserId",
                 table: "Booking",
                 column: "UserId");
@@ -532,6 +586,11 @@ namespace ProjectBSIS401.WEB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TermAndConditions_AgreementId",
+                table: "TermAndConditions",
+                column: "AgreementId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_ChatId",
                 table: "User",
                 column: "ChatId");
@@ -588,7 +647,13 @@ namespace ProjectBSIS401.WEB.Migrations
                 name: "ShopServices");
 
             migrationBuilder.DropTable(
+                name: "TermAndConditions");
+
+            migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Agreements");
 
             migrationBuilder.DropTable(
                 name: "Chat");

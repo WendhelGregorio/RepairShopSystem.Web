@@ -1,0 +1,130 @@
+﻿@model ProjectBSIS401.WEB.Areas.Manage.ViewModels.termAndcondtions.IndexViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="input-group mb-3">
+            <input type="text" id="searchKeyword" placeholder="Search" class="form-control" aria-label="search groups" aria-describedby="basic-addon2" value="@Model.TermAndConditions.Keyword">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="table-responsive table--no-card m-b-30">
+            <a href="~/manage/terms-and-conditions/create">
+                <button type="button" class="btn btn-lg btn-info btn-block">
+                    <i class="fa fa-plus"></i>&nbsp; Create Term And Condition
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+@if (Model.TermAndConditions.Items.Count > 0)
+{
+    <table class="table table-borderless table-striped table-earning">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var tac in Model.TermAndConditions.Items)
+                {
+
+                    <tr>
+                        <td>@tac.Title</td>
+                        <td>@tac.Description</td>
+                      
+                        <td>
+                            <a href="#"><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropContentPricing"><i class="fas fa-envelope-open-text"></i></button></a>
+
+                            <a href="~/manage/pricings/details/@tac.Id" title="Details TAC"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
+                            <a href="~/manage/pricings/edit/@tac.Id" title="Update TAC"><button type="button" class="btn"><i class="fas fa-pen-square"></i></button></a>
+                            <a href="#" onclick="confirmDeleteTAC('@tac.Id', '@tac.Title')" title="Delete TAC"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
+
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
+                            <li class="page-item"><input type="number" value="@Model.TermAndConditions.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/manage/terms-and-conditions/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val()));" /></li>
+                            <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.TermAndConditions.PageCount&nbsp;&nbsp;&nbsp;</span></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>0 search results.</p>
+}
+
+
+
+
+
+
+<!--Modal Delete-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-tac">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete TAC</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="modal-delete-tac-title"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-delete-tac-confirm"><button type="button" class="btn btn-primary">Delete TAC</button></a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+   
+
+    function confirmDeleteTAC(tacId, title) {
+        $("#modal-delete-tac-title").html(title);
+        $("#modal-delete-tac-confirm").attr("href", "/manage/terms-and-conditions/delete/" + tacId);
+        $("#modal-delete-tac").modal("show");
+    }
+
+    $("#searchKeyword").keyup(function (event) {
+        if (event.keyCode === 13) {
+            searchTrigger();
+        }
+    });
+
+    function searchTrigger() {
+        window.location = "/manage/terms-and-conditions/index?pageIndex=1&keyword=" + $("#searchKeyword").val();
+    }
+</script>
