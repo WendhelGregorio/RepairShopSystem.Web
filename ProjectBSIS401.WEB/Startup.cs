@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using ProjectBSIS401.WEB.Areas.Manage.ViewModels.hub;
 using ProjectBSIS401.WEB.Controllers;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
@@ -39,8 +40,9 @@ namespace ProjectBSIS401.WEB
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+  
 
-         
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -77,10 +79,11 @@ namespace ProjectBSIS401.WEB
             //this services convert enums to return string result.
             services.AddMvc().AddJsonOptions(options =>
             {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                
-            });
+               
+        });
 
 
 

@@ -172,7 +172,7 @@ WriteAttributeValue("", 1569, Model.Services.Keyword, 1569, 23, false);
             ");
             EndContext();
             BeginContext(1965, 191, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ee4dd7180db40f1901bd2b522d620e8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1d068cd215f54d74b1b3fd1246a1a7b9", async() => {
                 BeginContext(2042, 110, true);
                 WriteLiteral("\r\n                <i class=\"fa fa-plus\"></i>&nbsp;\r\n                <span>Create Services</span>\r\n            ");
                 EndContext();
@@ -246,7 +246,7 @@ WriteAttributeValue("", 1569, Model.Services.Keyword, 1569, 23, false);
             WriteLiteral("                        <td>\r\n                            ");
             EndContext();
             BeginContext(2911, 145, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6d01d8f644fb4b9b8b327e49a121259c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8374e375c9c24ed78398c91d342dd1a2", async() => {
                 BeginContext(2982, 70, true);
                 WriteLiteral("<button type=\"button\" class=\"btn\"><i class=\"fas fa-info\"></i></button>");
                 EndContext();
@@ -437,7 +437,7 @@ WriteAttributeValue("", 4874, Model.ServiceT, 4874, 17, false);
             WriteLiteral("                                    <li class=\"page-item\">");
             EndContext();
             BeginContext(5313, 194, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82f0926408074b15a4e024de39dc5b64", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ae17984c71e542628b76334aefa08b3d", async() => {
                 BeginContext(5464, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&laquo;</span>");
                 EndContext();
@@ -514,7 +514,7 @@ AddHtmlAttributeValue("", 5457, prev, 5457, 5, false);
             WriteLiteral("                                    <li class=\"page-item\">");
             EndContext();
             BeginContext(5968, 194, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d9a2bc6a126b4a0e97205585dd3ffb5f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aa57717e3bb743529f4ca7bb89d6ba31", async() => {
                 BeginContext(6119, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&raquo;</span>");
                 EndContext();

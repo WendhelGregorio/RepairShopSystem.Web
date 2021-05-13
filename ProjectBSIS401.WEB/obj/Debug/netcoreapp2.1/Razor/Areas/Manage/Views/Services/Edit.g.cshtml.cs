@@ -51,7 +51,7 @@ namespace AspNetCore
             WriteLiteral("\r\n<div class=\"section-title\">\r\n    <h2>Edit</h2>\r\n    <p></p>\r\n</div>\r\n\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col\">\r\n            ");
             EndContext();
             BeginContext(300, 1912, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7ca1de38472942ff806431e510cf4463", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ccdbba43bc7043e5ae3238e19b5eb978", async() => {
                 BeginContext(351, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
@@ -156,7 +156,7 @@ WriteAttributeValue("", 1799, option, 1799, 7, false);
                 WriteLiteral("                    </select>\r\n                </div>\r\n                <div class=\"mt-2\">\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n                    ");
                 EndContext();
                 BeginContext(2089, 78, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4b60260ef93465c99a71277023a3e4b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f1c3dd8d9ac438290e02d3cf7e56a84", async() => {
                     BeginContext(2157, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

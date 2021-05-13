@@ -80,7 +80,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n<div class=\"m-5\">\r\n    <div class=\"page-wrap d-flex flex-row align-items-center\">\r\n        <div class=\"container\">\r\n            <div class=\"row justify-content-center\">\r\n                <div class=\"col-md-12 text-center\">\r\n                    ");
             EndContext();
             BeginContext(292, 39, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "416633200b1746dba323d960c323202a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "eb0cc2c15b204684a2bf2292f6872e3f", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -103,7 +103,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
                     ");
             EndContext();
             BeginContext(638, 96, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b3f6dc7421aa4412a018cae5e73c5930", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a14fb939a7674fb78c2c15a87dff2ef6", async() => {
                 BeginContext(688, 42, true);
                 WriteLiteral("Login now! <i class=\"fas fa-user-alt\"></i>");
                 EndContext();

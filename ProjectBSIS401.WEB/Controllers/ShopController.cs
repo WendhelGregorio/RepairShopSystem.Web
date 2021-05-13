@@ -13,6 +13,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
+using ProjectBSIS401.WEB.ViewModels.calendar;
 using ProjectBSIS401.WEB.ViewModels.category;
 using ProjectBSIS401.WEB.ViewModels.shop;
 using SixLabors.ImageSharp;
@@ -466,6 +467,82 @@ namespace ProjectBSIS401.WEB.Controllers
              
             return RedirectToAction("shop/shop-profile" + shop.Id);
         }
+
+        [HttpGet, Route("/shop/get-bookings")]
+        public List<BookingViewModel> GetBookings()
+        {
+            System.Threading.Thread.Sleep(2000);
+            return this._context.Bookings.OrderByDescending(u => u.UpdatedAt == DateTime.Today)
+                                                 .Select(u => new BookingViewModel
+                                                 {
+                                                     SName = u.ShopServiceName,
+                                                     SDescription = u.ShopServiceDescription,
+                                                     SPrice = u.ShopServicePrice,
+                                                     Address = u.Address,
+                                                     PaymentType = u.PaymentType,
+                                                     UpdateAt = u.UpdatedAt,
+                                                     UserName = u.UserName,
+                                                     ContactNumber = u.ContactNumber
+
+
+                                                 }).ToList();
+        }
+        [HttpGet, Route("shop/list-events")]
+        public JsonResult GetBookings(string start)
+        {
+       
+            var bookings = this._context.Bookings.OrderByDescending(u => u.UpdatedAt == DateTime.Today)
+                                                   .Select(u => new BookingViewModel
+                                                   {
+                                                       SName = u.ShopServiceName,
+                                                       SDescription = u.ShopServiceDescription,
+                                                       SPrice = u.ShopServicePrice,
+                                                       Address = u.Address,
+                                                       PaymentType = u.PaymentType,
+                                                       UpdateAt = u.UpdatedAt,
+                                                       UserName = u.UserName,
+                                                       ContactNumber = u.ContactNumber
+
+
+                                                   }).ToList();
+
+            return Json(bookings);
+        }
+
+        
+        [HttpGet, Route("/shop/calendar")]
+        public IActionResult Calendar()
+        {
+            var bookings = this._context.Bookings.OrderByDescending(u => u.UpdatedAt == DateTime.Today)
+                                                 .Select(u => new BookingViewModel
+                                                 {
+                                                     SName = u.ShopServiceName,
+                                                     SDescription = u.ShopServiceDescription,
+                                                     SPrice = u.ShopServicePrice,
+                                                     Address = u.Address,
+                                                     PaymentType = u.PaymentType,
+                                                     UpdateAt = u.UpdatedAt,
+                                                     UserName = u.UserName,
+                                                     ContactNumber = u.ContactNumber
+
+                                                     
+                                                 }).ToList();
+            decimal bookingAve = 0;
+
+            if (bookings != null)
+            {
+                if (bookings.Count > 0)
+                {
+                    bookingAve = bookings.Average(b => b.SPrice);
+                }
+            }
+            return View(new CalendarViewModel
+            {
+               BookingItems = bookings,
+               BookingAve = bookingAve
+            });
+        }
+
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("/shop/update-banner/{shopId}")]
         public IActionResult Banner(Guid? shopId)
@@ -473,6 +550,7 @@ namespace ProjectBSIS401.WEB.Controllers
             var shop = this._context.Shops.FirstOrDefault(s => s.Id == shopId);
             return View(new BannerImageViewModel() { ShopId = shopId, Shop = shop });
         }
+
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/shop/update-banner")]
         public async Task<IActionResult> Banner(BannerImageViewModel model)

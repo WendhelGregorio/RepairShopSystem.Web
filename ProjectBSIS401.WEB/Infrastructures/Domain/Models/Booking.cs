@@ -36,7 +36,9 @@ namespace ProjectBSIS401.WEB.Infrastructures.Domain.Models
 
         public PaymentType PaymentType { get; set; }
 
-        public User User { get; set; }
+        public virtual ShopService ShopService { get; set; }
+
+        public virtual User User { get; set; }
 
         public List<Shop> Shop { get; set; }
 
