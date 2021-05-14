@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "86da370d555ce6102981820b819480b817fe60f7"
+    "signature": "4e2b185155a12812fa6de9204c3e4e04743b1843"
   },
   "compilationOptions": {
     "defines": [
@@ -35,6 +35,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10",
           "Newtonsoft.Json": "13.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.1",
+          "ReCaptcha-AspNet": "1.9.0",
           "RestClient.Net": "2.1.0",
           "SixLabors.ImageSharp": "1.0.2",
           "jquery.noty": "2.3.5"
@@ -870,6 +871,17 @@
         },
         "compile": {
           "lib/netstandard1.3/Pomelo.JsonObject.dll": {}
+        }
+      },
+      "ReCaptcha-AspNet/1.9.0": {
+        "runtime": {
+          "lib/net461/hbehr.recaptcha.dll": {
+            "assemblyVersion": "1.9.0.36338",
+            "fileVersion": "1.9.0.0"
+          }
+        },
+        "compile": {
+          "lib/net461/hbehr.recaptcha.dll": {}
         }
       },
       "RestClient.Net/2.1.0": {
@@ -4098,6 +4110,13 @@
       "sha512": "sha512-erkYG/OW1LloSwDFGeS9MvVjy1FLmaV3k8GK/GMR8D3sSDEylZogoLdLiaOFc92+zTen92rG6XGiioNacSlg0A==",
       "path": "pomelo.jsonobject/1.1.1",
       "hashPath": "pomelo.jsonobject.1.1.1.nupkg.sha512"
+    },
+    "ReCaptcha-AspNet/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TkcGFYdxczPjk5lIp4pn6pKy/57qpFQGtJdrrd0ujY74b1FfajZX4NOfo4XxEiWy/bVMVj48XhrxRCVDTWUy6g==",
+      "path": "recaptcha-aspnet/1.9.0",
+      "hashPath": "recaptcha-aspnet.1.9.0.nupkg.sha512"
     },
     "RestClient.Net/2.1.0": {
       "type": "package",

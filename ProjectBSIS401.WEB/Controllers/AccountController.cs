@@ -14,8 +14,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Grecaptcha;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 using ProjectBSIS401.WEB.ViewModels;
@@ -35,6 +37,9 @@ namespace ProjectBSIS401.WEB.Controllers
         private string emailUserName;
         private string emailPassword;
 
+        private static string publicSiteKey;
+        private static string privateSiteKey;
+
         public AccountController(DefaultDbContext context, IConfiguration config, IHostingEnvironment env)
         {
             _context = context;
@@ -44,6 +49,10 @@ namespace ProjectBSIS401.WEB.Controllers
             var emailConfig = this._config.GetSection("Email");
             emailUserName = (emailConfig["Username"]).ToString();
             emailPassword = (emailConfig["Password"]).ToString();
+
+            var recaptchaConfig = this._config.GetSection("GRecaptcha");
+            publicSiteKey = (recaptchaConfig["PublicSiteKey"]).ToString();
+            privateSiteKey = (recaptchaConfig["PrivateSiteKey"]).ToString();
         }
     
         public IActionResult Index()
@@ -52,8 +61,18 @@ namespace ProjectBSIS401.WEB.Controllers
             return View();
         }
 
+        #region First Method Recaptcha = ERROR METHOD 
+        //public static CaptchaResponse ValidateCaptcha(string response)
+        //{
+        //    var secret = privateSiteKey;
+        //    var client = new WebClient();
+        //    var jsonResult = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+        //    var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<CaptchaResponse>(jsonResult);
 
+        //    return captchaResponse;
 
+        //}
+        #endregion
 
         [HttpGet, Route("/account/login")]
         public IActionResult Login()
@@ -63,158 +82,171 @@ namespace ProjectBSIS401.WEB.Controllers
 
 
         [HttpPost, Route("/account/login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = CaptchaResponse.Validate(EncodedResponse);
+            
             if (!ModelState.IsValid)
             {
+
                 return View(model);
             }
 
             var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower());
-             
-            if (user != null)
+
+             if(isCaptchaValid)
             {
-                var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
-                var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id);
-                if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
+                if (user != null)
                 {
-                    if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
+                    var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                    var shop = this._context.Shops.FirstOrDefault(s => s.UserId == user.Id);
+                    if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
                     {
-                        ModelState.AddModelError("", "Your account has been locked ");
-                        return View();
-                    }
-                    else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.Unverified))
-                    {
-                        ModelState.AddModelError("", "Please verify your account first.");
-                        return View();
-                    }
-
-                    else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword))
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-                        //var shops = this._context.Shops.Where(s => s.Id == user.Id).Where(s => ).ToList();
-
-                        WebUser.SetUser(user, roles, groups);
-                        await this.SignIn();
-                        return RedirectToAction("~/account/change-password");
-                    }
-                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.Admin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                     
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-
-                        WebUser.SetUser(user, roles, groups);
-                        WebIDS.SetUserId(user.Id,user.UserName,user.EmailAddress, roles, groups);
-                        WebIDS.SetAdminId(user.Id, roles, groups);
-
-                        //Send email login alert!
-                        this.EmailSendNow(
-                                    EmailLoginAlert(user.UserName),
-                                    model.EmailAddress,
-                                    user.UserName,
-                                    "Welcome To Fixit.PH"
-                        );
-                        await this.SignIn();
-
-
-                        return RedirectPermanent("~/manage/users");
-                    }
-                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.ShopAdmin && user.LoginStatus == LoginStatus.Active && shop.Id != null)
-                    {
-                        user.LoginStatus = LoginStatus.Active;
-                        user.LoginRetries = 0;
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-
-                        WebIDS.SetShopId(shop.Id);
-                        WebIDS.SetUserId(user.Id, user.UserName, user.EmailAddress, roles, groups);
-                        WebIDS.SetShopAdminId(user.Id, roles, groups);
-                        await this.SignIn();
-
-                        this.EmailSendNow(
-                                      EmailLoginAlert(user.UserName),
-                                      model.EmailAddress,
-                                      user.UserName,
-                                      "Welcome To Fixit.PH"
-                          );
-                        return RedirectPermanent("~/shop/my-dashboard");
-                    }
-
-                    else if(userRole.Role == Infrastructures.Domain.Enums.Role.User && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-             
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-                        //var shops = this._context.Shops.Where(s => ).Select(s => s.Id).ToList;
-
-                        WebUser.SetUser(user, roles, groups);
-                        WebIDS.SetUserId(user.Id, user.UserName,user.EmailAddress, roles, groups);
-                        WebIDS.SetPublicUserId(user.Id, roles,groups);
-                        
-                        //Send email login alert!
-                        this.EmailSendNow(
-                                    EmailLoginAlert(user.UserName),
-                                    model.EmailAddress,
-                                    user.UserName,
-                                    "Welcome To Fixit.PH"
-                        );
-                        await this.SignIn();
-  
-                        return RedirectPermanent("~/shop/index");
-                    }    
-                    else
-                    {
-                        user.LoginRetries = user.LoginRetries + 1;
-
-                        if (user.LoginRetries >= 3)
+                        if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
                         {
-                            ModelState.AddModelError("", "Your account has been locked please contact an Administrator.");
-                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Locked;
+                            ModelState.AddModelError("", "Your account has been locked ");
+                            return View();
+                        }
+                        else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.Unverified))
+                        {
+                            ModelState.AddModelError("", "Please verify your account first.");
+                            return View();
                         }
 
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
+                        else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword))
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
 
-                        ModelState.AddModelError("", "Invalid Login.");
-                        return View();
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+                            //var shops = this._context.Shops.Where(s => s.Id == user.Id).Where(s => ).ToList();
+
+                            WebUser.SetUser(user, roles, groups);
+                            await this.SignIn();
+                            return RedirectToAction("~/account/change-password");
+                        }
+                        else if (userRole.Role == Infrastructures.Domain.Enums.Role.Admin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                            WebUser.SetUser(user, roles, groups);
+                            WebIDS.SetUserId(user.Id, user.UserName, user.EmailAddress, roles, groups);
+                            WebIDS.SetAdminId(user.Id, roles, groups);
+
+                            //Send email login alert!
+                            this.EmailSendNow(
+                                        EmailLoginAlert(user.UserName),
+                                        model.EmailAddress,
+                                        user.UserName,
+                                        "Welcome To Fixit.PH"
+                            );
+                            await this.SignIn();
+
+
+                            return RedirectPermanent("~/manage/users");
+                        }
+                        else if (userRole.Role == Infrastructures.Domain.Enums.Role.ShopAdmin && user.LoginStatus == LoginStatus.Active && shop.Id != null)
+                        {
+                            user.LoginStatus = LoginStatus.Active;
+                            user.LoginRetries = 0;
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                            WebIDS.SetShopId(shop.Id);
+                            WebIDS.SetUserId(user.Id, user.UserName, user.EmailAddress, roles, groups);
+                            WebIDS.SetShopAdminId(user.Id, roles, groups);
+                            await this.SignIn();
+
+                            this.EmailSendNow(
+                                          EmailLoginAlert(user.UserName),
+                                          model.EmailAddress,
+                                          user.UserName,
+                                          "Welcome To Fixit.PH"
+                              );
+                            return RedirectPermanent("~/shop/my-dashboard");
+                        }
+
+                        else if (userRole.Role == Infrastructures.Domain.Enums.Role.User && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+                            //var shops = this._context.Shops.Where(s => ).Select(s => s.Id).ToList;
+
+                            WebUser.SetUser(user, roles, groups);
+                            WebIDS.SetUserId(user.Id, user.UserName, user.EmailAddress, roles, groups);
+                            WebIDS.SetPublicUserId(user.Id, roles, groups);
+
+                            //Send email login alert!
+                            this.EmailSendNow(
+                                        EmailLoginAlert(user.UserName),
+                                        model.EmailAddress,
+                                        user.UserName,
+                                        "Welcome To Fixit.PH"
+                            );
+                            await this.SignIn();
+
+                            return RedirectPermanent("~/shop/index");
+                        }
+                        else
+                        {
+                            user.LoginRetries = user.LoginRetries + 1;
+
+                            if (user.LoginRetries >= 3)
+                            {
+                                ModelState.AddModelError("", "Your account has been locked please contact an Administrator.");
+                                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Locked;
+                            }
+
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            ModelState.AddModelError("", "Invalid Login.");
+                            return View();
+                        }
                     }
+
+
+
                 }
-
-            
-
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login. Please create your account first.");
+                    return View();
+                }
             }
             else
             {
-
-                ModelState.AddModelError("", "Invalid login. Please create your account first.");
+                ModelState.AddModelError("","Error From Google ReCaptcha :" + isCaptchaValid);
                 return View();
             }
+          
 
 
             return View();
@@ -222,7 +254,7 @@ namespace ProjectBSIS401.WEB.Controllers
 
 
 
-    
+
         [HttpGet, Route("/account/sign-up")]
         public IActionResult SignUp()
         {
@@ -236,6 +268,8 @@ namespace ProjectBSIS401.WEB.Controllers
         {
             //ViewBag.ShopId = new SelectList(_context.Shops, "Id", "BusinessName", model.ShopId);
 
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = CaptchaResponse.Validate(EncodedResponse);
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -248,55 +282,62 @@ namespace ProjectBSIS401.WEB.Controllers
             }
 
             var registrationCode = RandomString(6);
-     
-            User user = new User()
+            if(isCaptchaValid)
             {
-                Id = Guid.NewGuid(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                UserName = model.FirstName + "" + model.LastName,
-                EmailAddress = model.EmailAddress.ToLower(),
-                LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Unverified,
-                LoginRetries = 0,
-                Password = BCryptHelper.HashPassword(model.Password, BCryptHelper.GenerateSalt(8)),
-                PhoneNumber = model.PhoneNumber,
-                RegistrationCode = registrationCode,
-                Gender = Infrastructures.Domain.Enums.Gender.Male,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                DateOfBirth = model.DateOfBirth,
-                
-
-            };
-
-            this._context.UserRoles.Add(new UserRole()
-            {
-                Id = Guid.NewGuid(),
-                UserId = user.Id.Value,
-                Role = Infrastructures.Domain.Enums.Role.User
-
-            });
-
-            this._context.UserGroups.Add(new UserGroup()
-            {
-                UserId = user.Id.Value,
-                GroupId = Guid.NewGuid(),
-
-            });
+                User user = new User()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserName = model.FirstName + "" + model.LastName,
+                    EmailAddress = model.EmailAddress.ToLower(),
+                    LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Unverified,
+                    LoginRetries = 0,
+                    Password = BCryptHelper.HashPassword(model.Password, BCryptHelper.GenerateSalt(8)),
+                    PhoneNumber = model.PhoneNumber,
+                    RegistrationCode = registrationCode,
+                    Gender = Infrastructures.Domain.Enums.Gender.Male,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    DateOfBirth = model.DateOfBirth,
 
 
-            this._context.Users.Add(user);
-            this._context.SaveChanges();
+                };
 
-            //Send email
-            this.EmailSendNow(
-                        WelcomeEmailTemplate(registrationCode, user.UserName),
-                        model.EmailAddress,
-                        user.UserName,
-                        "Welcome To Fixit.PH"
-            );
+                this._context.UserRoles.Add(new UserRole()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = user.Id.Value,
+                    Role = Infrastructures.Domain.Enums.Role.User
 
-            return RedirectToAction("verify");
+                });
+
+                this._context.UserGroups.Add(new UserGroup()
+                {
+                    UserId = user.Id.Value,
+                    GroupId = Guid.NewGuid(),
+
+                });
+
+
+                this._context.Users.Add(user);
+                this._context.SaveChanges();
+
+                //Send email
+                this.EmailSendNow(
+                            WelcomeEmailTemplate(registrationCode, user.UserName),
+                            model.EmailAddress,
+                            user.UserName,
+                            "Welcome To Fixit.PH"
+                );
+                return RedirectToAction("verify");
+
+            }
+
+            ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+            return View();
+
+
 
         }
 

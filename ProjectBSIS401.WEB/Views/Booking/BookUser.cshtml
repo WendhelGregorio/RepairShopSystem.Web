@@ -48,13 +48,16 @@
                         <label for="contactnumber" class="control-label mb-1">Date of repair (*)</label>
                         <input type="datetime-local" class="form-control" id="dateAndTime" name="DateAndTime" aria-describedby="dateAndTime" placeholder="Enter date and time">
                     </div>
-                   
+
                     <div id="">
                         <input type="checkbox" id="check_box" />
                         clicking submit you agree to our
-                        <a href="~/tac/terms-and-conditions" >Terms and Conditions.</a>
+                        <a href="~/tac/terms-and-conditions">Terms and Conditions.</a>
                     </div>
                     <hr />
+                    <div class="form-group row">
+                        <div class="g-recaptcha" data-sitekey="6LeOOOEZAAAAAB3tZ8iV_OPqDA_Ed9UAe0DDyzD7"></div>
+                    </div>
                     <h3>Required!</h3>
                 </div>
             </div>
@@ -88,6 +91,7 @@
 <!-- I Agree Checkbox by https://www.TermsFeed.com -->
 <script type="text/javascript" src="//www.termsfeed.com/public/i-agree-checkbox/releases/1.0.0/i-agree-checkbox.js"></script>
 <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#submit").attr('disabled', 'disabled');

@@ -6,7 +6,7 @@
 <br />
 
 <div class="section-title">
-    <img src="~/myimages/logotransparent.png"  />
+    <img src="~/myimages/logotransparent.png" />
     <h2>Login</h2>
 </div>
 <main class="login-form">
@@ -40,8 +40,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="g-recaptcha" data-sitekey="6LeOOOEZAAAAAB3tZ8iV_OPqDA_Ed9UAe0DDyzD7"></div>
+                            </div>
+                            <div id="html_element"></div>
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" id="submit" class="btn btn-primary">
+                                <button type="submit" id="loginSubmit" class="btn btn-primary">
                                     Sign-In
                                 </button>
                                 <a href="~/account/forgot-password" class="btn btn-link">
@@ -50,7 +54,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -81,23 +85,25 @@
 </style>
 
 <script src="~/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript">
+ 
     $(document).ready(function () {
-        $("#submit").attr('disabled', 'disabled');
+        $("#loginSubmit").attr('disabled', 'disabled');
 
         $("form").keyup(function () {
             // To Disable Submit Button
-            $("#submit").attr('disabled', 'disabled');
+            $("#loginSubmit").attr('disabled', 'disabled');
             // Validating Fields
             var emailAddress = $("#email_address").val();
             var password = $("#password").val();
-         
+
 
             if (!(emailAddress == "" || password == "")) {
 
                 // To Enable Submit Button
-                $("#submit").removeAttr('disabled');
-                $("#submit").css({
+                $("#loginSubmit").removeAttr('disabled');
+                $("#loginSubmit").css({
                     "cursor": "pointer",
                     "box-shadow": "1px 0px 6px #333"
                 });
@@ -105,8 +111,8 @@
             }
         });
         // On Click Of Submit Button
-        $("#submit").click(function () {
-            $("#submit").css({
+        $("#loginSubmit").click(function () {
+            $("#loginSubmit").css({
                 "cursor": "default",
                 "box-shadow": "none"
             });

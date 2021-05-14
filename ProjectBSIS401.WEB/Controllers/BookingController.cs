@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Grecaptcha;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 using ProjectBSIS401.WEB.ViewModels.booking;
@@ -43,6 +44,7 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpGet, Route("booking/book-costumer/{shopId}/{userId}/{shopServiceId}")]
         public IActionResult BookUser(Guid? shopId,Guid? userId,Guid? shopServiceId)
         {
+ 
             var shop = this._context.Shops.FirstOrDefault(u => u.Id == shopId);
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
             var shopService = this._context.ShopServices.FirstOrDefault(u => u.Id == shopServiceId);
@@ -80,6 +82,10 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpPost, Route("booking/book-costumer")]
         public IActionResult BookUser(BookingViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = CaptchaResponse.Validate(EncodedResponse);
+
+
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -90,50 +96,59 @@ namespace ProjectBSIS401.WEB.Controllers
             var tacId = Guid.Parse("0919fe8a-f05b-4f1f-a0ee-db37664fad38");
             var tac = this._context.TermAndConditions.FirstOrDefault(t => t.Id == tacId);
 
-            if (shop != null)
+            if (isCaptchaValid)
             {
-                if(user != null)
+                if (shop != null)
                 {
-                    if(shopServices != null)
+                    if (user != null)
                     {
-                        Booking bookings = new Booking()
+                        if (shopServices != null)
                         {
-                            Id = Guid.NewGuid(),
-                            UserId = model.UserId.Value,
-                            ShopId = model.ShopId.Value,
-                            ShopServiceId = model.ShopServiceId.Value,
-                            UserName = model.UserName,
-                            ContactNumber = model.ContactNumber,
-                            ShopServiceName = model.TitleShopService,
-                            ShopServicePrice = model.PriceShopService,
-                            ShopServiceDescription = model.DescriptionShopService,
-                            AdditionalDescription = model.AdditionalDescription,
-                            ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
-                            Address = model.Address,
-                            UpdatedAt = DateTime.UtcNow,
-                            DateAndTime = model.DateAndTime,
-                            CreatedAt = DateTime.UtcNow,
-                            TimeStamps = DateTime.UtcNow,
-                            TermAndConditionId = tacId,
-                            TermAndCondition = tac,
-                        };
-                        WebIDS.SetBookingId(bookings.Id);
-                   
-                        this._context.Bookings.Add(bookings);
+                            Booking bookings = new Booking()
+                            {
+                                Id = Guid.NewGuid(),
+                                UserId = model.UserId.Value,
+                                ShopId = model.ShopId.Value,
+                                ShopServiceId = model.ShopServiceId.Value,
+                                UserName = model.UserName,
+                                ContactNumber = model.ContactNumber,
+                                ShopServiceName = model.TitleShopService,
+                                ShopServicePrice = model.PriceShopService,
+                                ShopServiceDescription = model.DescriptionShopService,
+                                AdditionalDescription = model.AdditionalDescription,
+                                ReserveStatus = Infrastructures.Domain.Enums.ReserveStatus.Pending,
+                                Address = model.Address,
+                                UpdatedAt = DateTime.UtcNow,
+                                DateAndTime = model.DateAndTime,
+                                CreatedAt = DateTime.UtcNow,
+                                TimeStamps = DateTime.UtcNow,
+                                TermAndConditionId = tacId,
+                                TermAndCondition = tac,
+                            };
+                            WebIDS.SetBookingId(bookings.Id);
 
-                        shop.LikesEnabled = true;
-                        shop.RatingsEnabled = true;
-                        shop.CommentsEnabled = true;
-                        _context.Shops.Update(shop);
+                            this._context.Bookings.Add(bookings);
 
-                        this._context.SaveChanges();
-                    }
-                    else
-                    {
-                        return Redirect("~/home/index");
+                            shop.LikesEnabled = true;
+                            shop.RatingsEnabled = true;
+                            shop.CommentsEnabled = true;
+                            _context.Shops.Update(shop);
+
+                            this._context.SaveChanges();
+                        }
+                        else
+                        {
+                            return Redirect("~/home/index");
+                        }
                     }
                 }
             }
+            else
+            {
+                ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+                return View();
+            }
+           
             //return RedirectToAction("Index", new { ShopId = model.ShopId, UserId = model.UserId });
 
             //return Redirect("~/shop/shop-items/" + model.ShopId + "/" + model.UserId);

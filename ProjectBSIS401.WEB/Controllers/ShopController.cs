@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Data;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Enums;
+using ProjectBSIS401.WEB.Infrastructures.Domain.Grecaptcha;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
 using ProjectBSIS401.WEB.Infrastructures.Domain.Models;
 using ProjectBSIS401.WEB.ViewModels.calendar;
@@ -209,50 +210,59 @@ namespace ProjectBSIS401.WEB.Controllers
         [HttpPost, Route("shop/shop-create")]
         public IActionResult CreateShop(CreateShopViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = CaptchaResponse.Validate(EncodedResponse);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+
             var userRole = this._context.UserRoles.FirstOrDefault(u => u.UserId == user.Id);
-            if(userRole.Role != Role.ShopAdmin)
+
+            if(isCaptchaValid)
             {
-                this._context.UserRoles.Add(new UserRole()
+                if (userRole.Role != Role.ShopAdmin)
                 {
-                    Id = Guid.NewGuid(),
-                    UserId = user.Id.Value,
-                    Role = Infrastructures.Domain.Enums.Role.ShopAdmin
-
-                });
-
-                if (user != null)
-                {
-                    Shop shop = new Shop()
+                    this._context.UserRoles.Add(new UserRole()
                     {
-
-                        BusinessContact = model.BusinessContact,
-                        BusinessEmailAddress = model.BusinessEmailAddress,
-                        BusinessLocation = model.BusinessLocation,
-                        BusinessName = model.BusinessName,
-                        BusinessType = model.BusinessType,
-                        OpenAt = model.OpenAt,
-                        CloseAt = model.CloseAt,
                         Id = Guid.NewGuid(),
-                        UserId = model.UserId,
-                        Status = Infrastructures.Domain.Enums.Status.Active,
-                        BusinessDescription = model.BusinessDescription,
-                        OwnerShop = model.OwnerShop,
-                        IsPublished = true,
+                        UserId = user.Id.Value,
+                        Role = Infrastructures.Domain.Enums.Role.ShopAdmin
 
-                    };
+                    });
 
-                   
-                    this._context.Shops.Add(shop);
-                    this._context.SaveChanges();
+                    if (user != null)
+                    {
+                        Shop shop = new Shop()
+                        {
+
+                            BusinessContact = model.BusinessContact,
+                            BusinessEmailAddress = model.BusinessEmailAddress,
+                            BusinessLocation = model.BusinessLocation,
+                            BusinessName = model.BusinessName,
+                            BusinessType = model.BusinessType,
+                            OpenAt = model.OpenAt,
+                            CloseAt = model.CloseAt,
+                            Id = Guid.NewGuid(),
+                            UserId = model.UserId,
+                            Status = Infrastructures.Domain.Enums.Status.Active,
+                            BusinessDescription = model.BusinessDescription,
+                            OwnerShop = model.OwnerShop,
+                            IsPublished = true,
+
+                        };
+
+                        this._context.Shops.Add(shop);
+                        this._context.SaveChanges();
+                    }
+
                 }
-               
+
             }
-           
+
             return RedirectToAction("Welcome");
         }
 
