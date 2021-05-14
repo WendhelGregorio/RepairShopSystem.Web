@@ -84,7 +84,7 @@ using ProjectBSIS401.WEB.Infrastructures.Domain.Helper;
             WriteLiteral("\r\n\r\n\r\n<br /><br />\r\n<div class=\"section-title mt-5\">\r\n    <h2>Reservation Form</h2>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-lg-8\">\r\n        ");
             EndContext();
             BeginContext(318, 3546, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cd2e782c12a24e819a1482ced0faed14", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "74afa34024d34d7ebf47434d2d63fa5a", async() => {
                 BeginContext(371, 14, true);
                 WriteLiteral("\r\n            ");
                 EndContext();
@@ -217,7 +217,7 @@ WriteAttributeValue("", 1879, Model.ContactNumber, 1879, 20, false);
                         ");
                 EndContext();
                 BeginContext(3236, 62, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08323fe6bf2245baacc755aa721a4827", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2e6fa08b2ec14595a4b5a05dbecf820a", async() => {
                     BeginContext(3273, 21, true);
                     WriteLiteral("Terms and Conditions.");
                     EndContext();
@@ -251,7 +251,7 @@ WriteAttributeValue("", 1879, Model.ContactNumber, 1879, 20, false);
             ");
                 EndContext();
                 BeginContext(3759, 84, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2843a3572fe40c7ab5983149edd9442", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5e48b33882444f918f20f8bf472352ca", async() => {
                     BeginContext(3833, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();
@@ -332,7 +332,7 @@ AddHtmlAttributeValue("", 3786, Model.ShopId, 3786, 13, false);
             WriteLiteral("</dd>\r\n        </dl>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!-- I Agree Checkbox by https://www.TermsFeed.com -->\r\n<script type=\"text/javascript\" src=\"//www.termsfeed.com/public/i-agree-checkbox/releases/1.0.0/i-agree-checkbox.js\"></script>\r\n");
             EndContext();
             BeginContext(4508, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "71386345f7074d059a5f40ce4b13e5ea", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b04886223d724a618cf4cb4318dd8b77", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

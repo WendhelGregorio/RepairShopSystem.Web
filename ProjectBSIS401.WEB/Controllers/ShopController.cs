@@ -497,29 +497,7 @@ namespace ProjectBSIS401.WEB.Controllers
 
                                                  }).ToList();
         }
-        [HttpGet, Route("shop/list-events")]
-        public JsonResult GetBookings(string start)
-        {
-       
-            var bookings = this._context.Bookings.OrderByDescending(u => u.UpdatedAt == DateTime.Today)
-                                                   .Select(u => new BookingViewModel
-                                                   {
-                                                       SName = u.ShopServiceName,
-                                                       SDescription = u.ShopServiceDescription,
-                                                       SPrice = u.ShopServicePrice,
-                                                       Address = u.Address,
-                                                       PaymentType = u.PaymentType,
-                                                       UpdateAt = u.UpdatedAt,
-                                                       UserName = u.UserName,
-                                                       ContactNumber = u.ContactNumber
 
-
-                                                   }).ToList();
-
-            return Json(bookings);
-        }
-
-        
         [HttpGet, Route("/shop/calendar")]
         public IActionResult Calendar()
         {
@@ -552,6 +530,8 @@ namespace ProjectBSIS401.WEB.Controllers
                BookingAve = bookingAve
             });
         }
+
+
 
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("/shop/update-banner/{shopId}")]

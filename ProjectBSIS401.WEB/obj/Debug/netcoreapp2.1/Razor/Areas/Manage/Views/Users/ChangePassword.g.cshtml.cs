@@ -52,7 +52,7 @@ namespace AspNetCore
             WriteLiteral("\r\n<div class=\"container\">\r\n    <div class=\"createaccount\">\r\n\r\n        ");
             EndContext();
             BeginContext(216, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "da170e04eca64dd8ae70caae140120c7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "3e3644d3c393438791763e5246ff7684", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -70,7 +70,7 @@ namespace AspNetCore
             WriteLiteral("\r\n        <h3>Change Password</h3>\r\n        <p class=\"text-muted text-center\">\r\n            It\'s a good idea to use a strong password that you don\'t use elsewhere\r\n        </p>\r\n        ");
             EndContext();
             BeginContext(446, 1096, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0ca468dc3d204ed28aa4fe58529bef21", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8b2cb7e23f4842bd88b72355b0b2abc8", async() => {
                 BeginContext(506, 142, true);
                 WriteLiteral("\r\n            <div asp-validation-summary=\"All\" class=\"text-danger text-center\"></div>\r\n            <div class=\"form-group\">\r\n                ");
                 EndContext();
@@ -138,7 +138,7 @@ WriteAttributeValue("", 803, Model.UserId, 803, 13, false);
             WriteLiteral("\r\n\r\n    </div>\r\n</div>\r\n\r\n\r\n");
             EndContext();
             BeginContext(1570, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "227bbcf82d7f43ce8e0f8ee878630b64", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e020878b93524807878697f1f9d1b478", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

@@ -69,7 +69,7 @@ WriteAttributeValue("", 398, Model.TermAndConditions.Keyword, 398, 32, false);
             ");
             EndContext();
             BeginContext(805, 250, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "639fd0dd949641eb8a1b2a1d0daef3a0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "77bc347fa36146478c74710a4337d1d5", async() => {
                 BeginContext(852, 199, true);
                 WriteLiteral("\r\n                <button type=\"button\" class=\"btn btn-lg btn-info btn-block\">\r\n                    <i class=\"fa fa-plus\"></i>&nbsp; Create Term And Condition\r\n                </button>\r\n            ");
                 EndContext();
@@ -135,7 +135,7 @@ WriteAttributeValue("", 398, Model.TermAndConditions.Keyword, 398, 32, false);
                             ");
             EndContext();
             BeginContext(1906, 138, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8e8c4eaf56b4f98a8e7cdefbcbd2587", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "047fd52261f340e689a750a4c9256c18", async() => {
                 BeginContext(1970, 70, true);
                 WriteLiteral("<button type=\"button\" class=\"btn\"><i class=\"fas fa-info\"></i></button>");
                 EndContext();
@@ -164,7 +164,7 @@ AddHtmlAttributeValue("", 1941, tac.Id, 1941, 7, false);
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(2074, 140, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7645d2a351e54dff9966f3aca1701baf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6389638f016a49aa94a642d6f10e7a4d", async() => {
                 BeginContext(2134, 76, true);
                 WriteLiteral("<button type=\"button\" class=\"btn\"><i class=\"fas fa-pen-square\"></i></button>");
                 EndContext();
